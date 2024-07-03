@@ -47,3 +47,6 @@
 }
 
 /* Estilo para el autocompletado */
+#section {
+  min-height: 100vh;
+}

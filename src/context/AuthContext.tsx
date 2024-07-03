@@ -20,12 +20,11 @@ export const AuthContext = createContext<ContextData>({
     setUser: () => { },
 });
 
-
-
 export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
-
+    const { setLoadingScreen } = useContext(AppContext)
     const { data: session, status } = useSession() as SessionData;
     const [user, setUser] = useState<any>({})
+    const [first, setFirst] = useState(true)
     const { setSnackbarOpen } = useContext(AppContext)
     const RegisterUser = async () => {
         localStorage.setItem('typeInit', 'login')
@@ -36,14 +35,12 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
             name: session?.user?.name ?? ''
         }
         const resultUser = await ApiController.registerUserForm(data)
-
         if (resultUser.data.status === 200) {
-
             setUser(resultUser.data.user)
         } else if (resultUser.data.status === 401) {
             setSnackbarOpen({ message: resultUser.data.message, type: "error" })
-
         }
+        setLoadingScreen(false)
     }
     const LgoinUser = async () => {
         const getUser = await ApiController.Login({
@@ -52,23 +49,29 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
             googleId: session.user?.id,
             id: session?.user?._id
         })
+        setLoadingScreen(false)
         if (getUser.data.status === 200) {
             setUser(getUser.data.user)
         } else {
+            signOut()
             setSnackbarOpen({ message: getUser.data.message, type: "error" })
         }
     }
 
-    //Este useEffect se usa para actualizar usuario
     useEffect(() => {
-        if (session?.user && localStorage.getItem('typeInit') === 'login') {
-            LgoinUser()
+        const typeInit = localStorage.getItem('typeInit');
+        console.log(session)
+        if (session?.user && first) {
+            if (typeInit === 'login') {
+                LgoinUser();
+            } else if (typeInit === 'register') {
+                RegisterUser();
+            }
+            setFirst(false);
+        } else {
+            setLoadingScreen(false)
         }
-        if (session?.user && localStorage.getItem('typeInit') === 'register') {
-            RegisterUser()
-        }
-
-    }, [session, status])
+    }, [session, status]);
 
     return (
         <AuthContext.Provider

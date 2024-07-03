@@ -5,21 +5,11 @@ import { Container, Item } from '../layout/Container';
 import { Box, Button, CircularProgress, IconButton, Typography } from '@mui/material';
 import { useSession, signIn } from 'next-auth/react';
 import Image from 'next/image';
+import { Card, ContainerButton, Text } from './components/Components';
 //import ApiController from '@/ApiController/ApiController';
 //import { FONTPRIMARYCOLOR } from '@/colors/Colors';
 //import { AppContext } from '@/context/AppContext';
-const Card = styled(Button)({
-    display: "flex",
-    padding: "14px 16px",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "10px",
-    flex: " 1 0 0",
-    borderRadius: "8px",
-    width: '100%',
-    border: "1px solid #CCC",
-    background: "#FFF"
-})
+
 const Loader = styled(CircularProgress)({
 
 
@@ -55,7 +45,12 @@ const FacebookButton: FC<{ login?: boolean, ws?: boolean }> = ({ login, ws }) =>
                     <Card onClick={Controller}>
 
                         {loading ? <Loader size="18px" /> :
-                            <Image alt={''} src={'/assets/facebook.svg'} width={30} height={30} />
+                            <ContainerButton>
+                                <Text>
+                                    Iniciar con facebook
+                                </Text>
+                                <Image alt={''} src={'/assets/facebook.svg'} width={24} height={24} />
+                            </ContainerButton>
                         }
 
                     </Card>

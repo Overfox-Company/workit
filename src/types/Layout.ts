@@ -10,7 +10,7 @@ import {
 
 export interface ContainerProps {
 
-
+    login?: boolean,
     direction?: GridDirection | undefined;
     children: ReactNode;
     justifyContent?: string;

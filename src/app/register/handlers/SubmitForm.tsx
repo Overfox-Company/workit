@@ -10,6 +10,7 @@ export const HandleSubmitForm = async (
 ) => {
 
     const result = await ApiController.registerUserForm(values)
+    console.log("resultado de login")
     console.log(result)
 
     if (result.data.status === 401) {
@@ -22,7 +23,7 @@ export const HandleSubmitForm = async (
             password: values.password,
             redirect: false,
         });
-
+        setSnackbarOpen({ message: result.data.message, type: 'success' })
         console.log(res)
     }
 }

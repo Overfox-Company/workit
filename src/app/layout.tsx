@@ -5,6 +5,7 @@ import NextAuthProvider from "@/providers/NextAuth";
 import { AuthContextProvider } from "@/context/AuthContext";
 import { AppContextProvider } from "@/context/AppContext";
 import SnackbarCustom from "@/components/UI/Alerts";
+import LoadingScreen from "@/components/UI/LoadingScreen";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,8 +22,8 @@ export default function RootLayout({
       <AppContextProvider>
         <AuthContextProvider>
           <html lang="en">
-
             <body>
+              <LoadingScreen />
               <SnackbarCustom />
               {children}
             </body>

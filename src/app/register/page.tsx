@@ -86,20 +86,7 @@ const Page: NextPage<Props> = ({ }) => {
                                     </Link>
                                 </Subtitle>
                             </Item>
-                            <Item xs={3}>
-                                <Divider />
-                            </Item>
-                            <Item xs={6} md={5}>
-                                <Subtitle sx={{ fontSize: SubtitleVariants }} style={{ fontWeight: 400 }}>
-                                    O registrarte con
-                                </Subtitle>
-                            </Item>
-                            <Item xs={3}>
-                                <Divider />
-                            </Item>
-                            <Item xs={12}>
-                                <GoogleButton login />
-                            </Item>
+
                         </Container>
                     </Card>
                 </Item>

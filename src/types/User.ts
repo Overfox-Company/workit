@@ -29,7 +29,8 @@ export interface loginUser {
 }
 export interface loginUserFormik {
     email: string;
-    password?: string;
+    // userName:string
+    password: string;
 }
 export interface registerUser {
     email: string;

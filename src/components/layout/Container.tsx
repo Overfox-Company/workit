@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import { Grid } from '@mui/material';
 import styled from '@emotion/styled';
 import { ContainerProps, ItemProps } from '@/types/Layout';
+import { BGSCREEN } from '@/constants/Colors';
 
 const Section = styled.section({
     width: '100%',
@@ -26,7 +27,13 @@ const StyleContentContainer = styled.div({
     padding: '0 5px',
     maxWidth: 1240,
 })
-
+const loginImage = {
+    backgroundColor: BGSCREEN,
+    backgroundImage: 'url("./assets/bg.svg")',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right',
+    backgroundSize: 'contain'
+}
 export const PrincipalContainer: FC<ContainerProps> = ({ children, ...props }) => {
     return (
         <StylePrincipalContainer  {...props}>
@@ -53,8 +60,8 @@ export const Item: FC<ItemProps> = ({ children, ...props }) => {
         {children}
     </Grid>)
 }
-export const Wrapper: FC<ContainerProps> = ({ children, ...props }) => {
-    return (<Section  {...props}>
+export const Wrapper: FC<ContainerProps> = ({ login, children, ...props }) => {
+    return (<Section id="section" {...props} style={login ? loginImage : { backgroundColor: BGSCREEN }}>
         <PrincipalContainer>
             <ContentContainer>
                 {children}

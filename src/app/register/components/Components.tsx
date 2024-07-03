@@ -5,8 +5,8 @@ import { PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from '@/constants/Colors'
 export const Card = styled(Box)({
     borderRadius: 8,
     padding: '48px 36px',
-    border: `solid 1px ${PAPERGRAY}`
-
+    //  border: `solid 1px ${PAPERGRAY}`,
+    backgroundColor: 'white'
 })
 
 export const Title = styled(Typography)({

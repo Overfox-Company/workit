@@ -1,18 +1,30 @@
 import { ReactNode } from "react";
 
-export type InputProps = {
-    icon?: boolean | undefined;
-    name?: string | undefined;
-    label?: string | undefined;
-    error?: string | undefined | any;
-    touched?: boolean | undefined | any;
-    placeholder?: string | undefined;
-    type?: string | undefined;
-    as?: string | undefined;
-    rows?: number | undefined;
-    cols?: number | undefined;
+type InputPropsBase = {
+    icon?: boolean;
+    name?: string;
+    label?: string;
+    error?: string | any;
+    touched?: boolean | any;
+    placeholder?: string;
+    type?: string;
+    as?: string;
+    rows?: number;
+    cols?: number;
     children?: React.ReactNode;
 };
+
+type InputPropsWithIcon = InputPropsBase & {
+    iconName: string;
+    iconSize: number;
+};
+
+type InputPropsWithoutIcon = InputPropsBase & {
+    iconName?: never;
+    iconSize?: never;
+};
+
+export type InputProps = InputPropsWithIcon | InputPropsWithoutIcon;
 export interface ButtonType {
     loading?: boolean;
     children: ReactNode;
