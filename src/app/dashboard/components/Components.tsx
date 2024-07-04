@@ -10,6 +10,7 @@ export const SideBar = styled(Box)({
   gap: 25,
   padding: 40,
   width: 387,
+  height: '100vh',
   backgroundColor: '#FCF6F1',
 });
 
@@ -26,12 +27,6 @@ export const Subtitle = styled(Typography)({
   fontFamily: 'Roboto',
   fontSize: 18,
   textAlign: 'center',
-});
-
-export const Divider = styled.div({
-  backgroundColor: SECONDARYDARK,
-  width: '100%',
-  height: 1,
 });
 
 export const List = styled.div({
@@ -76,7 +71,7 @@ export const Select = styled.select({
   cursor: 'pointer',
 });
 
-export const DarkModeSwitch = styled.div({
+export const TextBox = styled.div({
   display: 'flex',
   flexDirection: 'row',
   gap: 12,

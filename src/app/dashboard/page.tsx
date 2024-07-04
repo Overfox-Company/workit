@@ -1,10 +1,10 @@
 'use client';
 import {
-  DarkModeSwitch,
   List,
   ListItem,
   Select,
   SideBar,
+  TextBox,
   Title,
 } from '@/app/dashboard/components/Components';
 import { Container, Item, Wrapper } from '@/components/layout/Container';
@@ -85,10 +85,10 @@ const Dashboard = () => {
             </List>
           </Item>
           <Item>
-            <DarkModeSwitch>
+            <TextBox>
               <Icon src='home' size={15} />
               Dark
-            </DarkModeSwitch>
+            </TextBox>
           </Item>
         </Container>
       </SideBar>
