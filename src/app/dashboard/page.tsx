@@ -59,16 +59,16 @@ const Dashboard = () => {
   return (
     <div>
       <SideBar>
-        <Container gap={10}>
+        <Container gap={5}>
           <Item xs={12}>
             <Title textAlign={'left'}>Workit</Title>
           </Item>
           <Item xs={12}>
             <Container>
               <Select>
-                <option value='all'>Intelligent AI</option>
-                <option value='active'>Proyectos activos</option>
-                <option value='completed'>Proyectos completados</option>
+                <option>Intelligent AI</option>
+                <option>Proyectos activos</option>
+                <option>Proyectos completados</option>
               </Select>
             </Container>
           </Item>
