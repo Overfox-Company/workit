@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 // Define the base URL for the API
-const branch = process.env.NEXT_PUBLIC_IS_DEVELOP == 'true' ? "https://elsitiotech-git-develop-overfox-company.vercel.app/" : 'https://elsitiotech.com/'
+const branch = process.env.NEXT_PUBLIC_IS_DEVELOP
 export const Domain = process.env.NEXT_PUBLIC_PRODUCTION == 'true' ? branch : "http://localhost:3000/";
 
 // Define the base route for the API

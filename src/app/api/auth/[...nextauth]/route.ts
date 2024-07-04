@@ -3,8 +3,8 @@ import GoogleProvider from 'next-auth/providers/google'
 import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { connectDB } from '@/backend/database/MongoConnect';
-import { User } from "@/backend/models/User";
+import { connectDB } from '@/app/api/resources/database/MongoConnect';
+import { User } from "@/app/api/resources/models/User";
 import bcrypt from "bcryptjs";
 const handler = NextAuth({
     providers: [

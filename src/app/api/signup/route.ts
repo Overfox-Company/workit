@@ -1,5 +1,5 @@
-import { CreateUser, GetUserByEmail } from "@/backend/controllers/User";
-import { connectDB } from "@/backend/database/MongoConnect";
+import { CreateUser, GetUserByEmail } from "@/app/api/resources/controllers/User";
+import { connectDB } from "@/app/api/resources/database/MongoConnect";
 
 
 export async function POST(req: Request) {

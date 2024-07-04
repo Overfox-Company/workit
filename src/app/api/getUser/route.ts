@@ -1,4 +1,4 @@
-import { CreateUser, GetUserByEmail, LoginCredentials, LoginGoogle, UpdateGoogleId } from "@/backend/controllers/User";
+import { CreateUser, GetUserByEmail, LoginCredentials, LoginGoogle, UpdateGoogleId } from "@/app/api/resources/controllers/User";
 
 
 export async function POST(req: Request) {

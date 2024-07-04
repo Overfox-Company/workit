@@ -5,7 +5,7 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { AppContext } from "./AppContext";
 import { SessionData } from "@/types/User";
-import { LoginGoogle } from "@/backend/controllers/User";
+import { LoginGoogle } from "@/app/api/resources/controllers/User";
 
 type ContextData = {
     user: any,
