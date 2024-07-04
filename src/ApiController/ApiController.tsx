@@ -7,7 +7,7 @@ import axios from "axios";
 const branch = process.env.NEXT_PUBLIC_IS_DEVELOP
 export const Domain = process.env.NEXT_PUBLIC_PRODUCTION == 'true' ? branch : "http://localhost:3000/";
 console.log("esta es la ruta gonzalo")
-console.log(process.env.NEXT_PUBLIC_IS_DEVELOP)
+console.log(Domain)
 // Define the base route for the API
 const Route = `${Domain}api`;
 const api = axios.create({
