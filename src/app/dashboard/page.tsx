@@ -1,15 +1,13 @@
 'use client';
 import {
-  Divider,
+  DarkModeSwitch,
   List,
   ListItem,
   Select,
-  SiderBar,
-  Subtitle,
+  SideBar,
   Title,
 } from '@/app/dashboard/components/Components';
 import { Container, Item, Wrapper } from '@/components/layout/Container';
-// import the home icon
 import Icon from '@/components/UI/Icon';
 
 const Dashboard = () => {
@@ -60,7 +58,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <SiderBar>
+      <SideBar>
         <Container gap={10}>
           <Item xs={12}>
             <Title textAlign={'left'}>Workit</Title>
@@ -86,8 +84,14 @@ const Dashboard = () => {
               ))}
             </List>
           </Item>
+          <Item>
+            <DarkModeSwitch>
+              <Icon src='home' size={15} />
+              Dark
+            </DarkModeSwitch>
+          </Item>
         </Container>
-      </SiderBar>
+      </SideBar>
     </div>
   );
 };
