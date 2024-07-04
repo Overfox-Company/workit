@@ -98,8 +98,8 @@ const createApiRequest = async (method?: string, route?: string, data?: any) => 
 
 // Create an object to hold API methods
 const ApiController = {
-    registerUserForm: (data: CreateUserType) => api.post(Route + '/signup', data),
-    Login: (data: loginUser) => api.post(Route + '/getUser', data)
+    registerUserForm: (data: CreateUserType) => api.post('/signup', data),
+    Login: (data: loginUser) => api.post('/getUser', data)
 };
 
 // Export the ApiController object as the default export

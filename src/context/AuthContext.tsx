@@ -5,6 +5,7 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { AppContext } from "./AppContext";
 import { SessionData } from "@/types/User";
+import { LoginGoogle } from "@/backend/controllers/User";
 
 type ContextData = {
     user: any,
@@ -35,9 +36,13 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
             name: session?.user?.name ?? ''
         }
         const resultUser = await ApiController.registerUserForm(data)
+
         if (resultUser.data.status === 200) {
             setUser(resultUser.data.user)
-        } else if (resultUser.data.status === 401) {
+        } else if (resultUser.data.status === 203) {
+            LgoinUser()
+        }
+        else if (resultUser.data.status === 401) {
             setSnackbarOpen({ message: resultUser.data.message, type: "error" })
         }
         setLoadingScreen(false)
@@ -50,6 +55,7 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
             id: session?.user?._id
         })
         setLoadingScreen(false)
+        console.log(getUser.data)
         if (getUser.data.status === 200) {
             setUser(getUser.data.user)
         } else {

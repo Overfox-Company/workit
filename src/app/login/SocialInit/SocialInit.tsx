@@ -34,9 +34,9 @@ const SocialInit: NextPage<Props> = ({ setStep }) => {
                                     </Subtitle>
                                 </Item>
 
-                                <Item xs={12}>
+                                {/* <Item xs={12}>
                                     <FacebookButton login />
-                                </Item>
+                                </Item>*/}
                                 <Item xs={12}>
                                     <GoogleButton login />
                                 </Item>

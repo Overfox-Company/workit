@@ -82,9 +82,7 @@ const LoginForm: NextPage<Props> = ({ setStep }) => {
                                         Crear cuenta
                                     </ButtonBlueOutlined>
                                 </Link>
-
                             </Item>
-
                         </Container>
                     </CardWhite>
                 </FadeIn>

@@ -20,7 +20,7 @@ export const Subtitle = styled(Typography)({
     fontWeight: 500,
     color: SECONDARYDARK,
     fontFamily: 'Roboto',
-    fontSize: 18,
+    fontSize: 10,
     textAlign: 'center'
 })
 export const Divider = styled.div({

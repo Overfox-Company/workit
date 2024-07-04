@@ -16,7 +16,7 @@ const GoogleButton: FC<{ login?: boolean }> = ({ login }) => {
     }, [session])
     const Controller = async () => {
         if (loading === false) {
-            localStorage.setItem('typeInit', login ? 'login' : 'register')
+            localStorage.setItem('typeInit', 'register')
             localStorage.setItem('typeLogin', 'google')
             setTimeout(async () => {
                 await signIn("google", { redirect: false });

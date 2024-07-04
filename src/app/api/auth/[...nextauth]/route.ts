@@ -27,7 +27,9 @@ const handler = NextAuth({
                     credentials!.password,
                     userFound.password
                 );
-
+                if (userFound.googleId && !passwordMatch) {
+                    throw new Error("There is already an account with this email address associated with google");
+                }
                 if (!passwordMatch) throw new Error("Invalid password");
 
                 console.log(userFound);

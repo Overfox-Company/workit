@@ -68,9 +68,13 @@ export const GetUserByEmail = async (email: getByEmail) => {
 }
 export const LoginGoogle = async ({ email, googleId }: loginGoogle) => {
     try {
-        const result = await User.findOne({ email: email, googleId: googleId });
-        if (result) {
-            return result;
+        const resultUser = await User.findOne({ email: email });
+        if (resultUser.password && !resultUser.googleId) {
+            return 'update'
+        }
+        const resultUserWhitGoogleId = await User.findOne({ email, googleId });
+        if (resultUserWhitGoogleId._id) {
+            return resultUserWhitGoogleId;
         } else {
             return "Usuario no encontrado";
         }
@@ -97,5 +101,15 @@ export const LoginCredentials = async ({ email, id }: loginCredentials) => {
         return user;
     } catch (error) {
         return error;
+    }
+}
+export const UpdateGoogleId = async ({ email, googleId }: loginGoogle) => {
+    const resultUser = await User.findOne({ email })
+    if (resultUser.googleId) {
+        return resultUser
+    } else {
+        resultUser.googleId = googleId
+        await resultUser.save()
+        return resultUser
     }
 }

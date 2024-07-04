@@ -14,13 +14,16 @@ import Link from 'next/link'
 import { HandleSubmitForm } from './handlers/SubmitForm'
 import { AppContext } from '@/context/AppContext'
 import { useSession } from 'next-auth/react'
-
+import { IconButton } from '@mui/material'
+import Icon from '@/components/UI/Icon'
+import { useRouter } from 'next/navigation'
 interface Props { }
 
 const Page: NextPage<Props> = ({ }) => {
     const { data: session } = useSession()
     const FormRef = useRef<FormikProps<registerUser>>(null)
     const [loadingButton, setLoadingButton] = useState(false)
+    const router = useRouter()
     const { setSnackbarOpen } = useContext(AppContext)
     const SubmitForm = () => {
         if (FormRef.current) {
@@ -36,6 +39,11 @@ const Page: NextPage<Props> = ({ }) => {
                 <Item xs={12} sm={8} md={6} lg={4} xl={5}>
                     <Card sx={CardVariants}>
                         <Container justifyContent='center' rowSpacing={{ xs: 1, md: 0 }} alignItems='center' gap={{ xs: 0, md: 1 }}>
+                            <Item xs={12}>
+                                <IconButton onClick={() => router.push('/login')}>
+                                    <Icon src="arrowLeft" size={24} />
+                                </IconButton>
+                            </Item>
                             <Item xs={12}>
                                 <Title sx={{ fontSize: TitleVariants }}>
                                     Somos workit
