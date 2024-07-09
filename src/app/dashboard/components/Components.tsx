@@ -74,8 +74,45 @@ export const Select = styled.select({
 export const TextBox = styled.div({
   display: 'flex',
   flexDirection: 'row',
-  gap: 12,
+  gap: 130,
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
   cursor: 'pointer',
+  backgroundColor: '#FFFFFF',
+  borderRadius: 24,
+  padding: '8px',
+  marginTop: 150,
+});
+
+//should have the user name, search icon and notification icon
+export const Header = styled.div({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: 20,
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: '0 40px',
+  backgroundColor: '#FCF6F1',
+  height: 120,
+  width: 'fit',
+});
+
+export const ProfilePic = styled.img({
+  width: 56,
+  height: 56,
+  borderRadius: '100%',
+});
+
+//should have the date and the tasks to do in the day
+export const TaskCard = styled.div({
+  //configure which props to pass
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 20,
+  padding: '0 40px',
+  marginTop: 50,
+  backgroundColor: '#FFFFFF',
+  borderRadius: 24,
+  height: 500,
+  width: 'fit',
 });

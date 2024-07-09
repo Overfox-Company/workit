@@ -5,5 +5,7 @@ export const icons: { [key: string]: string } = {
     lock: '/assets/lock.svg',
     home: '/assets/home.svg',
     homeAlt: '/assets/homeAlt.svg',
-
+    search: '/assets/searchIcon.svg',
+    notification: '/assets/notifyIcon.svg',
+    profileImg: '/assets/profileImg.png',
 };
