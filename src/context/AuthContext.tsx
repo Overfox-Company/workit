@@ -28,7 +28,7 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
     const [first, setFirst] = useState(true)
     const { setSnackbarOpen } = useContext(AppContext)
     const RegisterUser = async () => {
-        localStorage.setItem('typeInit', 'login')
+
         const data = {
             google: session?.user?.id ?? '',
             email: session?.user?.email ?? '',
@@ -46,6 +46,7 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
             setSnackbarOpen({ message: resultUser.data.message, type: "error" })
         }
         setLoadingScreen(false)
+        localStorage.setItem('typeInit', 'login')
     }
     const LgoinUser = async () => {
 
@@ -69,13 +70,13 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
         console.log(getserver)
     }
     useEffect(() => {
-        gS()
         const typeInit = localStorage.getItem('typeInit');
         console.log(session)
         if (session?.user && first) {
             if (typeInit === 'login') {
                 LgoinUser();
             } else if (typeInit === 'register') {
+                console.log("se ejecuta el registro")
                 RegisterUser();
             }
             setFirst(false);

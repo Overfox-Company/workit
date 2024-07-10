@@ -19,27 +19,26 @@ interface loginCredentials {
 }
 export const CreateUser = async (data: CreateUserType) => {
     try {
-        if (await connectDB()) {
+        await connectDB()
 
-            const { email, password, avatar, google } = data
-            const findUser = await User.findOne({ email })
-            if (findUser._id) {
-                return 'user already exist'
-            }
-            console.log(data)
-            const hashedPassword = password ? await bcrypt.hash(password, 12) : ''
-            const newUser = new User({
-                email,
-                password: hashedPassword,
-                avatar,
-                googleId: google || ""
-            })
-            await newUser.save()
-            //   console.log(newUser)
-            return newUser
-        } else {
-            return 'err bd not conected'
+        const { email, password, avatar, google } = data
+        const findUser = await User.findOne({ email: email })
+
+        if (findUser) {
+            return 'user already exist'
         }
+
+        const hashedPassword = password ? await bcrypt.hash(password, 12) : ''
+        const newUser = new User({
+            email,
+            password: hashedPassword,
+            avatar,
+            googleId: google || ""
+        })
+        await newUser.save()
+        //   console.log(newUser)
+        return newUser
+
     } catch (e) {
         console.log(e)
         return e
