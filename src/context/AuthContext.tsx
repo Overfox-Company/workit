@@ -48,6 +48,7 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
         setLoadingScreen(false)
     }
     const LgoinUser = async () => {
+
         const getUser = await ApiController.Login({
             email: session.user?.email || "",
             type: localStorage.getItem('typeLogin') || "",
@@ -63,8 +64,12 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
             setSnackbarOpen({ message: getUser.data.message, type: "error" })
         }
     }
-
+    const gS = async () => {
+        const getserver = await ApiController.getServer()
+        console.log(getserver)
+    }
     useEffect(() => {
+        gS()
         const typeInit = localStorage.getItem('typeInit');
         console.log(session)
         if (session?.user && first) {
@@ -77,6 +82,8 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
         } else {
             setLoadingScreen(false)
         }
+
+
     }, [session, status]);
 
     return (
