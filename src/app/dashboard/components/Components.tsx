@@ -1,8 +1,9 @@
 'use client';
-import Icon from '@/components/UI/Icon';
 import { PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from '@/constants/Colors';
+import { TypographyProps } from '@/types/Layout';
 import styled from '@emotion/styled';
 import { Box, Typography } from '@mui/material';
+import React, { FC } from 'react';
 
 export const SideBar = styled(Box)({
   display: 'flex',
@@ -25,10 +26,30 @@ export const Subtitle = styled(Typography)({
   fontWeight: 500,
   color: SECONDARYDARK,
   fontFamily: 'Roboto',
-  fontSize: 18,
+  fontSize: 32,
   textAlign: 'center',
 });
 
+export const Text: FC<TypographyProps> = ({
+  children,
+  sx,
+  size,
+  fontWeight,
+  color,
+}) => {
+  return (
+    <Typography
+      sx={{ sx }}
+      fontSize={size}
+      fontWeight={fontWeight}
+      fontFamily={'Roboto'}
+      // choose the color of the text from the imported ones
+      color={color}
+    >
+      {children}
+    </Typography>
+  );
+};
 export const List = styled.div({
   display: 'flex',
   flexDirection: 'column',
@@ -89,28 +110,23 @@ export const Header = styled.div({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '0 40px',
   backgroundColor: '#FCF6F1',
   height: 120,
   width: '100%',
 });
 
 export const ProfilePic = styled.img({
-  width: 56,
-  height: 56,
+  width: 'auto',
+  height: 'auto',
   borderRadius: '100%',
 });
 
-//should have the date and the tasks to do in the day
-export const TaskCard = styled.div({
-  //configure which props to pass
+export const WorkSpaces = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  gap: 20,
   padding: '0 40px',
-  marginTop: 50,
-  backgroundColor: '#FFFFFF',
+  backgroundColor: '#FEF0E4',
   borderRadius: 24,
-  height: 500,
   width: 'fit',
+  height: '84%',
 });

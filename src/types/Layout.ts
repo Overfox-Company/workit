@@ -1,6 +1,5 @@
 import { GridDirection } from "@mui/material";
-import React from "react";
-import {
+import React, {
     type CSSProperties,
     type MouseEventHandler,
     type ReactNode,
@@ -43,4 +42,12 @@ export interface ItemProps {
     lg?: number;
     xl?: number;
     sm?: number;
+}
+export interface TypographyProps {
+    children: ReactNode;
+    sx?: any;
+    style?: any;
+    size?: number;
+    color?: string;
+    fontWeight?: number;
 }

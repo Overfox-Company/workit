@@ -1,4 +1,5 @@
 'use client';
+import profileImg from '@/../public/assets/profileImg.png';
 import {
   Header,
   List,
@@ -8,11 +9,12 @@ import {
   TaskCard,
   TextBox,
   Title,
+  WorkSpaces,
 } from '@/app/dashboard/components/Components';
 import { Container, Item, Wrapper } from '@/components/layout/Container';
 import Icon from '@/components/UI/Icon';
 import { Box, Switch } from '@mui/material';
-//Import images from the assets folder
+import Image from 'next/image';
 
 const Dashboard = () => {
   const NavList = [
@@ -96,6 +98,7 @@ const Dashboard = () => {
       sx={{
         display: 'Grid',
         gridTemplateColumns: '0.7fr 3.3fr',
+        backgroundColor: '#FCF6F1',
       }}
     >
       <SideBar>
@@ -147,7 +150,7 @@ const Dashboard = () => {
       <Box>
         <Header>
           <Box display={'flex'} flexDirection={'row'} gap={4}>
-            <Icon src='profileImg' size={56} />
+            <Image src={profileImg} alt='profile pic' width={56} height={56} />
             <Title textAlign={'left'}>Hola, {UserName}</Title>
           </Box>
           <Box display={'flex'} flexDirection={'row'} gap={4}>
@@ -155,6 +158,8 @@ const Dashboard = () => {
             <Icon src='notification' size={56} />
           </Box>
         </Header>
+
+        <WorkSpaces></WorkSpaces>
       </Box>
     </Box>
   );
