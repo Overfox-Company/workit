@@ -41,7 +41,7 @@ export const Text: FC<TypographyProps> = ({
     <Typography
       sx={{ sx }}
       fontSize={size}
-      fontWeight={fontWeight}
+      fontWeight={fontWeight ? fontWeight : 600}
       fontFamily={'Roboto'}
       // choose the color of the text from the imported ones
       color={color}
@@ -113,6 +113,7 @@ export const Header = styled.div({
   backgroundColor: '#FCF6F1',
   height: 120,
   width: '100%',
+  paddingRight: 40,
 });
 
 export const ProfilePic = styled.img({
@@ -124,9 +125,41 @@ export const ProfilePic = styled.img({
 export const WorkSpaces = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  padding: '0 40px',
+  padding: '40px',
   backgroundColor: '#FEF0E4',
   borderRadius: 24,
   width: 'fit',
   height: '84%',
+  maxHeight: 912,
+  maxWidth: 'fit',
+});
+
+export const AddButton = styled.button({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: 12,
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '8px 16px',
+  color: '#0B161F',
+  borderRadius: 12,
+  border: '1.5px solid #0B161F',
+  cursor: 'pointer',
+  fontSize: 18,
+  fontWeight: 500,
+  fontFamily: 'Roboto',
+});
+
+//should have the date and the tasks to do in the day
+export const TaskCard = styled.div({
+  //configure which props to pass
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 20,
+  padding: '0 40px',
+  marginTop: 50,
+  backgroundColor: '#FFFFFF',
+  borderRadius: 24,
+  height: 500,
+  width: 'fit',
 });

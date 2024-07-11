@@ -1,12 +1,14 @@
 'use client';
 import profileImg from '@/../public/assets/profileImg.png';
 import {
+  AddButton,
   Header,
   List,
   ListItem,
   Select,
   SideBar,
   TaskCard,
+  Text,
   TextBox,
   Title,
   WorkSpaces,
@@ -159,7 +161,16 @@ const Dashboard = () => {
           </Box>
         </Header>
 
-        <WorkSpaces></WorkSpaces>
+        <WorkSpaces>
+          <Container>
+            <Item xs={6}>
+              <Text size={32}>Proyectos</Text>
+            </Item>
+            <Item xs={6}>
+              <AddButton>Agregar +</AddButton>
+            </Item>
+          </Container>
+        </WorkSpaces>
       </Box>
     </Box>
   );
