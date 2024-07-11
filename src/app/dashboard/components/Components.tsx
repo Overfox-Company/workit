@@ -81,20 +81,18 @@ export const TextBox = styled.div({
   backgroundColor: '#FFFFFF',
   borderRadius: 24,
   padding: '8px',
-  marginTop: 150,
 });
 
 //should have the user name, search icon and notification icon
 export const Header = styled.div({
   display: 'flex',
   flexDirection: 'row',
-  gap: 20,
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0 40px',
   backgroundColor: '#FCF6F1',
   height: 120,
-  width: 'fit',
+  width: '100%',
 });
 
 export const ProfilePic = styled.img({
