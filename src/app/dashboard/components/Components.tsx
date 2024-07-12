@@ -1,6 +1,6 @@
 'use client';
 import { PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from '@/constants/Colors';
-import { TypographyProps } from '@/types/Layout';
+import { TasksCard, TypographyProps } from '@/types/Layout';
 import styled from '@emotion/styled';
 import { Box, Typography } from '@mui/material';
 import React, { FC } from 'react';
@@ -102,6 +102,8 @@ export const TextBox = styled.div({
   backgroundColor: '#FFFFFF',
   borderRadius: 24,
   padding: '8px',
+  fontSize: 16,
+  fontWeight: 600,
 });
 
 //should have the user name, search icon and notification icon
@@ -150,16 +152,36 @@ export const AddButton = styled.button({
   fontFamily: 'Roboto',
 });
 
-//should have the date and the tasks to do in the day
-export const TaskCard = styled.div({
-  //configure which props to pass
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 20,
-  padding: '0 40px',
-  marginTop: 50,
-  backgroundColor: '#FFFFFF',
-  borderRadius: 24,
-  height: 500,
-  width: 'fit',
-});
+export const TasksCards: FC<TasksCard> = ({ date, status, tasks, color }) => {
+  return (
+    <Box
+      sx={{
+        backgroundColor: '#C7EBB3',
+        borderRadius: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: 264,
+        minWidth: 308,
+        padding: '16px',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Text size={24}>{date}</Text>
+        <Text size={18}>{status}</Text>
+      </Box>
+      {tasks.map((task, index) => (
+        <Box key={index} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Text size={16}>{task.status}</Text>
+          <Text size={16}>{task.description}</Text>
+        </Box>
+      ))}
+    </Box>
+  );
+};

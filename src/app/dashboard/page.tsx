@@ -7,7 +7,7 @@ import {
   ListItem,
   Select,
   SideBar,
-  TaskCard,
+  TasksCards,
   Text,
   TextBox,
   Title,
@@ -33,7 +33,7 @@ const Dashboard = () => {
 
   const TaskInfo = [
     {
-      date: new Date('2022-01-02'),
+      date: '2022-01-02',
       tasks: [
         {
           description: 'Crear un diseño de interfaz de usuario',
@@ -46,7 +46,7 @@ const Dashboard = () => {
       ],
     },
     {
-      date: new Date('2022-01-03'),
+      date: '2022-01-03',
       tasks: [
         {
           description: 'Crear un diseño de interfaz de usuario',
@@ -118,7 +118,11 @@ const Dashboard = () => {
             </Container>
           </Item>
 
-          <Item>
+          <Item
+            sx={{
+              height: '60%',
+            }}
+          >
             <List>
               {NavList.map((item, index) => (
                 //handle with a class if active or not
@@ -129,18 +133,9 @@ const Dashboard = () => {
               ))}
             </List>
           </Item>
-          <Item
-            sx={{
-              mt: {
-                xl: 15,
-                lg: 10,
-                md: 5,
-                xs: 10,
-              },
-            }}
-          >
+          <Item>
             <TextBox>
-              <Box display={'flex'} flexDirection={'row'} gap={1}>
+              <Box display={'flex'} flexDirection={'row'} gap={1} width={116}>
                 <Icon src='home' size={15} />
                 Dark Mode
               </Box>
@@ -168,6 +163,18 @@ const Dashboard = () => {
             </Item>
             <Item xs={6}>
               <AddButton>Agregar +</AddButton>
+            </Item>
+
+            <Item>
+              {TaskInfo.map((task, index) => (
+                <TasksCards
+                  key={index}
+                  date={task.date}
+                  tasks={task.tasks}
+                  status='2/2'
+                  color='#C7EBB3'
+                />
+              ))}
             </Item>
           </Container>
         </WorkSpaces>

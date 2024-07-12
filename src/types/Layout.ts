@@ -51,3 +51,12 @@ export interface TypographyProps {
     color?: string;
     fontWeight?: number;
 }
+export interface TasksCard {
+    date: string;
+    status: string;
+    color: string;
+    tasks: Array<{
+        description: string;
+        status: string;
+    }>;
+}
