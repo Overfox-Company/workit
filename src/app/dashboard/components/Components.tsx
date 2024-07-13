@@ -2,7 +2,10 @@
 import { PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from '@/constants/Colors';
 import { TasksCard, TypographyProps } from '@/types/Layout';
 import styled from '@emotion/styled';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { Box, Typography } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
 import React, { FC } from 'react';
 
 export const SideBar = styled(Box)({
@@ -20,14 +23,6 @@ export const Title = styled(Typography)({
   color: PRIMARYDARK,
   fontFamily: 'Roboto',
   fontSize: 40,
-});
-
-export const Subtitle = styled(Typography)({
-  fontWeight: 500,
-  color: SECONDARYDARK,
-  fontFamily: 'Roboto',
-  fontSize: 32,
-  textAlign: 'center',
 });
 
 export const Text: FC<TypographyProps> = ({
@@ -152,7 +147,13 @@ export const AddButton = styled.button({
   fontFamily: 'Roboto',
 });
 
-export const TasksCards: FC<TasksCard> = ({ date, status, tasks, color }) => {
+export const TasksCards: FC<TasksCard> = ({
+  date,
+  cardStatus,
+  tasks,
+  color,
+  setTaskInfo,
+}) => {
   return (
     <Box
       sx={{
@@ -174,12 +175,46 @@ export const TasksCards: FC<TasksCard> = ({ date, status, tasks, color }) => {
         }}
       >
         <Text size={24}>{date}</Text>
-        <Text size={18}>{status}</Text>
+        <Text size={14} color='#6F6F70' fontWeight={500}>
+          {cardStatus}
+        </Text>
       </Box>
       {tasks.map((task, index) => (
-        <Box key={index} sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Text size={16}>{task.status}</Text>
-          <Text size={16}>{task.description}</Text>
+        <Box
+          key={index}
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            padding: '2px',
+            borderRadius: 8,
+            marginTop: 1,
+            alignItems: 'center',
+            bgcolor: task.status ? '#C7EBB3' : '#FEF0E4',
+          }}
+        >
+          <Checkbox
+            icon={<RadioButtonUncheckedIcon />}
+            checkedIcon={<TaskAltIcon />}
+            // if status is true show checked with defaultChecked
+            defaultChecked={task.status}
+            // when check change set the task status
+            onChange={(e) => {
+              try {
+                //first copy the tasks array
+                const newTasks = [...tasks];
+                //change the status of the task
+                newTasks[index].status = e.target.checked;
+                //set the new tasks array
+                setTaskInfo(newTasks);
+                console.log('Task status changed', newTasks);
+              } catch (error) {
+                console.log('Error', error);
+              }
+            }}
+          />
+          <Text size={14} fontWeight={500} color='#0B161F'>
+            {task.description}
+          </Text>
         </Box>
       ))}
     </Box>

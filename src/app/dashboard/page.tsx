@@ -17,8 +17,53 @@ import { Container, Item, Wrapper } from '@/components/layout/Container';
 import Icon from '@/components/UI/Icon';
 import { Box, Switch } from '@mui/material';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const Dashboard = () => {
+  const [TaskInfo, setTaskInfo] = useState([
+    {
+      date: 'June 15',
+      tasks: [
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: true,
+        },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: false,
+        },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: true,
+        },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: false,
+        },
+      ],
+    },
+    {
+      date: 'June 16',
+      tasks: [
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: false,
+        },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: true,
+        },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: true,
+        },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: false,
+        },
+      ],
+    },
+  ]);
   const NavList = [
     'Dashboard',
     'Tareas',
@@ -30,35 +75,6 @@ const Dashboard = () => {
   ];
 
   const UserName = 'Pepito Perez';
-
-  const TaskInfo = [
-    {
-      date: '2022-01-02',
-      tasks: [
-        {
-          description: 'Crear un diseño de interfaz de usuario',
-          status: 'Pendiente',
-        },
-        {
-          description: 'Crear un diseño de interfaz de usuario',
-          status: 'Pendiente',
-        },
-      ],
-    },
-    {
-      date: '2022-01-03',
-      tasks: [
-        {
-          description: 'Crear un diseño de interfaz de usuario',
-          status: 'Pendiente',
-        },
-        {
-          description: 'Crear un diseño de interfaz de usuario',
-          status: 'Pendiente',
-        },
-      ],
-    },
-  ];
 
   //handle if active or not for list items
   const handleActive = (
@@ -159,22 +175,25 @@ const Dashboard = () => {
         <WorkSpaces>
           <Container>
             <Item xs={6}>
-              <Text size={32}>Proyectos</Text>
+              <Text size={32}>Tareas</Text>
             </Item>
             <Item xs={6}>
               <AddButton>Agregar +</AddButton>
             </Item>
 
             <Item>
-              {TaskInfo.map((task, index) => (
-                <TasksCards
-                  key={index}
-                  date={task.date}
-                  tasks={task.tasks}
-                  status='2/2'
-                  color='#C7EBB3'
-                />
-              ))}
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+                {TaskInfo.map((task, index) => (
+                  <TasksCards
+                    setTaskInfo={setTaskInfo}
+                    key={index}
+                    date={task.date}
+                    tasks={task.tasks}
+                    cardStatus='2/2'
+                    color='#C7EBB3'
+                  />
+                ))}
+              </Box>
             </Item>
           </Container>
         </WorkSpaces>

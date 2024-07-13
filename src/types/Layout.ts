@@ -53,10 +53,11 @@ export interface TypographyProps {
 }
 export interface TasksCard {
     date: string;
-    status: string;
+    cardStatus: string;
     color: string;
     tasks: Array<{
         description: string;
-        status: string;
+        status: boolean;
     }>;
+    setTaskInfo: any;
 }
