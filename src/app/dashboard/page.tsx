@@ -189,7 +189,13 @@ const Dashboard = () => {
                     key={index}
                     date={task.date}
                     tasks={task.tasks}
-                    cardStatus='2/2'
+                    cardStatus={
+                      task.tasks
+                        .filter((task) => task.status)
+                        .length.toString() +
+                      '/' +
+                      task.tasks.length.toString()
+                    }
                     color='#C7EBB3'
                   />
                 ))}
