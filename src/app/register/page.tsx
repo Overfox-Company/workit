@@ -66,6 +66,7 @@ const Page: NextPage<Props> = ({ }) => {
                                     validationSchema={loginSchema}
                                 >{({ errors, touched }) => (
                                     <Form>
+                                        <Input error={errors.name} touched={touched.name} name={"name"} label={"Nombre de usuario"} placeholder='Jhon' />
                                         <Input error={errors.email} touched={touched.email} name={"email"} label={"Correo"} placeholder='Tu correo' />
                                         <Input error={errors.password} touched={touched.password} name={"password"} label={"Contraseña"} placeholder='******' type='password' />
                                         <Input error={errors.repeatPassword} touched={touched.repeatPassword} name={"repeatPassword"} label={"Repite la contraseña"} placeholder='******' type='password' />

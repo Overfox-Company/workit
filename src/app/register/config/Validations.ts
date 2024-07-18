@@ -1,6 +1,7 @@
 import * as Yup from 'yup'
 
 export const loginSchema = Yup.object().shape({
+    name: Yup.string().required('Necesitas un nombre de usuario'),
     email: Yup.string()
         .email('Ingrese una dirección de correo electrónico válida')
         .required('El correo electrónico es obligatorio'),
@@ -15,6 +16,7 @@ export const loginSchema = Yup.object().shape({
         .required('Debes repetir la contraseña'),
 });
 export const InitialValues = {
+    name: '',
     email: '',
     password: '',
     repeatPassword: ''

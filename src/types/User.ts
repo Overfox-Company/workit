@@ -35,6 +35,7 @@ export interface loginUserFormik {
     password: string;
 }
 export interface registerUser {
+    name: string;
     email: string;
     password: string;
     repeatPassword: string
