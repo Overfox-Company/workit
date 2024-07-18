@@ -19,8 +19,10 @@ export interface CreateUserType {
     password?: string,
     avatar?: string
     google?: string
+    name: string
 }
 export interface loginUser {
+    name?: string | undefined | null;
     email: string;
     password?: string;
     type?: string | undefined;

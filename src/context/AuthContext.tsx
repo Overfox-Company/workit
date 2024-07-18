@@ -6,7 +6,7 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import { AppContext } from "./AppContext";
 import { SessionData } from "@/types/User";
 import { LoginGoogle } from "@/app/api/resources/controllers/User";
-
+import { useRouter } from "next/navigation";
 type ContextData = {
     user: any,
     setUser: React.Dispatch<React.SetStateAction<any>>,
@@ -22,10 +22,11 @@ export const AuthContext = createContext<ContextData>({
 });
 
 export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
-    const { setLoadingScreen } = useContext(AppContext)
+    const { setSession } = useContext(AppContext)
     const { data: session, status } = useSession() as SessionData;
     const [user, setUser] = useState<any>({})
     const [first, setFirst] = useState(true)
+    const [loadSession, setLoadSession] = useState(false)
     const { setSnackbarOpen } = useContext(AppContext)
     const RegisterUser = async () => {
 
@@ -45,33 +46,30 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
         else if (resultUser.data.status === 401) {
             setSnackbarOpen({ message: resultUser.data.message, type: "error" })
         }
-        setLoadingScreen(false)
+        setLoadSession(true)
         localStorage.setItem('typeInit', 'login')
     }
     const LgoinUser = async () => {
 
         const getUser = await ApiController.Login({
+            name: session.user?.name,
             email: session.user?.email || "",
             type: localStorage.getItem('typeLogin') || "",
             googleId: session.user?.id,
             id: session?.user?._id
         })
-        setLoadingScreen(false)
-        console.log(getUser.data)
+
         if (getUser.data.status === 200) {
             setUser(getUser.data.user)
         } else {
             signOut()
             setSnackbarOpen({ message: getUser.data.message, type: "error" })
         }
+        setLoadSession(true)
     }
-    const gS = async () => {
-        const getserver = await ApiController.getServer()
-        console.log(getserver)
-    }
+
     useEffect(() => {
         const typeInit = localStorage.getItem('typeInit');
-        console.log(session)
         if (session?.user && first) {
             if (typeInit === 'login') {
                 LgoinUser();
@@ -80,13 +78,23 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
                 RegisterUser();
             }
             setFirst(false);
-        } else {
-            setLoadingScreen(false)
         }
 
 
     }, [session, status]);
+    const router = useRouter()
 
+    useEffect(() => {
+
+        if (user._id && user.firstTime) {
+            router.replace('/firstTime')
+            setSession(true)
+            console.log("a")
+        } else {
+            console.log("b")
+            setSession(true)
+        }
+    }, [user])
     return (
         <AuthContext.Provider
             value={{

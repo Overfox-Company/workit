@@ -2,6 +2,7 @@
 import styled from '@emotion/styled'
 import { Box, Button, Typography } from '@mui/material'
 import { PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from '@/constants/Colors'
+import { PRINCIPALFONT } from '@/constants/Fonts'
 export const Card = styled(Box)({
     borderRadius: 8,
     padding: '48px 36px',
@@ -12,13 +13,13 @@ export const Card = styled(Box)({
 export const Title = styled(Typography)({
     fontWeight: 700,
     color: PRIMARYDARK,
-    fontFamily: 'Roboto',
+    fontFamily: PRINCIPALFONT,
     fontSize: 32,
 })
 export const Subtitle = styled(Typography)({
     fontWeight: 500,
-    color: SECONDARYDARK,
-    fontFamily: 'Roboto',
+    color: PRIMARYDARK,
+    fontFamily: PRINCIPALFONT,
     fontSize: 18,
 })
 export const Divider = styled.div({
@@ -30,7 +31,7 @@ export const Divider = styled.div({
 export const WhiteButton = styled(Button)({
     width: '100%',
     height: 48,
-    fontFamily: 'Roboto',
+    fontFamily: PRINCIPALFONT,
     fontWeight: 700,
     fontSize: 14,
     color: PRIMARYDARK,
@@ -40,9 +41,3 @@ export const WhiteButton = styled(Button)({
         backgroundColor: 'lightgray', // Color de fondo cuando el botón está en hover
     },
 });
-export const CardWhite = styled(Box)({
-    borderRadius: 8,
-    padding: '48px 36px',
-    paddingTop: 36,
-    backgroundColor: 'white'
-})

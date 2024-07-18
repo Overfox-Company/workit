@@ -21,7 +21,7 @@ export const CreateUser = async (data: CreateUserType) => {
     try {
         await connectDB()
 
-        const { email, password, avatar, google } = data
+        const { email, password, avatar, google, name } = data
         const findUser = await User.findOne({ email: email })
 
         if (findUser) {
@@ -30,7 +30,9 @@ export const CreateUser = async (data: CreateUserType) => {
 
         const hashedPassword = password ? await bcrypt.hash(password, 12) : ''
         const newUser = new User({
+            firstTime: true,
             email,
+            name,
             password: hashedPassword,
             avatar,
             googleId: google || ""

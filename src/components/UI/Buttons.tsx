@@ -4,6 +4,7 @@ import { ButtonType } from '@/types/App'
 import styled from '@emotion/styled'
 import LoadingButton from '@mui/lab/LoadingButton';
 import { PRIMARYCOLOR, PRIMARYDARK } from '@/constants/Colors';
+import { PRINCIPALFONT } from '@/constants/Fonts';
 // oioioioi
 const ButtonBlueCustom = styled(LoadingButton)({
     textTransform: 'none',
@@ -15,7 +16,7 @@ const ButtonBlueCustom = styled(LoadingButton)({
     alignItems: "center",
     gap: 10,
     boxShadow: 'none',
-    fontFamily: 'Roboto',
+    fontFamily: PRINCIPALFONT,
     borderRadius: 6,
     justifyContent: 'center',
     border: ` 0px solid ${PRIMARYCOLOR}`,

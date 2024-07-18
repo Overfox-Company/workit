@@ -11,6 +11,7 @@ import { IconButton, Typography } from "@mui/material";
 import { ERROR, ERROROPACITY, GRAYINPUT, PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from "@/constants/Colors";
 import Image from "next/image";
 import Icon from "./Icon";
+import { PRINCIPALFONT } from "@/constants/Fonts";
 
 //Deezert es una aplicacion para la gestion empresarial, tanto del lado de recursos humanos como la gestion administrativa y la gestion de proyectos
 const TextInput = styled(Field)({
@@ -25,7 +26,7 @@ const TextInput = styled(Field)({
     fontWeight: 400,
     outline: "none",
     color: "rgb(80,80,80)",
-    fontFamily: "Roboto",
+    fontFamily: PRINCIPALFONT,
     '&::placeholder': {
         color: SECONDARYDARK
     }
@@ -39,7 +40,7 @@ const Error = styled(Typography)({
     marginLeft: 5,
     textAlign: "left",
     letterSpacing: 2,
-    fontFamily: "Roboto",
+    fontFamily: PRINCIPALFONT,
 });
 const ContainerInput = styled.div({
     display: 'flex',
@@ -83,7 +84,7 @@ const Input: React.FC<InputProps> = ({
                     <Typography
                         sx={{ fontSize: { xs: 14, md: 16 } }}
                         style={{
-                            fontFamily: "Roboto",
+                            fontFamily: PRINCIPALFONT,
                             color: PRIMARYDARK,
                             width: "100%",
                             textAlign: "left",
@@ -146,6 +147,6 @@ export const InputSimple = styled.input({
     padding: 5,
     fontSize: 16,
     boxShadow: '0 0 0px 0 rgb(50,50,50)',
-    fontFamily: '"Inter",sans-serif',
+    fontFamily: PRINCIPALFONT,
     width: 120
 })
