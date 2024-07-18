@@ -8,4 +8,5 @@ export const icons: { [key: string]: string } = {
     search: '/assets/searchIcon.svg',
     notification: '/assets/notifyIcon.svg',
     profileImg: '/assets/profileImg.png',
+    AddIcon: '/assets/cruzBotones.svg',
 };

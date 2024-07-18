@@ -61,3 +61,9 @@ export interface TasksCard {
     }>;
     setTaskInfo: any;
 }
+export interface ProjectsCard {
+    bannerImg: any;
+    membersImg: Array<string>;
+    projectName: string;
+    projectDescription: string;
+}

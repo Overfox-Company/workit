@@ -1,11 +1,12 @@
 'use client';
 import { PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from '@/constants/Colors';
-import { TasksCard, TypographyProps } from '@/types/Layout';
+import { ProjectsCard, TasksCard, TypographyProps } from '@/types/Layout';
 import styled from '@emotion/styled';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { Box, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
+import Image from 'next/image';
 import React, { FC } from 'react';
 
 export const SideBar = styled(Box)({
@@ -217,6 +218,72 @@ export const TasksCards: FC<TasksCard> = ({
           </Text>
         </Box>
       ))}
+    </Box>
+  );
+};
+
+export const ProjectsCards: FC<ProjectsCard> = ({
+  bannerImg,
+  membersImg,
+  projectName,
+  projectDescription,
+}) => {
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        borderRadius: 8,
+        minHeight: 220,
+        minWidth: 241,
+        backgroundColor: '#FFFFFF',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          position: 'relative',
+        }}
+      >
+        <Box sx={{ borderRadius: 8, overflow: 'hidden', paddingBottom: 3 }}>
+          <Image
+            src={bannerImg}
+            alt='project banner'
+            width={241}
+            height={110}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 0,
+            alignItems: 'center',
+            position: 'absolute',
+            top: 12,
+            left: 5,
+          }}
+        >
+          {membersImg.map((member, index) => (
+            <Image
+              key={index}
+              src={member}
+              alt='members'
+              width={32}
+              height={32}
+            />
+          ))}
+        </Box>
+      </Box>
+      <Box>
+        <Text size={24}>{projectName}</Text>
+        <Text size={16} color='#6F6F70'>
+          {projectDescription}
+        </Text>
+      </Box>
     </Box>
   );
 };

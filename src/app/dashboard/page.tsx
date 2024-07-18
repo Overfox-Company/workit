@@ -1,10 +1,12 @@
 'use client';
+import bannerImg from '@/../public/assets/bannerImg.jpg';
 import profileImg from '@/../public/assets/profileImg.png';
 import {
   AddButton,
   Header,
   List,
   ListItem,
+  ProjectsCards,
   Select,
   SideBar,
   TasksCards,
@@ -200,6 +202,31 @@ const Dashboard = () => {
                   />
                 ))}
               </Box>
+            </Item>
+          </Container>
+
+          <Container>
+            <Item xs={6}>
+              <Text size={32}>Proyecto</Text>
+            </Item>
+            <Item xs={6}>
+              <AddButton>
+                Agregar
+                <Icon src='AddIcon' size={32} />
+              </AddButton>
+            </Item>
+
+            <Item>
+              <ProjectsCards
+                bannerImg={bannerImg}
+                membersImg={[
+                  '/assets/profileImg.png',
+                  '/assets/profileImg.png',
+                  '/assets/profileImg.png',
+                ]}
+                projectName='Proyecto 1'
+                projectDescription='Lorem Ipsum Dolor'
+              />
             </Item>
           </Container>
         </WorkSpaces>
