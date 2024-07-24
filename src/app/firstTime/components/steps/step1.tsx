@@ -10,12 +10,12 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { InputLabel, MenuItem } from '@mui/material'
 import { americanCountries, europeanCountries } from '@/countries/data'
-import { styled } from '@mui/system';
+import styled from '@emotion/styled';
 import { AddCountry } from '../../handlers/SendSurvey'
 import { AuthContext } from '@/context/AuthContext'
 interface Props { setStep: Dispatch<SetStateAction<number>> }
 
-const CustomPaper = styled('div')(({ theme }) => ({
+const CustomPaper = styled.div(({ theme }) => ({
     height: 200, // Change this value to adjust the height
 }));
 
