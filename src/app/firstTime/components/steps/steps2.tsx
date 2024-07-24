@@ -4,33 +4,13 @@ import { StepIndicator, Title } from '../Components'
 import FadeIn from '@/components/animation/FadeIn'
 import { Dispatch, SetStateAction, useMemo, useEffect, useState, useContext } from 'react'
 import { ButtonBlue, ButtonBlueOutlined } from '@/components/UI/Buttons'
-import countryList from 'react-select-country-list';
-import Flag from 'react-world-flags';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { InputLabel, MenuItem } from '@mui/material'
-import { americanCountries, europeanCountries } from '@/countries/data'
-import { styled } from '@mui/system';
-import { AddCountry } from '../../handlers/SendSurvey'
 import { AuthContext } from '@/context/AuthContext'
-import Input, { InputSimple } from '@/components/UI/Input'
+import Input from '@/components/UI/Input'
 import { Form, Formik } from 'formik'
 interface Props { setStep: Dispatch<SetStateAction<number>> }
 
-const CustomPaper = styled('div')(({ theme }) => ({
-    height: 200, // Change this value to adjust the height
-}));
-
-const MenuProps = {
-    PaperProps: {
-        component: CustomPaper,
-    },
-};
 const Step2: NextPage<Props> = ({ setStep }) => {
     const { user, setUser } = useContext(AuthContext)
-
-
-
     const handleClick = async () => {
 
     }
