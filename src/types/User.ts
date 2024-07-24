@@ -40,3 +40,32 @@ export interface registerUser {
     password: string;
     repeatPassword: string
 }
+export interface updateUserType {
+    _id: string,
+    email?: string | undefined | null,
+    avatar?: string | undefined | null,
+    name?: string | undefined | null,
+    country?: string | undefined | null
+}
+export interface userType {
+    _id: string,
+    email?: string | undefined | null,
+    avatar?: string | undefined | null,
+    name?: string | undefined | null,
+    country?: string | undefined | null,
+    firstTime?: boolean | undefined | null,
+    survey?: {
+        country: string
+    }
+}
+export const InitialUSer = {
+    _id: "",
+    email: "",
+    avatar: "",
+    name: "",
+    country: "",
+    firstTime: false,
+    survey: {
+        country: ""
+    }
+}

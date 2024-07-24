@@ -2,18 +2,33 @@ import { CardWhite, Container, Item, } from '@/components/layout/Container'
 import { NextPage } from 'next'
 import { StepIndicator, Title } from '../Components'
 import FadeIn from '@/components/animation/FadeIn'
-import { Dispatch, SetStateAction, useMemo, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useMemo, useEffect, useState, useContext } from 'react'
 import { ButtonBlue } from '@/components/UI/Buttons'
 import countryList from 'react-select-country-list';
 import Flag from 'react-world-flags';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { InputLabel, MenuItem } from '@mui/material'
+import { americanCountries, europeanCountries } from '@/countries/data'
+import { styled } from '@mui/system';
+import { AddCountry } from '../../handlers/SendSurvey'
+import { AuthContext } from '@/context/AuthContext'
 interface Props { setStep: Dispatch<SetStateAction<number>> }
 
-const Step1: NextPage<Props> = ({ }) => {
-    const [value, setValue] = useState<string>("");
-    const options = useMemo(() => countryList().getData().map(country => ({
+const CustomPaper = styled('div')(({ theme }) => ({
+    height: 200, // Change this value to adjust the height
+}));
+
+const MenuProps = {
+    PaperProps: {
+        component: CustomPaper,
+    },
+};
+const Step1: NextPage<Props> = ({ setStep }) => {
+    const { user, setUser } = useContext(AuthContext)
+    const [value, setValue] = useState<string | null>(null);
+    const options = useMemo(() => countryList().getData().filter((country) => americanCountries.includes(country.value) || europeanCountries.includes(country.value)
+    ).map(country => ({
         label: (
             <div key={country.value} style={{ display: 'flex', alignItems: 'center' }}>
                 <Flag code={country.value} style={{ width: 20, height: 15, marginRight: 10 }} />
@@ -29,7 +44,12 @@ const Step1: NextPage<Props> = ({ }) => {
     useEffect(() => {
         console.log(options)
     }, [])
-
+    const handleClick = async () => {
+        const result = await AddCountry(value as string, user._id, setUser)
+        if (result) {
+            setStep(2)
+        }
+    }
     return <FadeIn>
         <div>
             <Container justifyContent='center'>
@@ -48,9 +68,10 @@ const Step1: NextPage<Props> = ({ }) => {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={value}
+                                        value={value as string}
                                         label="Country"
                                         onChange={changeHandler}
+                                        MenuProps={MenuProps}
                                     >
 
                                         {options.map(option => (
@@ -63,7 +84,7 @@ const Step1: NextPage<Props> = ({ }) => {
 
 
                             <Item xs={10}>
-                                <ButtonBlue>
+                                <ButtonBlue disabled={value ? false : true} onClick={() => handleClick()}>
                                     Siguiente
                                 </ButtonBlue>
                             </Item>

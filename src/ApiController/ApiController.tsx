@@ -1,4 +1,4 @@
-import { CreateUserType, loginUser } from "@/types/User";
+import { CreateUserType, loginUser, updateUserType } from "@/types/User";
 import axios from "axios";
 
 
@@ -102,7 +102,8 @@ const createApiRequest = async (method?: string, route?: string, data?: any) => 
 const ApiController = {
     registerUserForm: (data: CreateUserType) => api.post('/signup', data),
     Login: (data: loginUser) => api.post('/getUser', data),
-    getServer: () => api.get('/getServer')
+    getServer: () => api.get('/getServer'),
+    updateUser: (data: updateUserType) => api.post('/updateUser', data)
 };
 
 // Export the ApiController object as the default export

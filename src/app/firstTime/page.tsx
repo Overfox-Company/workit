@@ -9,6 +9,7 @@ import { ButtonBlue } from '@/components/UI/Buttons'
 import Presentation from './components/Presentation'
 import Scale from '@/components/animation/Scale'
 import Step1 from './components/steps/step1'
+import Step2 from './components/steps/steps2'
 
 interface Props { }
 
@@ -18,8 +19,14 @@ const Page: NextPage<Props> = ({ }) => {
     return <Wrapper>
         {user._id ?
             <Scale from={"0.5"} to="1">
-                {step === 0 ? <Presentation setStep={setStep} /> : null}
-                {step === 1 ? <Step1 setStep={setStep} /> : null}
+                {!user.survey?.country ? <div>
+                    {step === 0 ? <Presentation setStep={setStep} /> : null}
+                    {step === 1 ? <Step1 setStep={setStep} /> : null}
+                </div> : null}
+
+                {user.survey?.country ? <div>
+                    {step === 0 ? <Step2 setStep={setStep} /> : null}
+                </div> : null}
             </Scale>
 
             : null}

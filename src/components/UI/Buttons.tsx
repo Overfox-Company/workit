@@ -38,7 +38,7 @@ const ButtonBlueOutlinedCustom = styled(LoadingButton)({
     justifyContent: 'center',
 })
 export const ButtonBlue: FC<ButtonType> = ({ loading, children, disabled, ...props }) => {
-    return (<ButtonBlueCustom style={{ backgroundColor: PRIMARYDARK, }} loading={loading} variant={"contained"} disabled={disabled || loading} {...props} >
+    return (<ButtonBlueCustom style={{ backgroundColor: PRIMARYDARK, opacity: disabled ? 0.8 : 1 }} loading={loading} variant={"contained"} disabled={disabled || loading} {...props} >
         {!loading ? <p style={{ color: 'white' }} >
             {children}
         </p> : null}

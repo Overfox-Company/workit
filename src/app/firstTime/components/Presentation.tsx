@@ -19,7 +19,7 @@ const Presentation: NextPage<Props> = ({ setStep }) => {
                 <CardWhite>
                     <Image width={50} height={50} src={Ilustration} alt="ilustration check" />
                     <Title>
-                        ¡Bienvenido {user.name.split(" ")[0]}!
+                        ¡Bienvenido {user.name ? user.name.split(" ")[0] : null}!
                     </Title>
                     <br />
                     <SubTitle>

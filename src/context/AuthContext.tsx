@@ -4,12 +4,12 @@ import ApiController from "@/ApiController/ApiController";
 import { useSession, signOut, signIn } from "next-auth/react";
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { AppContext } from "./AppContext";
-import { SessionData } from "@/types/User";
+import { InitialUSer, SessionData, userType } from "@/types/User";
 import { LoginGoogle } from "@/app/api/resources/controllers/User";
 import { useRouter } from "next/navigation";
 type ContextData = {
-    user: any,
-    setUser: React.Dispatch<React.SetStateAction<any>>,
+    user: userType,
+    setUser: React.Dispatch<React.SetStateAction<userType>>,
 };
 type ProviderProps = {
     children?: React.ReactNode;
@@ -17,14 +17,14 @@ type ProviderProps = {
 };
 
 export const AuthContext = createContext<ContextData>({
-    user: {},
+    user: InitialUSer,
     setUser: () => { },
 });
 
 export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
     const { setSession } = useContext(AppContext)
     const { data: session, status } = useSession() as SessionData;
-    const [user, setUser] = useState<any>({})
+    const [user, setUser] = useState<userType>(InitialUSer)
     const [first, setFirst] = useState(true)
     const [loadSession, setLoadSession] = useState(false)
     const { setSnackbarOpen } = useContext(AppContext)
@@ -89,9 +89,7 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
         if (user._id && user.firstTime) {
             router.replace('/firstTime')
             setSession(true)
-            console.log("a")
         } else {
-            console.log("b")
             setSession(true)
         }
     }, [user])
