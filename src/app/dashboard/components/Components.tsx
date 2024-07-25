@@ -1,4 +1,5 @@
 'use client';
+import Icon from '@/components/UI/Icon';
 import { PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from '@/constants/Colors';
 import { ProjectsCard, TasksCard, TypographyProps } from '@/types/Layout';
 import styled from '@emotion/styled';
@@ -7,7 +8,6 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { Box, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Image from 'next/image';
-import { relative } from 'path';
 import React, { FC } from 'react';
 
 export const SideBar = styled(Box)({
@@ -36,7 +36,7 @@ export const Text: FC<TypographyProps> = ({
 }) => {
   return (
     <Typography
-      sx={{ sx }}
+      sx={{ ...sx }}
       fontSize={size}
       fontWeight={fontWeight ? fontWeight : 600}
       fontFamily={'Roboto'}
@@ -156,17 +156,25 @@ export const TasksCards: FC<TasksCard> = ({
   tasks,
   color,
   setTaskInfo,
+  taskInfo,
 }) => {
   const HandleCheck = (index: number, checked: boolean) => {
     try {
-      const newTasks = [...tasks];
-      newTasks[index].status = checked;
-
-      // ***** NO SE ESTA DEVOLVIENDO EL ARRAY ENTERO, SOLO EL ARRAY DE LOS ESTADOS DE LAS TAREAS ******
-      // setTaskInfo(newTasks);
-      console.log(newTasks);
-      //
-      console.log('Task status changed', newTasks);
+      const newTasks = [
+        {
+          date,
+          tasks: tasks.map((task, i) =>
+            i === index ? { ...task, status: checked } : task
+          ),
+        },
+      ];
+      //find the task that was checked in taskInfo and change the status, with setTaskInfo update the taskInfo without changing the other tasks
+      taskInfo.map((task) => {
+        if (task.date === date) {
+          task.tasks = newTasks[0].tasks;
+        }
+      });
+      setTaskInfo([...taskInfo]);
     } catch (error) {
       console.log('Error', error);
     }
@@ -192,9 +200,20 @@ export const TasksCards: FC<TasksCard> = ({
         }}
       >
         <Text size={24}>{date}</Text>
-        <Text size={14} color='#6F6F70' fontWeight={500}>
-          {cardStatus}
-        </Text>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 1,
+            cursor: 'pointer',
+          }}
+        >
+          <Icon src='AddIcon' size={24} />
+          <Text size={14} color='#6F6F70' fontWeight={500}>
+            {cardStatus}
+          </Text>
+        </Box>
       </Box>
       {tasks.map((task, index) => (
         <Box
@@ -211,13 +230,21 @@ export const TasksCards: FC<TasksCard> = ({
         >
           <Checkbox
             icon={<RadioButtonUncheckedIcon />}
-            checkedIcon={<TaskAltIcon />}
+            checkedIcon={<TaskAltIcon style={{ fill: '#65954A' }} />}
             // if status is true show checked with defaultChecked
             defaultChecked={task.status}
             // when check change set the task status
             onChange={(e) => HandleCheck(index, e.target.checked)}
           />
-          <Text size={14} fontWeight={500} color='#0B161F'>
+          <Text
+            size={14}
+            fontWeight={500}
+            color={task.status ? '#65954A' : '#0B161F'}
+            sx={{
+              textDecoration: task.status ? 'line-through' : 'none',
+              textDecorationThickness: '0.5px',
+            }}
+          >
             {task.description}
           </Text>
         </Box>

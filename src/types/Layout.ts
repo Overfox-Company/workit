@@ -55,6 +55,7 @@ export interface TasksCard {
     date: string;
     cardStatus: string;
     color: string;
+    taskInfo: Array<any>;
     tasks: Array<{
         description: string;
         status: boolean;

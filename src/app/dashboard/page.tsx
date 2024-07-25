@@ -114,16 +114,16 @@ const Dashboard = () => {
     }
   };
 
-  const HandleCardStatus = (index: number, task: Array<any>) => {
-    try {
-      // change the status of the task
-      const newTask = [...TaskInfo];
-      newTask[index].tasks = task;
-      setTaskInfo(newTask);
-    } catch (error) {
-      console.log('Error', error);
-    }
-  };
+  // const HandleCardStatus = (index: number, task: Array<any>) => {
+  //   try {
+  //     // change the status of the task
+  //     const newTask = [...TaskInfo];
+  //     newTask[index].tasks = task;
+  //     setTaskInfo(newTask);
+  //   } catch (error) {
+  //     console.log('Error', error);
+  //   }
+  // };
 
   return (
     <Box
@@ -206,10 +206,9 @@ const Dashboard = () => {
                         setTaskInfo={setTaskInfo}
                         key={index}
                         date={task.date}
+                        taskInfo={TaskInfo}
                         tasks={task.tasks}
                         cardStatus={
-                          // ***** NO SE ESTA DEVOLVIENDO EL ARRAY ENTERO, SOLO EL ARRAY DE LOS ESTADOS DE LAS TAREAS ******
-                          // task.tasks.length > 0 ? task.tasks.filter((task) => task.status).length : 0
                           task.tasks
                             .filter((task) => task.status)
                             .length.toString() +
