@@ -7,6 +7,7 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { Box, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Image from 'next/image';
+import { relative } from 'path';
 import React, { FC } from 'react';
 
 export const SideBar = styled(Box)({
@@ -130,6 +131,7 @@ export const WorkSpaces = styled.div({
   height: '84%',
   maxHeight: 912,
   maxWidth: 'fit',
+  gap: 36,
 });
 
 export const AddButton = styled.button({
@@ -155,6 +157,20 @@ export const TasksCards: FC<TasksCard> = ({
   color,
   setTaskInfo,
 }) => {
+  const HandleCheck = (index: number, checked: boolean) => {
+    try {
+      const newTasks = [...tasks];
+      newTasks[index].status = checked;
+
+      // ***** NO SE ESTA DEVOLVIENDO EL ARRAY ENTERO, SOLO EL ARRAY DE LOS ESTADOS DE LAS TAREAS ******
+      // setTaskInfo(newTasks);
+      console.log(newTasks);
+      //
+      console.log('Task status changed', newTasks);
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
   return (
     <Box
       sx={{
@@ -199,19 +215,7 @@ export const TasksCards: FC<TasksCard> = ({
             // if status is true show checked with defaultChecked
             defaultChecked={task.status}
             // when check change set the task status
-            onChange={(e) => {
-              try {
-                //first copy the tasks array
-                const newTasks = [...tasks];
-                //change the status of the task
-                newTasks[index].status = e.target.checked;
-                //set the new tasks array
-                setTaskInfo(newTasks);
-                console.log('Task status changed', newTasks);
-              } catch (error) {
-                console.log('Error', error);
-              }
-            }}
+            onChange={(e) => HandleCheck(index, e.target.checked)}
           />
           <Text size={14} fontWeight={500} color='#0B161F'>
             {task.description}
@@ -227,16 +231,18 @@ export const ProjectsCards: FC<ProjectsCard> = ({
   membersImg,
   projectName,
   projectDescription,
+  projectImg,
 }) => {
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: 8,
+        borderRadius: 4,
         minHeight: 220,
         minWidth: 241,
         backgroundColor: '#FFFFFF',
+        position: 'relative',
       }}
     >
       <Box
@@ -248,40 +254,93 @@ export const ProjectsCards: FC<ProjectsCard> = ({
           position: 'relative',
         }}
       >
-        <Box sx={{ borderRadius: 8, overflow: 'hidden', paddingBottom: 3 }}>
+        <Box
+          sx={{
+            borderRadius: 4,
+            overflow: 'hidden',
+            height: 130,
+            width: 241,
+          }}
+        >
           <Image
             src={bannerImg}
             alt='project banner'
-            width={241}
-            height={110}
+            fill={true}
+            style={{ borderTopRightRadius: 16, borderTopLeftRadius: 16 }}
           />
         </Box>
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            gap: 0,
             alignItems: 'center',
             position: 'absolute',
+            gap: 0,
             top: 12,
-            left: 5,
+            left: 15,
+            backgroundColor: '#0B161F80',
+            borderRadius: 100,
+            padding: 0.5,
           }}
         >
-          {membersImg.map((member, index) => (
+          {membersImg.slice(0, 3).map((member, index) => (
             <Image
               key={index}
               src={member}
-              alt='members'
-              width={32}
-              height={32}
+              alt='member img'
+              width={24}
+              height={24}
+              style={{
+                borderRadius: '100%',
+                position: 'relative',
+                zIndex: membersImg.length - index,
+                left: index * -8,
+              }}
             />
           ))}
         </Box>
       </Box>
-      <Box>
-        <Text size={24}>{projectName}</Text>
-        <Text size={16} color='#6F6F70'>
+      <Box sx={{ paddingLeft: 2, paddingTop: 3 }}>
+        <Text size={16}>{projectName}</Text>
+        <Text size={12} color='#646464' fontWeight={400}>
           {projectDescription}
+        </Text>
+      </Box>
+
+      <Image
+        src={projectImg}
+        alt='project Img'
+        style={{ position: 'absolute', top: 110, left: 15 }}
+      />
+
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: 24,
+          height: 24,
+          borderRadius: '100%',
+          backgroundColor: '#C7EBB34D',
+          position: 'absolute',
+          zIndex: 0,
+          left: 67,
+          top: 16,
+        }}
+      >
+        <Text
+          size={8}
+          color='#FFFFFF'
+          fontWeight={500}
+          sx={{
+            backgroundColor: SECONDARYDARK,
+            borderRadius: '100%',
+            padding: '4px',
+            position: 'relative',
+            zIndex: 0,
+          }}
+        >
+          {membersImg.length > 3 ? `+${membersImg.length - 3}` : ''}
         </Text>
       </Box>
     </Box>

@@ -66,4 +66,5 @@ export interface ProjectsCard {
     membersImg: Array<string>;
     projectName: string;
     projectDescription: string;
+    projectImg: any;
 }

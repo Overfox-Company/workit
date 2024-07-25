@@ -1,6 +1,7 @@
 'use client';
 import bannerImg from '@/../public/assets/bannerImg.jpg';
 import profileImg from '@/../public/assets/profileImg.png';
+import projectImg from '@/../public/assets/projectImg.png';
 import {
   AddButton,
   Header,
@@ -113,6 +114,17 @@ const Dashboard = () => {
     }
   };
 
+  const HandleCardStatus = (index: number, task: Array<any>) => {
+    try {
+      // change the status of the task
+      const newTask = [...TaskInfo];
+      newTask[index].tasks = task;
+      setTaskInfo(newTask);
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -151,7 +163,7 @@ const Dashboard = () => {
               ))}
             </List>
           </Item>
-          <Item>
+          <Item sx={{ marginTop: 10 }}>
             <TextBox>
               <Box display={'flex'} flexDirection={'row'} gap={1} width={116}>
                 <Icon src='home' size={15} />
@@ -176,57 +188,81 @@ const Dashboard = () => {
 
         <WorkSpaces>
           <Container>
-            <Item xs={6}>
+            <Item xs={9}>
               <Text size={32}>Tareas</Text>
             </Item>
-            <Item xs={6}>
-              <AddButton>Agregar +</AddButton>
-            </Item>
-
-            <Item>
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                {TaskInfo.map((task, index) => (
-                  <TasksCards
-                    setTaskInfo={setTaskInfo}
-                    key={index}
-                    date={task.date}
-                    tasks={task.tasks}
-                    cardStatus={
-                      task.tasks
-                        .filter((task) => task.status)
-                        .length.toString() +
-                      '/' +
-                      task.tasks.length.toString()
-                    }
-                    color='#C7EBB3'
-                  />
-                ))}
-              </Box>
-            </Item>
-          </Container>
-
-          <Container>
-            <Item xs={6}>
-              <Text size={32}>Proyecto</Text>
-            </Item>
-            <Item xs={6}>
+            <Item xs={3}>
               <AddButton>
                 Agregar
                 <Icon src='AddIcon' size={32} />
               </AddButton>
             </Item>
 
-            <Item>
-              <ProjectsCards
-                bannerImg={bannerImg}
-                membersImg={[
-                  '/assets/profileImg.png',
-                  '/assets/profileImg.png',
-                  '/assets/profileImg.png',
-                ]}
-                projectName='Proyecto 1'
-                projectDescription='Lorem Ipsum Dolor'
-              />
+            <Item sx={{ marginTop: 2 }}>
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+                {TaskInfo.length > 0
+                  ? TaskInfo.map((task, index) => (
+                      <TasksCards
+                        setTaskInfo={setTaskInfo}
+                        key={index}
+                        date={task.date}
+                        tasks={task.tasks}
+                        cardStatus={
+                          // ***** NO SE ESTA DEVOLVIENDO EL ARRAY ENTERO, SOLO EL ARRAY DE LOS ESTADOS DE LAS TAREAS ******
+                          // task.tasks.length > 0 ? task.tasks.filter((task) => task.status).length : 0
+                          task.tasks
+                            .filter((task) => task.status)
+                            .length.toString() +
+                          '/' +
+                          task.tasks.length.toString()
+                        }
+                        color='#C7EBB3'
+                      />
+                    ))
+                  : null}
+              </Box>
+            </Item>
+          </Container>
+
+          <Container>
+            <Item xs={9}>
+              <Text size={32}>Proyectos</Text>
+            </Item>
+            <Item xs={3}>
+              <AddButton>
+                Agregar
+                <Icon src='AddIcon' size={32} />
+              </AddButton>
+            </Item>
+
+            <Item sx={{ marginTop: 2 }}>
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+                <ProjectsCards
+                  bannerImg={bannerImg}
+                  membersImg={[
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                  ]}
+                  projectName='OverFox'
+                  projectDescription='Breve descripción'
+                  projectImg={projectImg}
+                />{' '}
+                <ProjectsCards
+                  bannerImg={bannerImg}
+                  membersImg={[
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                  ]}
+                  projectName='OverFox'
+                  projectDescription='Breve descripción'
+                  projectImg={projectImg}
+                />
+              </Box>
             </Item>
           </Container>
         </WorkSpaces>
