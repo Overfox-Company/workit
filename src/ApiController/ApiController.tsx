@@ -1,3 +1,4 @@
+import { AddCompanyType } from "@/types/Company";
 import { CreateUserType, loginUser, updateUserType } from "@/types/User";
 import axios from "axios";
 
@@ -8,6 +9,8 @@ const branch = process.env.NEXT_PUBLIC_IS_DEVELOP
 export const Domain = process.env.NEXT_PUBLIC_PRODUCTION == 'true' ? branch : "http://localhost:3000/";
 
 // Define the base route for the API
+
+//THIS FILE NEED A REFACTOR, TO USERCONTROLLER, COMPANYCONTROLLER ETC
 const Route = `${Domain}api`;
 console.log("esta es la ruta gonzalo")
 console.log(Route)
@@ -100,11 +103,15 @@ const createApiRequest = async (method?: string, route?: string, data?: any) => 
 
 // Create an object to hold API methods
 const ApiController = {
+    //User routes
     registerUserForm: (data: CreateUserType) => api.post('/signup', data),
     Login: (data: loginUser) => api.post('/getUser', data),
     getServer: () => api.get('/getServer'),
-    updateUser: (data: updateUserType) => api.post('/updateUser', data)
+    updateUser: (data: updateUserType) => api.post('/updateUser', data),
+
+    //Company routes
+    addCompany: (data: AddCompanyType) => api.post('/addCompany', data)
 };
 
-// Export the ApiController object as the default export
+
 export default ApiController;

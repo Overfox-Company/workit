@@ -45,7 +45,8 @@ export interface updateUserType {
     email?: string | undefined | null,
     avatar?: string | undefined | null,
     name?: string | undefined | null,
-    country?: string | undefined | null
+    country?: string | undefined | null,
+    typeUser?: string | undefined | null,
 }
 export interface userType {
     _id: string,
@@ -55,7 +56,8 @@ export interface userType {
     country?: string | undefined | null,
     firstTime?: boolean | undefined | null,
     survey?: {
-        country: string
+        country: string,
+        typeUser: string
     }
 }
 export const InitialUSer = {
@@ -66,6 +68,7 @@ export const InitialUSer = {
     country: "",
     firstTime: false,
     survey: {
-        country: ""
+        country: "",
+        typeUser: ""
     }
 }

@@ -12,7 +12,8 @@ export async function POST(req: Request) {
             email,
             avatar,
             name,
-            country
+            country,
+            typeUser
         } = await req.json();
         if (!_id) {
             return new Response(JSON.stringify({ message: 'Not id founded', status: 400, }))
@@ -27,6 +28,9 @@ export async function POST(req: Request) {
             }
             if (country) {
                 userFound.survey.country = country
+            }
+            if (typeUser) {
+                userFound.survey.typeUser = typeUser
             }
             if (name) {
                 userFound.name = name

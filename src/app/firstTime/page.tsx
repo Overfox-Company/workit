@@ -9,7 +9,8 @@ import { ButtonBlue } from '@/components/UI/Buttons'
 import Presentation from './components/Presentation'
 import Scale from '@/components/animation/Scale'
 import Step1 from './components/steps/step1'
-import Step2 from './components/steps/steps2'
+import Step2 from './components/steps/step2'
+import Step3 from './components/steps/step3'
 
 interface Props { }
 
@@ -23,9 +24,12 @@ const Page: NextPage<Props> = ({ }) => {
                     {step === 0 ? <Presentation setStep={setStep} /> : null}
                     {step === 1 ? <Step1 setStep={setStep} /> : null}
                 </div> : null}
-
-                {user.survey?.country ? <div>
+                {user.survey?.country && !user.survey?.typeUser ? <div>
                     {step === 0 ? <Step2 setStep={setStep} /> : null}
+                </div> : null}
+
+                {user.survey?.country && user.survey?.typeUser ? <div>
+                    {step === 0 ? <Step3 setStep={setStep} /> : null}
                 </div> : null}
             </Scale>
 

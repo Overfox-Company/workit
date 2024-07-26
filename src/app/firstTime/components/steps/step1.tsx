@@ -13,6 +13,7 @@ import { americanCountries, europeanCountries } from '@/countries/data'
 import styled from '@emotion/styled';
 import { AddCountry } from '../../handlers/SendSurvey'
 import { AuthContext } from '@/context/AuthContext'
+
 interface Props { setStep: Dispatch<SetStateAction<number>> }
 
 const CustomPaper = styled.div(({ theme }) => ({
@@ -24,6 +25,7 @@ const MenuProps = {
         component: CustomPaper,
     },
 };
+
 const Step1: NextPage<Props> = ({ setStep }) => {
     const { user, setUser } = useContext(AuthContext)
     const [value, setValue] = useState<string | null>(null);
@@ -47,7 +49,7 @@ const Step1: NextPage<Props> = ({ setStep }) => {
     const handleClick = async () => {
         const result = await AddCountry(value as string, user._id, setUser)
         if (result) {
-            setStep(2)
+            setStep(0)
         }
     }
     return <FadeIn>
@@ -55,7 +57,7 @@ const Step1: NextPage<Props> = ({ setStep }) => {
             <Container justifyContent='center'>
                 <Item xs={5}>
                     <CardWhite>
-                        <StepIndicator step={1} />
+                        <StepIndicator step={1} limit={2} />
                         <Title>
                             ¿Desde que pais nos visitas?
                         </Title>
@@ -81,15 +83,12 @@ const Step1: NextPage<Props> = ({ setStep }) => {
                                     </Select>
                                 </FormControl>
                             </Item>
-
-
                             <Item xs={10}>
                                 <ButtonBlue disabled={value ? false : true} onClick={() => handleClick()}>
                                     Siguiente
                                 </ButtonBlue>
                             </Item>
                         </Container>
-
                     </CardWhite>
                 </Item>
             </Container>

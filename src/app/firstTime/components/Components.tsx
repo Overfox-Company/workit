@@ -25,11 +25,11 @@ export const Text = styled(Typography)({
     fontFamily: PRINCIPALFONT,
     fontSize: 18,
 })
-export const StepIndicator: FC<{ step: number }> = ({ step }) => {
+export const StepIndicator: FC<{ step: number, limit?: number }> = ({ step, limit = 3 }) => {
     return <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Text>
 
-            Paso {step} de 3
+            Paso {step} de {limit}
         </Text>
     </div>
 }
