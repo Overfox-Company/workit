@@ -82,7 +82,7 @@ const Step2: NextPage<Props> = ({ setStep }) => {
                         </Title>
                         <br />
                         {TypeUser.map((type) => (
-                            <Card onClick={() => setSelected(type.id)} style={{
+                            <Card key={type.id} onClick={() => setSelected(type.id)} style={{
                                 borderColor: selected === type.id ? PRIMARYCOLOR : "rgb(140,140,140)",
                                 boxShadow: selected === type.id ? `0 4px 10px -8px ${PRIMARYCOLOR}` : undefined,
                             }}>
