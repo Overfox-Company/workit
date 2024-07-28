@@ -16,14 +16,7 @@ import Tooltip from '@mui/material/Tooltip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Input from '@/components/UI/Input'
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
-import { styled as StyledMui } from '@mui/system';
 
-const CustomTooltip = StyledMui(Tooltip)(({ theme }) => ({
-    tooltip: {
-        backgroundColor: 'blue', // Cambia esto al color deseado
-        color: 'white', // Cambia esto al color de texto deseado
-    },
-}));
 const AvatarCompany = styled(Image)({
     position: 'absolute',
     top: -35,
@@ -154,7 +147,7 @@ const Step4: NextPage<Props> = ({ }) => {
                                     </LabelOption>
                                     <ClickAwayListener onClickAway={handleTooltipClose}>
                                         <div>
-                                            < CustomTooltip
+                                            <Tooltip
                                                 arrow
 
                                                 placement='right'
@@ -179,7 +172,7 @@ const Step4: NextPage<Props> = ({ }) => {
                                                 }
                                             >
                                                 <BoxColor style={{ backgroundColor: color, border: 'solid 1px rgb(250,250,250)' }} onClick={handleTooltipOpen} />
-                                            </ CustomTooltip>
+                                            </Tooltip>
                                         </div>
                                     </ClickAwayListener>
                                 </BoxOpacity>
