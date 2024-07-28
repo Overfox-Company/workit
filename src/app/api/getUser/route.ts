@@ -1,4 +1,5 @@
 import { CreateUser, GetUserByEmail, LoginCredentials, LoginGoogle, UpdateGoogleId } from "@/app/api/resources/controllers/User";
+import { GetAllCompanysByOwner } from "../resources/controllers/Company";
 
 
 export async function POST(req: Request) {
@@ -13,7 +14,8 @@ export async function POST(req: Request) {
             userFound = await LoginCredentials({ email, id })
         }
         if (userFound?._id) {
-            return new Response(JSON.stringify({ message: 'User found', status: 200, user: userFound }))
+            const allCompanys = await GetAllCompanysByOwner(userFound._id)
+            return new Response(JSON.stringify({ message: 'User found', status: 200, user: userFound, companys: allCompanys }))
         } else if (userFound === 'update') {
             const resultUser = await UpdateGoogleId({ email, googleId })
             return new Response(JSON.stringify({ message: 'User found', status: 200, user: resultUser }))

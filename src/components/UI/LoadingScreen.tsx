@@ -32,7 +32,7 @@ const LoadingScreen: NextPage<Props> = ({ }) => {
     const [cleanComponent, setCleanComponent] = useState(false)
     useEffect(() => {
 
-        console.log(loadingScreen)
+        //  console.log(loadingScreen)
         if (!loadingScreen) {
             setTimeout(() => {
                 setCleanComponent(true)

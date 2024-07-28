@@ -26,6 +26,7 @@ export async function POST(req: Request) {
             avatar,
             name: nameCompany,
             bg,
+            firstCompnayByOwner: true,
             idOwner: userID
         })
         await newCompany.save()

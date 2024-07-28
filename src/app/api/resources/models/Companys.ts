@@ -7,6 +7,7 @@ const CompanySchema = new Schema({
     bg: { type: String },
     email: { type: String },
     avatar: { type: String, },
+    firstCompnayByOwner: { type: Boolean },
     date: { type: String },
     idOwner: { type: Schema.Types.ObjectId, ref: "User", required: true },
     workers: [{ type: Schema.Types.ObjectId, ref: "User" }],

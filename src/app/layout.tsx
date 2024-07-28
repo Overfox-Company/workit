@@ -21,8 +21,9 @@ export default function RootLayout({
   return (
     <NextAuthProvider>
       <AppContextProvider>
-        <AuthContextProvider>
-          <CompanyContextProvider>
+        <CompanyContextProvider>
+          <AuthContextProvider>
+
             <html lang="en">
               <body>
                 <LoadingScreen />
@@ -30,8 +31,9 @@ export default function RootLayout({
                 {children}
               </body>
             </html>
-          </CompanyContextProvider>
-        </AuthContextProvider>
+
+          </AuthContextProvider>
+        </CompanyContextProvider>
       </AppContextProvider>
     </NextAuthProvider>
   );
