@@ -23,9 +23,11 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const Dashboard = () => {
+  const TasksColors = ['#C7EBB3', '#FFDEC6', '#0B161F'];
   const [TaskInfo, setTaskInfo] = useState([
     {
       date: 'June 15',
+      color: '#C7EBB3',
       tasks: [
         {
           description: 'Lorem Ipsum Dolor',
@@ -47,6 +49,7 @@ const Dashboard = () => {
     },
     {
       date: 'June 16',
+      color: '#FFDEC6',
       tasks: [
         {
           description: 'Lorem Ipsum Dolor',
@@ -215,7 +218,8 @@ const Dashboard = () => {
                           '/' +
                           task.tasks.length.toString()
                         }
-                        color='#C7EBB3'
+                        colors={task.color}
+                        projectImg={projectImg}
                       />
                     ))
                   : null}

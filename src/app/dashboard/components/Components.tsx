@@ -154,9 +154,10 @@ export const TasksCards: FC<TasksCard> = ({
   date,
   cardStatus,
   tasks,
-  color,
+  colors,
   setTaskInfo,
   taskInfo,
+  projectImg,
 }) => {
   const HandleCheck = (index: number, checked: boolean) => {
     try {
@@ -182,7 +183,7 @@ export const TasksCards: FC<TasksCard> = ({
   return (
     <Box
       sx={{
-        backgroundColor: '#C7EBB3',
+        backgroundColor: colors,
         borderRadius: 8,
         display: 'flex',
         flexDirection: 'column',
@@ -225,7 +226,7 @@ export const TasksCards: FC<TasksCard> = ({
             borderRadius: 8,
             marginTop: 1,
             alignItems: 'center',
-            bgcolor: task.status ? '#C7EBB3' : '#FEF0E4',
+            bgcolor: task.status ? null : '#FEF0E4',
           }}
         >
           <Checkbox
@@ -247,6 +248,17 @@ export const TasksCards: FC<TasksCard> = ({
           >
             {task.description}
           </Text>
+          <Image
+            src={projectImg}
+            alt='project Img'
+            style={{
+              borderRadius: '100%',
+              marginLeft: 'auto',
+              marginRight: 4,
+              width: 24,
+              height: 24,
+            }}
+          />
         </Box>
       ))}
     </Box>
@@ -360,7 +372,6 @@ export const ProjectsCards: FC<ProjectsCard> = ({
           color='#FFFFFF'
           fontWeight={500}
           sx={{
-            backgroundColor: SECONDARYDARK,
             borderRadius: '100%',
             padding: '4px',
             position: 'relative',
