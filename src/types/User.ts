@@ -29,6 +29,15 @@ export interface loginUser {
     googleId?: string | undefined | null;
     id?: string | undefined | null
 }
+export interface EditUser {
+    name?: string | undefined | null;
+    email?: string;
+    password?: string;
+    type?: string | undefined;
+    googleId?: string | undefined | null;
+    id: string | undefined | null
+    firstTime?: boolean
+}
 export interface loginUserFormik {
     email: string;
     // userName:string

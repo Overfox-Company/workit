@@ -1,5 +1,5 @@
-import { AddCompanyType } from "@/types/Company";
-import { CreateUserType, loginUser, updateUserType } from "@/types/User";
+import { AddCompanyType, EditCompany } from "@/types/Company";
+import { CreateUserType, EditUser, loginUser, updateUserType } from "@/types/User";
 import axios from "axios";
 
 
@@ -107,9 +107,15 @@ const ApiController = {
     Login: (data: loginUser) => api.post('/getUser', data),
     getServer: () => api.get('/getServer'),
     updateUser: (data: updateUserType) => api.post('/updateUser', data),
+    editUser: (data: EditUser) => api.post('/editUser', data),
 
     //Company routes
-    addCompany: (data: AddCompanyType) => api.post('/addCompany', data)
+    addCompany: (data: AddCompanyType) => api.post('/addCompany', data),
+    editCompany: (data: EditCompany) => api.post('/editCompany', data, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }
+    })
 };
 
 

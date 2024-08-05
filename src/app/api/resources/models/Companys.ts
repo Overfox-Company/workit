@@ -5,8 +5,11 @@ import { Document, Schema, model, models } from 'mongoose';
 const CompanySchema = new Schema({
     name: { type: String, required: true },
     bg: { type: String },
+    bgColor: { type: String },
+    bgId: { type: String },
     email: { type: String },
     avatar: { type: String, },
+    avatarId: { type: String, },
     firstCompnayByOwner: { type: Boolean },
     date: { type: String },
     idOwner: { type: Schema.Types.ObjectId, ref: "User", required: true },

@@ -55,24 +55,27 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
     }
     const LoginUser = async () => {
 
-        const getUser = await ApiController.Login({
+        const dataToLogin = {
+
             name: session.user?.name,
             email: session.user?.email || "",
             type: localStorage.getItem('typeLogin') || "",
             googleId: session.user?.id,
-            id: session?.user?._id
-        })
+            id: session?.user?._id || session?.user?.id
+
+        }
+        console.log(dataToLogin)
+        const getUser = await ApiController.Login(dataToLogin)
         console.log(getUser.data)
         if (getUser.data.status === 200) {
             setUser(getUser.data.user)
 
             if (getUser.data.companys) {
-                console.log("si hay compañias")
                 setCompanyList(getUser.data.companys)
-                console.log(setCompanyList)
+
             }
         } else {
-            // signOut()
+            signOut()
             setSnackbarOpen({ message: getUser.data.message, type: "error" })
         }
         setLoadSession(true)
@@ -85,7 +88,6 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
             if (typeInit === 'login') {
                 LoginUser();
             } else if (typeInit === 'register') {
-                console.log("se ejecuta el registro")
                 RegisterUser();
             }
             setFirst(false);

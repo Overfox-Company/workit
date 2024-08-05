@@ -1,9 +1,11 @@
 import { CreateUser, GetUserByEmail, LoginCredentials, LoginGoogle, UpdateGoogleId } from "@/app/api/resources/controllers/User";
 import { GetAllCompanysByOwner } from "../resources/controllers/Company";
+import { connectDB } from "../resources/database/MongoConnect";
 
 
 export async function POST(req: Request) {
     try {
+        await connectDB()
         const { email, password, googleId, type, id } = await req.json();
         let userFound;
         if (type === 'google') {
@@ -13,7 +15,7 @@ export async function POST(req: Request) {
 
             userFound = await LoginCredentials({ email, id })
         }
-        if (userFound?._id) {
+        if (userFound._id) {
             const allCompanys = await GetAllCompanysByOwner(userFound._id)
             return new Response(JSON.stringify({ message: 'User found', status: 200, user: userFound, companys: allCompanys }))
         } else if (userFound === 'update') {

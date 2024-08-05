@@ -11,6 +11,7 @@ import * as Yup from 'yup'
 import ApiController from '@/ApiController/ApiController'
 import { CompanyContext } from '@/context/CompanyContext'
 import { AppContext } from '@/context/AppContext'
+import Skip from './controllers/Skip'
 interface Props { setStep: Dispatch<SetStateAction<number>> }
 const validationSchema = Yup.object().shape({
     nameCompany: Yup.string()
@@ -26,14 +27,15 @@ const Step3: NextPage<Props> = ({ setStep }) => {
         }
         const result = await ApiController.addCompany(dataAddCompany)
         const { status, company, message } = result.data
-        console.log(result)
+
         if (status === 200) {
             setCompanyList([company])
             setStep(1)
         }
         setSnackbarOpen({ message, type: status === 200 ? 'success' : 'error' })
     }
-    return <FadeIn>
+    const [skip, setSkip] = useState(false)
+    return skip ? <Skip /> : <FadeIn>
         <div>
             <Container justifyContent='center'>
                 <Item xs={5}>
@@ -59,7 +61,7 @@ const Step3: NextPage<Props> = ({ setStep }) => {
                                         <br />
                                         <Container columnSpacing={2} rowSpacing={2}>
                                             <Item xs={6}>
-                                                <ButtonBlueOutlined>
+                                                <ButtonBlueOutlined onClick={() => setSkip(true)}>
                                                     Omitir
                                                 </ButtonBlueOutlined>
                                             </Item>

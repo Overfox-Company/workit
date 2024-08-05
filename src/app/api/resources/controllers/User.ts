@@ -74,6 +74,7 @@ export const GetUserByEmail = async (email: getByEmail) => {
 }
 export const LoginGoogle = async ({ email, googleId }: loginGoogle) => {
     try {
+        await connectDB()
         const resultUser = await User.findOne({ email: email });
         if (resultUser.password && !resultUser.googleId) {
             return 'update'

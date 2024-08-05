@@ -8,6 +8,7 @@ export type AddCompanyType = {
     id: string,
 }
 export interface CompanyType {
+    bgColor?: string,
     _id?: string | undefined,
     nameCompany: string,
     bg: string | undefined,
@@ -28,3 +29,13 @@ export const InitialCompany = {
     idOwner: '',
     firstCompnayByOwner: true
 }
+export interface EditCompany {
+    id_user?: string,
+    bgColor?: string,
+    id_company: string,
+    bg?: File,
+    avatar?: File,
+    name?: string,
+    email?: string,
+    workers?: string[],
+} 
