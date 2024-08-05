@@ -37,6 +37,9 @@ export async function POST(req: Request) {
             companyToEdit.bg = bgResult.url
         }
         if (avatar) {
+            if (companyToEdit.avatarId) {
+                await deleteFileFromCloudinary(companyToEdit.avatarId)
+            }
             const avatarResult: any = await uploadFileToCloudinary(avatar, companyToEdit._id)
             companyToEdit.avatarId = avatarResult.public_id
             companyToEdit.avatar = avatarResult.url
