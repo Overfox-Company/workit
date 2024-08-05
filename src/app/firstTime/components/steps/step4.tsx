@@ -39,14 +39,26 @@ const Step4: NextPage<Props> = ({ }) => {
     const [newCompany, setNewCompany] = useState<CompanyType>(InitialCompany)
     useEffect(() => {
         const filter = companyList.filter(company => company.idOwner === user._id)[0]
+
         if (filter?._id && !newCompany._id) {
+
             console.log(filter)
             setNewCompany(filter)
             if (filter.bgColor) {
                 setColor(filter.bgColor)
             }
         }
-    }, [user, companyList])
+    }, [user, companyList, newCompany])
+    useEffect(() => {
+        console.log(user)
+    }, [user])
+    useEffect(() => {
+        console.log(companyList)
+    }, [companyList])
+    useEffect(() => {
+        console.log("company")
+        console.log(newCompany)
+    }, [newCompany])
     useEffect(() => {
         if (!loadingScreen) {
             setTimeout(() => {
@@ -65,10 +77,17 @@ const Step4: NextPage<Props> = ({ }) => {
     };
     const onDrop = useCallback((acceptedFiles: File[]) => {
         onDropImageBg(acceptedFiles[0])
-    }, [])
+    }, [newCompany])
     const { getRootProps, getInputProps, } = useDropzone({ onDrop, maxFiles: 1 })
     const [loadBg, setLoadBg] = useState(false)
     const [opacityBg, setOpacityBg] = useState(0)
+
+    const [loadAvatar, setLoadAvatar] = useState(false)
+    const [opacityAvatar, setOpacityAvatar] = useState(0)
+    const onDropAvatar = useCallback((acceptedFiles: File[]) => {
+        onDropImageAvatar(acceptedFiles[0])
+    }, [newCompany])
+    const { getRootProps: getRootPropsAvatar, getInputProps: getInputPropsAvatar, } = useDropzone({ onDrop: onDropAvatar, maxFiles: 1 })
     const onDropImageBg = async (File: File) => {
         setLoadBg(true)
         setTimeout(() => {
@@ -76,6 +95,7 @@ const Step4: NextPage<Props> = ({ }) => {
         }, 10)
         const form: any = new FormData()
         form.append("bg", File)
+        console.log(newCompany)
         if (newCompany._id) {
             form.append("id_company", newCompany._id)
         }
@@ -96,13 +116,6 @@ const Step4: NextPage<Props> = ({ }) => {
         }, 1300)
 
     }
-    const [loadAvatar, setLoadAvatar] = useState(false)
-    const [opacityAvatar, setOpacityAvatar] = useState(0)
-    const onDropAvatar = useCallback((acceptedFiles: File[]) => {
-        onDropImageAvatar(acceptedFiles[0])
-    }, [])
-    const { getRootProps: getRootPropsAvatar, getInputProps: getInputPropsAvatar, } = useDropzone({ onDrop: onDropAvatar, maxFiles: 1 })
-
     const onDropImageAvatar = async (File: File) => {
         setLoadAvatar(true)
         setTimeout(() => {

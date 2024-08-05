@@ -17,6 +17,7 @@ const Skip = () => {
         const result = await ApiController.editUser(data)
         const { editedUser, message } = result.data
         if (editedUser) {
+            console.log("se ejecuta skip")
             route.push('/dashboard')
             setUser(editedUser)
         } else {
