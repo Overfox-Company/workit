@@ -33,6 +33,7 @@
     "react-world-flags": "^1.6.0",
     "storybook": "^8.0.0",
     "styled-components": "^6.1.8",
+    "uuid": "^10.0.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {
