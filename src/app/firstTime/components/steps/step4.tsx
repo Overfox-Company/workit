@@ -37,6 +37,7 @@ const Step4: NextPage<Props> = ({ }) => {
     const [show, setShow] = useState(false)
     const [color, setColor] = useState(Colors[Math.floor(Math.random() * Colors.length)])
     const [newCompany, setNewCompany] = useState<CompanyType>(InitialCompany)
+
     useEffect(() => {
         const filter = companyList.filter(company => company.idOwner === user._id)[0]
 
@@ -49,16 +50,7 @@ const Step4: NextPage<Props> = ({ }) => {
             }
         }
     }, [user, companyList, newCompany])
-    useEffect(() => {
-        console.log(user)
-    }, [user])
-    useEffect(() => {
-        console.log(companyList)
-    }, [companyList])
-    useEffect(() => {
-        console.log("company")
-        console.log(newCompany)
-    }, [newCompany])
+
     useEffect(() => {
         if (!loadingScreen) {
             setTimeout(() => {
@@ -66,6 +58,7 @@ const Step4: NextPage<Props> = ({ }) => {
             }, 100)
         }
     }, [loadingScreen])
+
     const [open, setOpen] = useState(false);
 
     const handleTooltipClose = () => {
