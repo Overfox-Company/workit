@@ -111,6 +111,7 @@ export const LoginCredentials = async ({ email, id }: loginCredentials) => {
     }
 }
 export const UpdateGoogleId = async ({ email, googleId }: loginGoogle) => {
+    await connectDB()
     const resultUser = await User.findOne({ email })
     if (resultUser.googleId) {
         return resultUser

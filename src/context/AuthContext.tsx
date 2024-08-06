@@ -99,8 +99,9 @@ export const AuthContextProvider: React.FC<ProviderProps> = ({ children }) => {
 
     useEffect(() => {
 
-        if (user._id && user.firstTime) {
-            router.replace('/firstTime')
+        if (user._id) {
+            const a = user.firstTime ? '/firstTime' : '/dashboard'
+            router.replace(a)
             setSession(true)
         } else {
             setSession(true)
