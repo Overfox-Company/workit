@@ -57,8 +57,11 @@ const Page: NextPage<Props> = ({ }) => {
                             <Item xs={12}>
                                 <Formik
                                     innerRef={FormRef}
-                                    onSubmit={(values) => {
-                                        HandleSubmitForm(values, setLoadingButton, setSnackbarOpen)
+                                    onSubmit={async (values) => {
+                                        const result = await HandleSubmitForm(values, setLoadingButton, setSnackbarOpen)
+                                        if (result) {
+                                            router.push("/firstTime")
+                                        }
                                     }}
                                     validateOnChange={false} // No validar al cambiar
                                     validateOnBlur={false}

@@ -7,6 +7,7 @@ export const HandleSubmitForm = async (
     values: registerUser,
     setloading: React.Dispatch<React.SetStateAction<boolean>>,
     setSnackbarOpen: React.Dispatch<React.SetStateAction<typeof SnackbarInitial>>
+    
 ) => {
 
     const result = await ApiController.registerUserForm(values)
@@ -23,8 +24,12 @@ export const HandleSubmitForm = async (
         const { status } = result.data
         if (status === 200) {
             setSnackbarOpen({ message: result.data.message, type: 'success' })
+            return true
+            
         } else {
+
             setSnackbarOpen({ message: result.data.message, type: 'error' })
+            return false
         }
     }
 }
