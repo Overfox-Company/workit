@@ -12,11 +12,15 @@ import { IconButton } from '@mui/material'
 import Link from 'next/link'
 import Icon from '@/components/UI/Icon'
 import FadeIn from '@/components/animation/FadeIn'
+import { AuthContext } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
 interface Props { setStep: Dispatch<SetStateAction<number>> }
 
 const LoginForm: NextPage<Props> = ({ setStep }) => {
     const { setSnackbarOpen } = useContext(AppContext)
+    const { user } = useContext(AuthContext)
     const FormRef = useRef<FormikProps<loginUserFormik>>(null)
+    const route = useRouter()
     const SubmitForm = () => {
         if (FormRef.current) {
             FormRef.current.submitForm();
@@ -36,9 +40,12 @@ const LoginForm: NextPage<Props> = ({ setStep }) => {
                             <Item xs={12}>
                                 <Formik
                                     innerRef={FormRef}
-                                    onSubmit={(values, { resetForm }) => {
-                                        HandleSubmitForm(values, setSnackbarOpen)
-
+                                    onSubmit={async (values, { resetForm }) => {
+                                        const res = await HandleSubmitForm(values, setSnackbarOpen)
+                                        if (res) {
+                                            const a = user.firstTime ? '/firstTime' : '/dashboard'
+                                            route.push(a)
+                                        }
                                         // resetForm();
                                     }}
                                     validateOnChange={false} // No validar al cambiar

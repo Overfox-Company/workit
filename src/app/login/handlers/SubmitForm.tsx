@@ -12,8 +12,9 @@ export const HandleSubmitForm = async (
     });
     if (res?.error) {
         setSnackbarOpen({ message: res?.error, type: "error" })
+        return false
     }
     localStorage.setItem('typeInit', 'login')
     localStorage.setItem('typeLogin', 'credentials')
-    console.log(res)
+    return true
 }
