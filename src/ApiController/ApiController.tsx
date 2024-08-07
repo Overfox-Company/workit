@@ -8,8 +8,13 @@ import axios from "axios";
 const branch = process.env.NEXT_PUBLIC_IS_DEVELOP
 export const Domain = process.env.NEXT_PUBLIC_PRODUCTION == 'true' ? branch : "http://localhost:3000/";
 
-// Define the base route for the API
-
+// Define the base route for the 
+console.log("next production")
+console.log(process.env.NEXT_PUBLIC_PRODUCTION)
+console.log("branch")
+console.log(branch)
+console.log("domain")
+console.log(Domain)
 //THIS FILE NEED A REFACTOR, TO USERCONTROLLER, COMPANYCONTROLLER ETC
 const Route = `${Domain}api`;
 
