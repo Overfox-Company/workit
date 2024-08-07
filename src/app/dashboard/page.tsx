@@ -10,6 +10,7 @@ import {
   ProjectsCards,
   Select,
   SideBar,
+  TaskFilter,
   TasksCards,
   Text,
   TextBox,
@@ -23,7 +24,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const Dashboard = () => {
-  const TasksColors = ['#C7EBB3', '#FFDEC6', '#0B161F'];
   const [TaskInfo, setTaskInfo] = useState([
     {
       date: 'June 15',
@@ -117,17 +117,6 @@ const Dashboard = () => {
     }
   };
 
-  // const HandleCardStatus = (index: number, task: Array<any>) => {
-  //   try {
-  //     // change the status of the task
-  //     const newTask = [...TaskInfo];
-  //     newTask[index].tasks = task;
-  //     setTaskInfo(newTask);
-  //   } catch (error) {
-  //     console.log('Error', error);
-  //   }
-  // };
-
   return (
     <Box
       sx={{
@@ -193,6 +182,49 @@ const Dashboard = () => {
           <Container>
             <Item xs={9}>
               <Text size={32}>Tareas</Text>
+              <TaskFilter>
+                <Text
+                  size={14}
+                  sx={{
+                    backgroundColor: '#C7EBB3',
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                  }}
+                >
+                  Todas
+                  {/* TaskInfo total number */} ({TaskInfo.length})
+                </Text>
+                <Text
+                  size={14}
+                  sx={{
+                    backgroundColor: '#FFE8D5',
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                  }}
+                >
+                  Recientes
+                </Text>
+                <Text
+                  size={14}
+                  sx={{
+                    backgroundColor: '#FFE8D5',
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                  }}
+                >
+                  Completadas
+                </Text>
+                <Text
+                  size={14}
+                  sx={{
+                    backgroundColor: '#FFE8D5',
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                  }}
+                >
+                  Sin Iniciar
+                </Text>
+              </TaskFilter>
             </Item>
             <Item xs={3}>
               <AddButton>

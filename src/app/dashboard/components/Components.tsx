@@ -384,3 +384,15 @@ export const ProjectsCards: FC<ProjectsCard> = ({
     </Box>
   );
 };
+
+export const TaskFilter = styled.div({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: 12,
+  alignItems: 'center',
+  cursor: 'pointer',
+  borderRadius: 24,
+  padding: '8px',
+  fontSize: 16,
+  fontWeight: 600,
+});
