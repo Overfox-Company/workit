@@ -17,7 +17,8 @@ console.log("domain")
 console.log(Domain)
 //THIS FILE NEED A REFACTOR, TO USERCONTROLLER, COMPANYCONTROLLER ETC
 const Route = `${Domain}api`;
-
+console.log("route")
+console.log(Route)
 const api = axios.create({
     baseURL: Route,
 
