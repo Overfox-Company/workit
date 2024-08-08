@@ -1,6 +1,5 @@
 import { GridDirection } from "@mui/material";
-import React from "react";
-import {
+import React, {
     type CSSProperties,
     type MouseEventHandler,
     type ReactNode,
@@ -43,4 +42,31 @@ export interface ItemProps {
     lg?: number;
     xl?: number;
     sm?: number;
+}
+export interface TypographyProps {
+    children: ReactNode;
+    sx?: any;
+    style?: any;
+    size?: number;
+    color?: string;
+    fontWeight?: number;
+}
+export interface TasksCard {
+    date: string;
+    cardStatus: string;
+    colors: any;
+    taskInfo: Array<any>;
+    tasks: Array<{
+        description: string;
+        status: boolean;
+    }>;
+    setTaskInfo: any;
+    projectImg: any;
+}
+export interface ProjectsCard {
+    bannerImg: any;
+    membersImg: Array<string>;
+    projectName: string;
+    projectDescription: string;
+    projectImg: any;
 }
