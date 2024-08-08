@@ -3,8 +3,8 @@ import GoogleProvider from 'next-auth/providers/google'
 import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { connectDB } from '@/backend/database/MongoConnect';
-import { User } from "@/backend/models/User";
+import { connectDB } from '@/app/api/resources/database/MongoConnect';
+import { User } from "@/app/api/resources/models/User";
 import bcrypt from "bcryptjs";
 const handler = NextAuth({
     providers: [
@@ -27,7 +27,9 @@ const handler = NextAuth({
                     credentials!.password,
                     userFound.password
                 );
-
+                if (userFound.googleId && !passwordMatch) {
+                    throw new Error("There is already an account with this email address associated with google");
+                }
                 if (!passwordMatch) throw new Error("Invalid password");
 
                 console.log(userFound);

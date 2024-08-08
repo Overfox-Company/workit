@@ -7,12 +7,10 @@ export const HandleSubmitForm = async (
     values: registerUser,
     setloading: React.Dispatch<React.SetStateAction<boolean>>,
     setSnackbarOpen: React.Dispatch<React.SetStateAction<typeof SnackbarInitial>>
+    
 ) => {
 
     const result = await ApiController.registerUserForm(values)
-    console.log("resultado de login")
-    console.log(result)
-
     if (result.data.status === 401) {
         setSnackbarOpen({ message: result.data.message, type: 'error' })
     } else {
@@ -23,7 +21,15 @@ export const HandleSubmitForm = async (
             password: values.password,
             redirect: false,
         });
-        setSnackbarOpen({ message: result.data.message, type: 'success' })
-        console.log(res)
+        const { status } = result.data
+        if (status === 200) {
+            setSnackbarOpen({ message: result.data.message, type: 'success' })
+            return true
+            
+        } else {
+
+            setSnackbarOpen({ message: result.data.message, type: 'error' })
+            return false
+        }
     }
 }

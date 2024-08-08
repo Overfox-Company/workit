@@ -6,12 +6,13 @@ import { PAPERGRAY, PRIMARYDARK } from '@/constants/Colors'
 import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '@/context/AppContext'
 import { motion } from 'framer-motion'; // Importa motion de Framer Motion
+import { PRINCIPALFONT } from '@/constants/Fonts'
 
 interface Props { }
 const Text = styled(Typography)({
     fontWeight: 700,
     color: PRIMARYDARK,
-    fontFamily: 'Roboto',
+    fontFamily: PRINCIPALFONT,
     fontSize: 32,
     textAlign: 'center'
 })
@@ -31,7 +32,7 @@ const LoadingScreen: NextPage<Props> = ({ }) => {
     const [cleanComponent, setCleanComponent] = useState(false)
     useEffect(() => {
 
-        console.log(loadingScreen)
+        //  console.log(loadingScreen)
         if (!loadingScreen) {
             setTimeout(() => {
                 setCleanComponent(true)

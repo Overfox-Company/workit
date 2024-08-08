@@ -1,4 +1,4 @@
-export const PRIMARYCOLOR = '#00D86B'
+export const PRIMARYCOLOR = '#017E3F'
 export const PRIMARYDARK = '#0B161F'
 export const SECONDARYDARK = '#646464'
 export const PAPERGRAY = '#EDEFF1'

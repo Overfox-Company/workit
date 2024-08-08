@@ -1,6 +1,6 @@
 'use client'
 import React, { FC } from 'react'
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import styled from '@emotion/styled';
 import { ContainerProps, ItemProps } from '@/types/Layout';
 import { BGSCREEN } from '@/constants/Colors';
@@ -83,3 +83,12 @@ export const Column: FC<ContainerProps> = ({ children, ...props }) => {
         </div>
     )
 }
+export const CardWhite = styled(Box)({
+    borderRadius: 12,
+    padding: '48px 30px',
+    paddingTop: 36,
+    display: 'flex',
+    backgroundColor: 'white',
+    flexDirection: 'column',
+    alignItems: 'center'
+})

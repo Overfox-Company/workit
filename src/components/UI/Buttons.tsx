@@ -4,6 +4,7 @@ import { ButtonType } from '@/types/App'
 import styled from '@emotion/styled'
 import LoadingButton from '@mui/lab/LoadingButton';
 import { PRIMARYCOLOR, PRIMARYDARK } from '@/constants/Colors';
+import { PRINCIPALFONT } from '@/constants/Fonts';
 // oioioioi
 const ButtonBlueCustom = styled(LoadingButton)({
     textTransform: 'none',
@@ -15,7 +16,7 @@ const ButtonBlueCustom = styled(LoadingButton)({
     alignItems: "center",
     gap: 10,
     boxShadow: 'none',
-    fontFamily: 'Roboto',
+    fontFamily: PRINCIPALFONT,
     borderRadius: 6,
     justifyContent: 'center',
     border: ` 0px solid ${PRIMARYCOLOR}`,
@@ -37,7 +38,7 @@ const ButtonBlueOutlinedCustom = styled(LoadingButton)({
     justifyContent: 'center',
 })
 export const ButtonBlue: FC<ButtonType> = ({ loading, children, disabled, ...props }) => {
-    return (<ButtonBlueCustom style={{ backgroundColor: PRIMARYDARK, }} loading={loading} variant={"contained"} disabled={disabled || loading} {...props} >
+    return (<ButtonBlueCustom style={{ backgroundColor: PRIMARYDARK, opacity: disabled ? 0.8 : 1 }} loading={loading} variant={"contained"} disabled={disabled || loading} {...props} >
         {!loading ? <p style={{ color: 'white' }} >
             {children}
         </p> : null}

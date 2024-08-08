@@ -6,6 +6,7 @@ import { AuthContextProvider } from "@/context/AuthContext";
 import { AppContextProvider } from "@/context/AppContext";
 import SnackbarCustom from "@/components/UI/Alerts";
 import LoadingScreen from "@/components/UI/LoadingScreen";
+import { CompanyContext, CompanyContextProvider } from "@/context/CompanyContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,17 +21,20 @@ export default function RootLayout({
   return (
     <NextAuthProvider>
       <AppContextProvider>
-        <AuthContextProvider>
-          <html lang="en">
-            <body>
-              <LoadingScreen />
-              <SnackbarCustom />
-              {children}
-            </body>
-          </html>
-        </AuthContextProvider>
-      </AppContextProvider>
+        <CompanyContextProvider>
+          <AuthContextProvider>
 
+            <html lang="en">
+              <body>
+                <LoadingScreen />
+                <SnackbarCustom />
+                {children}
+              </body>
+            </html>
+
+          </AuthContextProvider>
+        </CompanyContextProvider>
+      </AppContextProvider>
     </NextAuthProvider>
   );
 }

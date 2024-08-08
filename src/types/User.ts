@@ -19,13 +19,24 @@ export interface CreateUserType {
     password?: string,
     avatar?: string
     google?: string
+    name: string
 }
 export interface loginUser {
+    name?: string | undefined | null;
     email: string;
     password?: string;
     type?: string | undefined;
     googleId?: string | undefined | null;
     id?: string | undefined | null
+}
+export interface EditUser {
+    name?: string | undefined | null;
+    email?: string;
+    password?: string;
+    type?: string | undefined;
+    googleId?: string | undefined | null;
+    id: string | undefined | null
+    firstTime?: boolean
 }
 export interface loginUserFormik {
     email: string;
@@ -33,7 +44,40 @@ export interface loginUserFormik {
     password: string;
 }
 export interface registerUser {
+    name: string;
     email: string;
     password: string;
     repeatPassword: string
+}
+export interface updateUserType {
+    _id: string,
+    email?: string | undefined | null,
+    avatar?: string | undefined | null,
+    name?: string | undefined | null,
+    country?: string | undefined | null,
+    typeUser?: string | undefined | null,
+}
+export interface userType {
+    _id: string,
+    email?: string | undefined | null,
+    avatar?: string | undefined | null,
+    name?: string | undefined | null,
+    country?: string | undefined | null,
+    firstTime?: boolean | undefined | null,
+    survey?: {
+        country: string,
+        typeUser: string
+    }
+}
+export const InitialUSer = {
+    _id: "",
+    email: "",
+    avatar: "",
+    name: "",
+    country: "",
+    firstTime: false,
+    survey: {
+        country: "",
+        typeUser: ""
+    }
 }

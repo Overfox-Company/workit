@@ -19,22 +19,28 @@ interface loginCredentials {
 }
 export const CreateUser = async (data: CreateUserType) => {
     try {
-        if (await connectDB()) {
-            const { email, password, avatar, google } = data
-            console.log(data)
-            const hashedPassword = password ? await bcrypt.hash(password, 12) : ''
-            const newUser = new User({
-                email,
-                password: hashedPassword,
-                avatar,
-                googleId: google || ""
-            })
-            await newUser.save()
-            //   console.log(newUser)
-            return newUser
-        } else {
-            return 'err bd not conected'
+        await connectDB()
+
+        const { email, password, avatar, google, name } = data
+        const findUser = await User.findOne({ email: email })
+
+        if (findUser) {
+            return 'user already exist'
         }
+
+        const hashedPassword = password ? await bcrypt.hash(password, 12) : ''
+        const newUser = new User({
+            firstTime: true,
+            email,
+            name,
+            password: hashedPassword,
+            avatar,
+            googleId: google || ""
+        })
+        await newUser.save()
+        //   console.log(newUser)
+        return newUser
+
     } catch (e) {
         console.log(e)
         return e
@@ -68,9 +74,14 @@ export const GetUserByEmail = async (email: getByEmail) => {
 }
 export const LoginGoogle = async ({ email, googleId }: loginGoogle) => {
     try {
-        const result = await User.findOne({ email: email, googleId: googleId });
-        if (result) {
-            return result;
+        await connectDB()
+        const resultUser = await User.findOne({ email: email });
+        if (resultUser.password && !resultUser.googleId) {
+            return 'update'
+        }
+        const resultUserWhitGoogleId = await User.findOne({ email, googleId });
+        if (resultUserWhitGoogleId._id) {
+            return resultUserWhitGoogleId;
         } else {
             return "Usuario no encontrado";
         }
@@ -97,5 +108,16 @@ export const LoginCredentials = async ({ email, id }: loginCredentials) => {
         return user;
     } catch (error) {
         return error;
+    }
+}
+export const UpdateGoogleId = async ({ email, googleId }: loginGoogle) => {
+    await connectDB()
+    const resultUser = await User.findOne({ email })
+    if (resultUser.googleId) {
+        return resultUser
+    } else {
+        resultUser.googleId = googleId
+        await resultUser.save()
+        return resultUser
     }
 }

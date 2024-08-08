@@ -5,6 +5,7 @@ import { Button, CircularProgress, Typography } from '@mui/material';
 import { useSession, signIn } from 'next-auth/react';
 import Image from 'next/image';
 import { PAPERGRAY, PRIMARYCOLOR, PRIMARYDARK } from '@/constants/Colors';
+import { PRINCIPALFONT } from '@/constants/Fonts';
 export const Card = styled(Button)({
     display: "flex",
     padding: "14px 16px",
@@ -23,7 +24,7 @@ export const Loader = styled(CircularProgress)({
 
 })
 export const Text = styled(Typography)({
-    fontFamily: 'Roboto',
+    fontFamily: PRINCIPALFONT,
     fontWeight: 700,
     fontSize: 14,
     color: PRIMARYDARK,

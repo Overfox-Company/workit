@@ -45,10 +45,13 @@ export default function SnackbarCustom() {
             ...state,
             open: false,
         });
-        setSnackbarOpen({
-            message: '',
-            type: 'error'
-        });
+        setTimeout(() => {
+            setSnackbarOpen({
+                message: '',
+                type: 'error'
+            });
+        }, 1000)
+
     };
 
     return (
@@ -58,7 +61,7 @@ export default function SnackbarCustom() {
             TransitionComponent={state.Transition}
             message="I love snacks"
             key={state.Transition.name}
-            autoHideDuration={4000}
+            autoHideDuration={5000}
         >
             <Alert style={{ borderRadius: 8, backgroundColor: isSnackbarOpen.type === 'error' ? ERROR : isSnackbarOpen.type === 'success' ? PRIMARYCOLOR : 'yellow' }} onClose={handleClose} severity={isSnackbarOpen.type} sx={{ width: "100%" }}>
                 {isSnackbarOpen.message}
