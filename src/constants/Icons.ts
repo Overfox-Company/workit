@@ -9,4 +9,10 @@ export const icons: { [key: string]: string } = {
     notification: '/assets/notifyIcon.svg',
     profileImg: '/assets/profileImg.png',
     AddIcon: '/assets/cruzBotones.svg',
+    Dashboard: '/assets/dashboardIcon.svg',
+    Proyectos: 'assets/proyectsIcon.svg',
+    Equipo: 'assets/teamIcon.svg',
+    Finanzas: 'assets/financeIcon.svg',
+    Contactos: 'assets/contactsIcon.svg',
+    Configuracion: 'assets/settingsIcon.svg'
 };

@@ -70,7 +70,7 @@ export const ListItem = styled.div({
   flexDirection: 'row',
   gap: 15,
   alignItems: 'center',
-  fontWeight: 600,
+  fontWeight: 700,
   fontSize: 16,
   paddingLeft: 12,
   paddinY: 12,

@@ -153,7 +153,10 @@ const Dashboard = () => {
         >
           <Container>
             <Item xs={1.5}>
-              <Text size={24} color='#0B1839'>
+              <Text
+                sx={{ fontSize: { md: 24, xl: 28 }, marginY: 2 }}
+                color='#0B1839'
+              >
                 Proyectos
               </Text>
             </Item>
@@ -193,7 +196,10 @@ const Dashboard = () => {
           </Container>
           <Container>
             <Item xs={9}>
-              <Text color='#0B1839' sx={{ fontSize: { md: 24, xl: 28 } }}>
+              <Text
+                color='#0B1839'
+                sx={{ fontSize: { md: 24, xl: 28 }, marginY: 3 }}
+              >
                 Tareas
               </Text>
               <TaskFilter>
@@ -203,7 +209,7 @@ const Dashboard = () => {
                   sx={{
                     backgroundColor: '#5CCF6F',
                     padding: '8px 16px',
-                    borderRadius: '8px',
+                    borderRadius: '100px',
                   }}
                 >
                   Todas
@@ -244,13 +250,6 @@ const Dashboard = () => {
                 </Text>
               </TaskFilter>
             </Item>
-            <Item xs={3}>
-              <AddButton>
-                Agregar
-                <Icon src='AddIcon' size={24} />
-              </AddButton>
-            </Item>
-
             <Item sx={{ marginTop: 1 }}>
               <Box
                 sx={{
@@ -279,48 +278,6 @@ const Dashboard = () => {
                       />
                     ))
                   : null}
-              </Box>
-            </Item>
-          </Container>
-
-          <Container>
-            <Item xs={9}>
-              <Text size={32}>Proyectos</Text>
-            </Item>
-            <Item xs={3}>
-              <AddButton>
-                Agregar
-                <Icon src='AddIcon' size={32} />
-              </AddButton>
-            </Item>
-
-            <Item sx={{ marginTop: 2 }}>
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                <ProjectsCards
-                  bannerImg={bannerImg}
-                  membersImg={[
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                  ]}
-                  projectName='OverFox'
-                  projectDescription='Breve descripción'
-                  projectImg={projectImg}
-                />{' '}
-                <ProjectsCards
-                  bannerImg={bannerImg}
-                  membersImg={[
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                  ]}
-                  projectName='OverFox'
-                  projectDescription='Breve descripción'
-                  projectImg={projectImg}
-                />
               </Box>
             </Item>
           </Container>
