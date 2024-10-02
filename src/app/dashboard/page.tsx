@@ -5,15 +5,10 @@ import projectImg from '@/../public/assets/projectImg.png';
 import {
   AddButton,
   Header,
-  List,
-  ListItem,
   ProjectsCards,
-  Select,
-  SideBar,
   TaskFilter,
   TasksCards,
   Text,
-  TextBox,
   Title,
   WorkSpaces,
 } from '@/app/dashboard/components/Components';
@@ -22,6 +17,7 @@ import Icon from '@/components/UI/Icon';
 import { Box, Switch } from '@mui/material';
 import Image from 'next/image';
 import { useState } from 'react';
+import SideBarComponent from './components/SideBar/SideBar';
 
 const Dashboard = () => {
   const [TaskInfo, setTaskInfo] = useState([
@@ -67,18 +63,25 @@ const Dashboard = () => {
           description: 'Lorem Ipsum Dolor',
           status: false,
         },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: false,
+        },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: true,
+        },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: true,
+        },
+        {
+          description: 'Lorem Ipsum Dolor',
+          status: false,
+        },
       ],
     },
   ]);
-  const NavList = [
-    'Dashboard',
-    'Tareas',
-    'Proyectos',
-    'Equipo',
-    'Finanzas',
-    'Contactos',
-    'Ajustes',
-  ];
 
   const UserName = 'Joel Zambrado';
 
@@ -125,47 +128,7 @@ const Dashboard = () => {
         backgroundColor: '#FCFCFC',
       }}
     >
-      <SideBar>
-        <Container gap={{ xs: 1, lg: 3, xl: 5 }}>
-          <Item xs={12}>
-            <Title textAlign={'left'}>Workit</Title>
-          </Item>
-          <Item xs={12}>
-            <Container>
-              <Select>
-                <option>Intelligent AI</option>
-                <option>Proyectos activos</option>
-                <option>Proyectos completados</option>
-              </Select>
-            </Container>
-          </Item>
-
-          <Item
-            sx={{
-              height: '60%',
-            }}
-          >
-            <List>
-              {NavList.map((item, index) => (
-                //handle with a class if active or not
-                <ListItem key={index} onClick={handleActive}>
-                  <Icon src='home' size={15} />
-                  {item}
-                </ListItem>
-              ))}
-            </List>
-          </Item>
-          <Item sx={{ marginTop: 10 }}>
-            <TextBox>
-              <Box display={'flex'} flexDirection={'row'} gap={1} width={116}>
-                <Icon src='home' size={15} />
-                Dark Mode
-              </Box>
-              <Switch />
-            </TextBox>
-          </Item>
-        </Container>
-      </SideBar>
+      <SideBarComponent />
       <Box>
         <Header>
           <Box
@@ -178,12 +141,16 @@ const Dashboard = () => {
             <Title textAlign={'left'}>Hola, {UserName}</Title>
           </Box>
           <Box display={'flex'} flexDirection={'row'} gap={4}>
-            <Icon src='search' size={56} />
-            <Icon src='notification' size={56} />
+            <Icon src='search' size={36} />
+            <Icon src='notification' size={36} />
           </Box>
         </Header>
 
-        <WorkSpaces>
+        <WorkSpaces
+          sx={{
+            padding: { md: 2, xl: 4 },
+          }}
+        >
           <Container>
             <Item xs={1.5}>
               <Text size={24} color='#0B1839'>
@@ -226,7 +193,7 @@ const Dashboard = () => {
           </Container>
           <Container>
             <Item xs={9}>
-              <Text size={24} color='#0B1839'>
+              <Text color='#0B1839' sx={{ fontSize: { md: 24, xl: 28 } }}>
                 Tareas
               </Text>
               <TaskFilter>
@@ -280,12 +247,18 @@ const Dashboard = () => {
             <Item xs={3}>
               <AddButton>
                 Agregar
-                <Icon src='AddIcon' size={32} />
+                <Icon src='AddIcon' size={24} />
               </AddButton>
             </Item>
 
-            <Item sx={{ marginTop: 2 }}>
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+            <Item sx={{ marginTop: 1 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: { md: 1, xl: 3 },
+                }}
+              >
                 {TaskInfo.length > 0
                   ? TaskInfo.map((task, index) => (
                       <TasksCards
@@ -306,6 +279,48 @@ const Dashboard = () => {
                       />
                     ))
                   : null}
+              </Box>
+            </Item>
+          </Container>
+
+          <Container>
+            <Item xs={9}>
+              <Text size={32}>Proyectos</Text>
+            </Item>
+            <Item xs={3}>
+              <AddButton>
+                Agregar
+                <Icon src='AddIcon' size={32} />
+              </AddButton>
+            </Item>
+
+            <Item sx={{ marginTop: 2 }}>
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+                <ProjectsCards
+                  bannerImg={bannerImg}
+                  membersImg={[
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                  ]}
+                  projectName='OverFox'
+                  projectDescription='Breve descripción'
+                  projectImg={projectImg}
+                />{' '}
+                <ProjectsCards
+                  bannerImg={bannerImg}
+                  membersImg={[
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                  ]}
+                  projectName='OverFox'
+                  projectDescription='Breve descripción'
+                  projectImg={projectImg}
+                />
               </Box>
             </Item>
           </Container>

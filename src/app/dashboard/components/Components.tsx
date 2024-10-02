@@ -28,6 +28,8 @@ export const MobileSidebar = styled(Box)({
   width: 387,
   height: '100vh',
   backgroundColor: '#FAFAFC',
+  paddingTop: 10,
+  paddingBottom: 10,
 });
 
 export const Title = styled(Typography)({
@@ -61,7 +63,6 @@ export const List = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: 12,
-  width: 318,
 });
 
 export const ListItem = styled.div({
@@ -74,15 +75,10 @@ export const ListItem = styled.div({
   paddingLeft: 12,
   paddinY: 12,
   height: 46,
-
+  borderRadius: 12,
+  transition: 'all 0.1s ease-in-out',
   '&:hover': {
     cursor: 'pointer',
-  },
-
-  '&.active': {
-    backgroundColor: '#0B161F',
-    borderRadius: 12,
-    color: '#FFFFFF',
   },
 });
 
@@ -119,6 +115,7 @@ export const Header = styled.div({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
+  padding: 8,
   backgroundColor: '#FCFCFC',
   height: 71,
   width: '100%',
@@ -132,17 +129,14 @@ export const ProfilePic = styled.img({
   borderRadius: '100%',
 });
 
-export const WorkSpaces = styled.div({
+export const WorkSpaces = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   padding: '40px',
   backgroundColor: '#FCFCFC',
   borderRadius: 24,
   width: 'fit',
-  height: '84%',
-  maxHeight: 912,
   maxWidth: 'fit',
-  gap: 36,
 });
 
 export const AddButton = styled.button({
@@ -151,12 +145,12 @@ export const AddButton = styled.button({
   gap: 12,
   alignItems: 'center',
   justifyContent: 'center',
-  padding: '8px 16px',
+  padding: '6px 12px',
   color: '#0B161F',
   borderRadius: 12,
   border: '1.5px solid #0B161F',
   cursor: 'pointer',
-  fontSize: 18,
+  fontSize: 14,
   fontWeight: 500,
   fontFamily: 'Roboto',
 });
@@ -195,23 +189,25 @@ export const TasksCards: FC<TasksCard> = ({
     <Box
       sx={{
         backgroundColor: colors,
-        borderRadius: 8,
+        borderRadius: 4,
         display: 'flex',
         flexDirection: 'column',
-        minHeight: 264,
-        minWidth: 308,
-        padding: '16px',
+        height: { md: '35vh', lg: '35vh', xl: '30vh' },
+        width: { md: '17vw', lg: '17vw', xl: '16vw' },
+        padding: '12px',
+        paddingRight: 0,
       }}
     >
       <Box
         sx={{
+          paddingRight: '12px',
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
-        <Text size={24}>{date}</Text>
+        <Text sx={{ fontSize: { md: 16, xl: 24 } }}>{date}</Text>
         <Box
           sx={{
             display: 'flex',
@@ -227,51 +223,60 @@ export const TasksCards: FC<TasksCard> = ({
           </Text>
         </Box>
       </Box>
-      {tasks.map((task, index) => (
-        <Box
-          key={index}
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            padding: '2px',
-            borderRadius: 8,
-            marginTop: 1,
-            alignItems: 'center',
-            bgcolor: task.status ? null : '#FEF0E4',
-          }}
-        >
-          <Checkbox
-            icon={<RadioButtonUncheckedIcon />}
-            checkedIcon={<TaskAltIcon style={{ fill: '#65954A' }} />}
-            // if status is true show checked with defaultChecked
-            defaultChecked={task.status}
-            // when check change set the task status
-            onChange={(e) => HandleCheck(index, e.target.checked)}
-          />
-          <Text
-            size={14}
-            fontWeight={500}
-            color={task.status ? '#65954A' : '#0B161F'}
+      <Box
+        sx={{
+          paddingRight: '12px',
+          overflow: 'auto',
+        }}
+      >
+        {tasks.map((task, index) => (
+          <Box
+            key={index}
             sx={{
-              textDecoration: task.status ? 'line-through' : 'none',
-              textDecorationThickness: '0.5px',
+              display: 'flex',
+              flexDirection: 'row',
+              padding: { md: '6px', xl: '8px' },
+              borderRadius: 4,
+              marginTop: 1,
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              bgcolor: task.status ? null : '#FEF0E4',
             }}
           >
-            {task.description}
-          </Text>
-          <Image
-            src={projectImg}
-            alt='project Img'
-            style={{
-              borderRadius: '100%',
-              marginLeft: 'auto',
-              marginRight: 4,
-              width: 24,
-              height: 24,
-            }}
-          />
-        </Box>
-      ))}
+            <Checkbox
+              style={{ padding: 0 }}
+              icon={<RadioButtonUncheckedIcon />}
+              checkedIcon={<TaskAltIcon style={{ fill: '#65954A' }} />}
+              // if status is true show checked with defaultChecked
+              defaultChecked={task.status}
+              // when check change set the task status
+              onChange={(e) => HandleCheck(index, e.target.checked)}
+            />
+            <Text
+              size={14}
+              fontWeight={500}
+              color={task.status ? '#65954A' : '#0B161F'}
+              sx={{
+                fontSize: { md: 12, xl: 18 },
+                textDecoration: task.status ? 'line-through' : 'none',
+                textDecorationThickness: '0.5px',
+              }}
+            >
+              {task.description}
+            </Text>
+            <Image
+              src={projectImg}
+              alt='project Img'
+              style={{
+                borderRadius: '100%',
+
+                width: 24,
+                height: 24,
+              }}
+            />
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };
@@ -289,8 +294,8 @@ export const ProjectsCards: FC<ProjectsCard> = ({
         display: 'flex',
         flexDirection: 'column',
         borderRadius: 4,
-        minHeight: 220,
-        minWidth: 241,
+        height: { md: '28vh', lg: '28vh', xl: '25vh' },
+        width: { md: '17vw', lg: '17vw', xl: '15vw' },
         backgroundColor: '#FFFFFF',
         position: 'relative',
         boxShadow: '0 4px 8px 7px #021C030E, 0 6px 20px 7px #021C0312',
@@ -309,14 +314,15 @@ export const ProjectsCards: FC<ProjectsCard> = ({
           sx={{
             borderRadius: 4,
             overflow: 'hidden',
-            height: 130,
+            height: { md: 100, xl: 130 },
             width: 241,
           }}
         >
           <Image
             src={bannerImg}
             alt='project banner'
-            fill={true}
+            fill
+            objectFit='cover'
             style={{ borderTopRightRadius: 16, borderTopLeftRadius: 16 }}
           />
         </Box>
@@ -351,18 +357,6 @@ export const ProjectsCards: FC<ProjectsCard> = ({
           ))}
         </Box>
       </Box>
-      <Box sx={{ paddingLeft: 2, paddingTop: 3 }}>
-        <Text size={16}>{projectName}</Text>
-        <Text size={12} color='#646464' fontWeight={400}>
-          {projectDescription}
-        </Text>
-      </Box>
-
-      <Image
-        src={projectImg}
-        alt='project Img'
-        style={{ position: 'absolute', top: 110, left: 15 }}
-      />
 
       <Box
         sx={{
@@ -393,6 +387,17 @@ export const ProjectsCards: FC<ProjectsCard> = ({
           {membersImg.length > 3 ? `+${membersImg.length - 3}` : ''}
         </Text>
       </Box>
+      <Box sx={{ paddingLeft: 2, paddingTop: 3, position: 'relative' }}>
+        <Image
+          src={projectImg}
+          alt='project Img'
+          style={{ position: 'absolute', top: '-30%', left: 15 }}
+        />
+        <Text size={16}>{projectName}</Text>
+        <Text size={12} color='#646464' fontWeight={400}>
+          {projectDescription}
+        </Text>
+      </Box>
     </Box>
   );
 };
@@ -405,6 +410,7 @@ export const TaskFilter = styled.div({
   cursor: 'pointer',
   borderRadius: 24,
   padding: '8px',
+  paddingLeft: 0,
   fontSize: 16,
   fontWeight: 600,
 });
