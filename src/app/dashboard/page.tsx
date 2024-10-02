@@ -80,7 +80,7 @@ const Dashboard = () => {
     'Ajustes',
   ];
 
-  const UserName = 'Pepito Perez';
+  const UserName = 'Joel Zambrado';
 
   //handle if active or not for list items
   const handleActive = (
@@ -122,7 +122,7 @@ const Dashboard = () => {
       sx={{
         display: 'Grid',
         gridTemplateColumns: '0.7fr 3.3fr',
-        backgroundColor: '#FCF6F1',
+        backgroundColor: '#FCFCFC',
       }}
     >
       <SideBar>
@@ -168,7 +168,12 @@ const Dashboard = () => {
       </SideBar>
       <Box>
         <Header>
-          <Box display={'flex'} flexDirection={'row'} gap={4}>
+          <Box
+            display={'flex'}
+            flexDirection={'row'}
+            alignItems={'center'}
+            gap={4}
+          >
             <Image src={profileImg} alt='profile pic' width={56} height={56} />
             <Title textAlign={'left'}>Hola, {UserName}</Title>
           </Box>
@@ -180,13 +185,56 @@ const Dashboard = () => {
 
         <WorkSpaces>
           <Container>
+            <Item xs={1.5}>
+              <Text size={24} color='#0B1839'>
+                Proyectos
+              </Text>
+            </Item>
+            <Item xs={10.5} sx={{ cursor: 'pointer', display: 'flex' }}>
+              <Icon src='AddIcon' size={32} />
+            </Item>
+
+            <Item sx={{ marginTop: 2 }}>
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+                <ProjectsCards
+                  bannerImg={bannerImg}
+                  membersImg={[
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                  ]}
+                  projectName='OverFox'
+                  projectDescription='Breve descripción'
+                  projectImg={projectImg}
+                />{' '}
+                <ProjectsCards
+                  bannerImg={bannerImg}
+                  membersImg={[
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                    '/assets/profileImg.png',
+                  ]}
+                  projectName='OverFox'
+                  projectDescription='Breve descripción'
+                  projectImg={projectImg}
+                />
+              </Box>
+            </Item>
+          </Container>
+          <Container>
             <Item xs={9}>
-              <Text size={32}>Tareas</Text>
+              <Text size={24} color='#0B1839'>
+                Tareas
+              </Text>
               <TaskFilter>
                 <Text
+                  color='#FFFFFF'
                   size={14}
                   sx={{
-                    backgroundColor: '#C7EBB3',
+                    backgroundColor: '#5CCF6F',
                     padding: '8px 16px',
                     borderRadius: '8px',
                   }}
@@ -195,9 +243,10 @@ const Dashboard = () => {
                   {/* TaskInfo total number */} ({TaskInfo.length})
                 </Text>
                 <Text
+                  color='#647184'
                   size={14}
                   sx={{
-                    backgroundColor: '#FFE8D5',
+                    backgroundColor: '#FFFFFF',
                     padding: '8px 16px',
                     borderRadius: '8px',
                   }}
@@ -205,19 +254,21 @@ const Dashboard = () => {
                   Recientes
                 </Text>
                 <Text
+                  color='#647184'
                   size={14}
                   sx={{
-                    backgroundColor: '#FFE8D5',
+                    backgroundColor: '#FFFFFF',
                     padding: '8px 16px',
                     borderRadius: '8px',
                   }}
                 >
-                  Completadas
+                  Por Vencer
                 </Text>
                 <Text
+                  color='#647184'
                   size={14}
                   sx={{
-                    backgroundColor: '#FFE8D5',
+                    backgroundColor: '#FFFFFF',
                     padding: '8px 16px',
                     borderRadius: '8px',
                   }}
@@ -255,48 +306,6 @@ const Dashboard = () => {
                       />
                     ))
                   : null}
-              </Box>
-            </Item>
-          </Container>
-
-          <Container>
-            <Item xs={9}>
-              <Text size={32}>Proyectos</Text>
-            </Item>
-            <Item xs={3}>
-              <AddButton>
-                Agregar
-                <Icon src='AddIcon' size={32} />
-              </AddButton>
-            </Item>
-
-            <Item sx={{ marginTop: 2 }}>
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                <ProjectsCards
-                  bannerImg={bannerImg}
-                  membersImg={[
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                  ]}
-                  projectName='OverFox'
-                  projectDescription='Breve descripción'
-                  projectImg={projectImg}
-                />{' '}
-                <ProjectsCards
-                  bannerImg={bannerImg}
-                  membersImg={[
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                  ]}
-                  projectName='OverFox'
-                  projectDescription='Breve descripción'
-                  projectImg={projectImg}
-                />
               </Box>
             </Item>
           </Container>

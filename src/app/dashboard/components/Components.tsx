@@ -17,14 +17,24 @@ export const SideBar = styled(Box)({
   padding: 40,
   width: 387,
   height: '100vh',
-  backgroundColor: '#FCF6F1',
+  backgroundColor: '#FAFAFC',
+});
+
+export const MobileSidebar = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 25,
+  padding: 40,
+  width: 387,
+  height: '100vh',
+  backgroundColor: '#FAFAFC',
 });
 
 export const Title = styled(Typography)({
   fontWeight: 700,
   color: PRIMARYDARK,
   fontFamily: 'Roboto',
-  fontSize: 40,
+  fontSize: 24,
 });
 
 export const Text: FC<TypographyProps> = ({
@@ -109,10 +119,11 @@ export const Header = styled.div({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
-  backgroundColor: '#FCF6F1',
-  height: 120,
+  backgroundColor: '#FCFCFC',
+  height: 71,
   width: '100%',
   paddingRight: 40,
+  paddingLeft: 40,
 });
 
 export const ProfilePic = styled.img({
@@ -125,7 +136,7 @@ export const WorkSpaces = styled.div({
   display: 'flex',
   flexDirection: 'column',
   padding: '40px',
-  backgroundColor: '#FEF0E4',
+  backgroundColor: '#FCFCFC',
   borderRadius: 24,
   width: 'fit',
   height: '84%',
@@ -210,7 +221,7 @@ export const TasksCards: FC<TasksCard> = ({
             cursor: 'pointer',
           }}
         >
-          <Icon src='AddIcon' size={24} />
+          <Icon src='AddIcon' size={32} />
           <Text size={14} color='#6F6F70' fontWeight={500}>
             {cardStatus}
           </Text>
@@ -282,6 +293,7 @@ export const ProjectsCards: FC<ProjectsCard> = ({
         minWidth: 241,
         backgroundColor: '#FFFFFF',
         position: 'relative',
+        boxShadow: '0 4px 8px 7px #021C030E, 0 6px 20px 7px #021C0312',
       }}
     >
       <Box
