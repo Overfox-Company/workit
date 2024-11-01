@@ -3,9 +3,9 @@ import { CompanyContext } from '@/context/CompanyContext'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '@/context/AuthContext'
 import { CompanyType, InitialCompany } from '@/types/Company'
-import { Avatar, } from '@mui/material'
+import { Avatar, Box, Button, } from '@mui/material'
 import { Container, Item } from '@/components/layout/Container'
-import { PRIMARYCOLOR, PRIMARYDARK } from '@/constants/Colors'
+import { BGSCREEN, PRIMARYCOLOR, PRIMARYDARK, TEXTDARK } from '@/constants/Colors'
 import Scale from '@/components/animation/Scale'
 import { AppContext } from '@/context/AppContext'
 import { ButtonBlue, ButtonBlueOutlined } from '@/components/UI/Buttons'
@@ -20,14 +20,27 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ApiController from '@/ApiController/ApiController'
 import CircularProgress from '@mui/material/CircularProgress';
 import { useRouter } from 'next/navigation'
-import { AvatarCompany, AvatarContent, BgColor, BoxColor, BoxOpacity, CompanyCard, ContainerImages, ContainerOptions, ContentAddImageIcon, CoverCompany, InfoContainer, LabelOption, NameCompany } from './components/ComponentsStep4'
+import { AvatarCompany, AvatarContent, BgColor, BoxColor, BoxOpacity, CompanyCard, ContainerImages, ContainerOptions, ContentAddImageIcon, CoverCompany, InfoContainer, LabelOption, NameCompany, SelectColors, SelectImages } from './components/ComponentsStep4'
 import * as Yup from 'yup'
 import Skip from './controllers/Skip'
+
+import styled from '@emotion/styled'
+import InidicatorSteps from './components/InidicatorSteps'
 interface Props { }
 
 const validationSchema = Yup.object({
     email: Yup.string().email('Debe ser un correo electrónico válido').required('El correo es obligatorio')
 });
+const ButtonToSelect = styled(Button)({
+    fontWeitgh: 700,
+    borderRadius: 8,
+    textTransform: 'none',
+    boxShadow: 'none',
+    "&:hover": {
+        boxShadow: 'none'
+    }
+
+})
 const Colors = ["rgb(85,85,85)", "rgb(96,38,154)", "rgb(238,175,96)", PRIMARYCOLOR, PRIMARYDARK, "rgb(76,86,206)", "rgb(228,69,110)", "rgb(91,183,97)", "rgb(84,177,250)"]
 const Step4: NextPage<Props> = ({ }) => {
     const route = useRouter()
@@ -177,7 +190,7 @@ const Step4: NextPage<Props> = ({ }) => {
         }
     }
     const [skip, setSkip] = useState(false)
-
+    const [optionToChangeBackground, setOptionToChangeBackground] = useState(0)
     return skip ? <Skip /> : show ? <div>
         <Scale from={"0.8"} to={"1"}>
             <Container justifyContent='center'>
@@ -205,35 +218,7 @@ const Step4: NextPage<Props> = ({ }) => {
                                     </LabelOption>
                                     <InsertPhotoIcon style={{ color: 'white', cursor: 'pointer' }} />
                                 </BoxOpacity>
-                                <BoxOpacity onClick={handleTooltipOpen}>
-                                    <LabelOption>
-                                        Color
-                                    </LabelOption>
-                                    <ClickAwayListener onClickAway={handleTooltipClose}>
-                                        <div>
-                                            <Tooltip
-                                                arrow
-                                                placement='right'
-                                                PopperProps={{
-                                                    disablePortal: true,
-                                                }}
-                                                onClose={handleTooltipClose}
-                                                open={open}
-                                                disableFocusListener
-                                                disableHoverListener
-                                                disableTouchListener
-                                                title={
-                                                    Colors.map(color => (
-                                                        <BoxColor key={color} style={{ backgroundColor: color }} onClick={() => { onChangeColor(color) }} />
-                                                    )
-                                                    )
-                                                }
-                                            >
-                                                <BoxColor style={{ backgroundColor: color, border: 'solid 1px rgb(250,250,250)' }} />
-                                            </Tooltip>
-                                        </div>
-                                    </ClickAwayListener>
-                                </BoxOpacity>
+
                             </ContainerOptions>
                         </ContainerImages>
                         <InfoContainer>
@@ -271,7 +256,35 @@ const Step4: NextPage<Props> = ({ }) => {
 
                                     <Input error={errors.email} touched={touched.email} name={"email"} label={`Email asociado a ${newCompany.name}`} placeholder="example@gmail.com" />
                                     <br />
+                                    <div style={{ display: 'flex', gap: 4 }}>
+                                        {["Color de fondo", "Imagen de fondo"].map((text, index) => (
+                                            < ButtonToSelect onClick={() => setOptionToChangeBackground(index)} variant='contained'
+
+                                                style={{
+                                                    color: optionToChangeBackground !== index ? TEXTDARK : "white",
+                                                    backgroundColor: optionToChangeBackground !== index ? BGSCREEN : PRIMARYDARK
+                                                }}>
+                                                {text}
+                                            </ButtonToSelect>
+                                        ))}
+                                    </div>
+
+                                    <br />
                                     <Container columnSpacing={2} rowSpacing={2}>
+                                        <Item xs={12}>
+                                            {optionToChangeBackground ?
+                                                <div {...getRootProps()}>
+
+
+                                                    <input {...getInputProps()} />
+
+                                                    <SelectImages />
+                                                </div>
+
+
+                                                : <SelectColors onChangeColor={onChangeColor} value={color} />
+                                            }
+                                        </Item>
                                         <Item xs={6}>
                                             <ButtonBlueOutlined onClick={() => { setLoadingScreen(true); setSkip(true) }}>
                                                 Omitir
@@ -283,17 +296,22 @@ const Step4: NextPage<Props> = ({ }) => {
                                                 Continuar
                                             </ButtonBlue>
                                         </Item>
+                                        <Item xs={12}>
+                                            <InidicatorSteps steps={4} />
+                                        </Item>
                                     </Container>
                                 </Form>
                             )}
                             </Formik>
+
                         </InfoContainer>
                     </CompanyCard>
+
                 </Item>
             </Container>
         </Scale>
 
-    </div> : null
+    </div > : null
 }
 
 export default Step4
