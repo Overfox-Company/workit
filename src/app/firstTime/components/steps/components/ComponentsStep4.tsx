@@ -104,7 +104,7 @@ export const SelectColors = ({ onChangeColor, value }: { value: string, onChange
     return (
         <Box style={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
             {Colors.map(color => (
-                <div style={{ padding: 2, border: `solid 2px ${value === color ? value : 'transparent'}`, borderRadius: 200 }}>
+                <div key={color} style={{ padding: 2, border: `solid 2px ${value === color ? value : 'transparent'}`, borderRadius: 200 }}>
                     <BoxColor key={color} style={{ backgroundColor: color }} onClick={() => { onChangeColor(color) }} />
 
                 </div>

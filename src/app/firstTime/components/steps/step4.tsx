@@ -258,7 +258,7 @@ const Step4: NextPage<Props> = ({ }) => {
                                     <br />
                                     <div style={{ display: 'flex', gap: 4 }}>
                                         {["Color de fondo", "Imagen de fondo"].map((text, index) => (
-                                            < ButtonToSelect onClick={() => setOptionToChangeBackground(index)} variant='contained'
+                                            < ButtonToSelect key={text} onClick={() => setOptionToChangeBackground(index)} variant='contained'
 
                                                 style={{
                                                     color: optionToChangeBackground !== index ? TEXTDARK : "white",
