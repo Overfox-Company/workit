@@ -1,7 +1,9 @@
 import SecuenceFade from '@/components/animation/SecuenceFade';
 import { Container, Item } from '@/components/layout/Container';
 import Icon, { IconHome } from '@/components/UI/Icon';
-import { Box, Switch } from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import Switch from '@mui/material/Switch';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import {
@@ -13,8 +15,11 @@ import {
   TextBox,
   Title,
 } from '../Components';
+import { IOSSwitch } from '../IOSSSwitch';
 
-interface Props {}
+interface Props {
+  variant: string;
+}
 const NavList = [
   'Dashboard',
   'Proyectos',
@@ -26,10 +31,12 @@ const NavList = [
 
 const selectedColor = '#5CCF6F';
 const noSelectedColor = '#0B1839';
-const SideBarComponent: NextPage<Props> = ({}) => {
+//make the component receive a boolean from page, and change the width of the sidebar
+// const SideBarComponent: NextPage<Props> = ({}) => {
+const SideBarComponent: NextPage<Props> = ({ variant }) => {
   const [selectedOption, setSelectedOption] = useState(0);
   return (
-    <SideBar>
+    <SideBar variant={variant}>
       <Container
         justifyContent='space-between'
         style={{
@@ -39,12 +46,14 @@ const SideBarComponent: NextPage<Props> = ({}) => {
         <Item xs={12}>
           <Container gap={{ xs: 1, lg: 3, xl: 5 }}>
             <Item xs={12}>
-              <Text sx={{ fontSize: { md: 40, xl: 44 } }}>Workit</Text>
+              <Text sx={{ fontSize: { md: 40, xl: 44 }, paddingLeft: 0.2 }}>
+                Workit
+              </Text>
             </Item>
             <Item xs={12}>
               <Container>
                 <Select>
-                  <option>Intelligent AI</option>
+                  <option> Intelligent AI</option>
                   <option>Proyectos activos</option>
                   <option>Proyectos completados</option>
                 </Select>
@@ -71,11 +80,7 @@ const SideBarComponent: NextPage<Props> = ({}) => {
                         color: index === selectedOption ? '#5CCF6F' : '#0B1839',
                       }}
                     >
-                        <Box sx={{
-                            backgroundColor:'#5CCF6F'
-                        }}>
                       <Icon src={item} size={24} />
-                      </Box>
                       {/* <IconHome
                         color={
                           index === selectedOption
@@ -102,9 +107,10 @@ const SideBarComponent: NextPage<Props> = ({}) => {
           xs={12}
         >
           <ListItem style={{ width: '100%', backgroundColor: 'white' }}>
-            <Icon src='home' size={15} />
-            Dark Mode
-            <Switch />
+            <FormControlLabel
+              control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              label='Dark Mode'
+            />
           </ListItem>
         </Item>
       </Container>

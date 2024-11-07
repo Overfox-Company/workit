@@ -14,5 +14,10 @@ export const icons: { [key: string]: string } = {
     Equipo: 'assets/teamIcon.svg',
     Finanzas: 'assets/financeIcon.svg',
     Contactos: 'assets/contactsIcon.svg',
-    Configuracion: 'assets/settingsIcon.svg'
+    Configuracion: 'assets/settingsIcon.svg',
+    SideBar: 'assets/sidebar.svg',
+    sidebarIcon: 'assets/sidebarIcon.svg',
+    whiteboardIcon: 'assets/whiteboardIcon.svg',
+    calendarIcon: 'assets/calendarIcon.svg',
+    notificationIcon: 'assets/notificationIcon.svg',
 };

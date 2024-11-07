@@ -7,18 +7,32 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { Box, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
+import Switch, { SwitchProps } from '@mui/material/Switch';
 import Image from 'next/image';
 import React, { FC } from 'react';
 
-export const SideBar = styled(Box)({
+// //make the sidebar receive a prop who will change the width of the sidebar
+export const SideBar = styled(Box)<{ variant: string }>((props) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: 25,
   padding: 40,
-  width: 387,
+  width: props.variant === 'false' ? 387 : 80,
   height: '100vh',
   backgroundColor: '#FAFAFC',
-});
+  transition: 'all 0.1s ease-in-out',
+  overflow: 'hidden',
+}));
+
+// export const SideBar = styled(Box)({
+//   display: 'flex',
+//   flexDirection: 'column',
+//   gap: 25,
+//   padding: 40,
+//   width: 387,
+//   height: '100vh',
+//   backgroundColor: '#FAFAFC',
+// });
 
 export const MobileSidebar = styled(Box)({
   display: 'flex',
@@ -115,7 +129,6 @@ export const Header = styled.div({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: 8,
   backgroundColor: '#FCFCFC',
   height: 71,
   width: '100%',
@@ -134,7 +147,6 @@ export const WorkSpaces = styled(Box)({
   flexDirection: 'column',
   padding: '40px',
   backgroundColor: '#FCFCFC',
-  borderRadius: 24,
   width: 'fit',
   maxWidth: 'fit',
 });

@@ -14,12 +14,13 @@ import {
 } from '@/app/dashboard/components/Components';
 import { Container, Item, Wrapper } from '@/components/layout/Container';
 import Icon from '@/components/UI/Icon';
-import { Box, Switch } from '@mui/material';
+import { Box, Collapse, Switch } from '@mui/material';
 import Image from 'next/image';
 import { useState } from 'react';
 import SideBarComponent from './components/SideBar/SideBar';
 
 const Dashboard = () => {
+  const [Collapsed, setCollapsed] = useState('false');
   const [TaskInfo, setTaskInfo] = useState([
     {
       date: 'June 15',
@@ -123,12 +124,13 @@ const Dashboard = () => {
   return (
     <Box
       sx={{
-        display: 'Grid',
-        gridTemplateColumns: '0.7fr 3.3fr',
+        display: 'flex',
+        flexDirection: 'row',
+
         backgroundColor: '#FCFCFC',
       }}
     >
-      <SideBarComponent />
+      <SideBarComponent variant={Collapsed} />
       <Box>
         <Header>
           <Box
@@ -137,12 +139,20 @@ const Dashboard = () => {
             alignItems={'center'}
             gap={4}
           >
+            <button
+              onClick={() => {
+                setCollapsed(Collapsed === 'false' ? 'true' : 'false');
+              }}
+            >
+              <Icon src='sidebarIcon' size={24} />
+            </button>
             <Image src={profileImg} alt='profile pic' width={56} height={56} />
-            <Title textAlign={'left'}>Hola, {UserName}</Title>
+            <Title textAlign={'left'}>{UserName}</Title>
           </Box>
           <Box display={'flex'} flexDirection={'row'} gap={4}>
-            <Icon src='search' size={36} />
-            <Icon src='notification' size={36} />
+            <Icon src='whiteboardIcon' size={24} />
+            <Icon src='calendarIcon' size={24} />
+            <Icon src='notificationIcon' size={24} />
           </Box>
         </Header>
 
@@ -152,7 +162,7 @@ const Dashboard = () => {
           }}
         >
           <Container>
-            <Item xs={1.5}>
+            <Item xs={2}>
               <Text
                 sx={{ fontSize: { md: 24, xl: 28 }, marginY: 2 }}
                 color='#0B1839'
@@ -160,7 +170,7 @@ const Dashboard = () => {
                 Proyectos
               </Text>
             </Item>
-            <Item xs={10.5} sx={{ cursor: 'pointer', display: 'flex' }}>
+            <Item xs={10} sx={{ cursor: 'pointer', display: 'flex' }}>
               <Icon src='AddIcon' size={32} />
             </Item>
 
