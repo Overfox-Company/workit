@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const Icon: NextPage<Props> = ({ src, size }) => {
-    return <Image alt={src} src={icons[src]} width={size} height={size} />
+    return <Image alt={src} src={icons[src]} width={size} height={size} className='icons'/>
 }
 export const IconHome: NextPage<{
     color: string,

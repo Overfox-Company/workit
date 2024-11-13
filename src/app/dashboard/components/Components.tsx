@@ -7,17 +7,41 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { Box, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
+import Switch, { SwitchProps } from '@mui/material/Switch';
 import Image from 'next/image';
 import React, { FC } from 'react';
 
-export const SideBar = styled(Box)({
+// //make the sidebar receive a prop who will change the width of the sidebar
+export const SideBar = styled(Box)<{ variant: string }>((props) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 25,
+  padding: 40,
+  width: props.variant === 'false' ? 387 : 80,
+  height: '100vh',
+  backgroundColor: '#FAFAFC',
+  transition: 'all 0.1s ease-in-out',
+  overflow: 'hidden',
+}));
+
+// export const SideBar = styled(Box)({
+//   display: 'flex',
+//   flexDirection: 'column',
+//   gap: 25,
+//   padding: 40,
+//   width: 387,
+//   height: '100vh',
+//   backgroundColor: '#FAFAFC',
+// });
+
+export const MobileSidebar = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   gap: 25,
   padding: 40,
   width: 387,
   height: '100vh',
-  backgroundColor: '#FCF6F1',
+  backgroundColor: '#FAFAFC',
   paddingTop: 10,
   paddingBottom: 10,
 });
@@ -26,7 +50,7 @@ export const Title = styled(Typography)({
   fontWeight: 700,
   color: PRIMARYDARK,
   fontFamily: 'Roboto',
-  fontSize: 40,
+  fontSize: 24,
 });
 
 export const Text: FC<TypographyProps> = ({
@@ -53,7 +77,6 @@ export const List = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: 12,
-
 });
 
 export const ListItem = styled.div({
@@ -61,7 +84,7 @@ export const ListItem = styled.div({
   flexDirection: 'row',
   gap: 15,
   alignItems: 'center',
-  fontWeight: 600,
+  fontWeight: 700,
   fontSize: 16,
   paddingLeft: 12,
   paddinY: 12,
@@ -71,7 +94,6 @@ export const ListItem = styled.div({
   '&:hover': {
     cursor: 'pointer',
   },
-
 });
 
 export const Select = styled.select({
@@ -107,10 +129,11 @@ export const Header = styled.div({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
-  backgroundColor: '#FCF6F1',
-  padding: 8,
+  backgroundColor: '#FCFCFC',
+  height: 71,
   width: '100%',
   paddingRight: 40,
+  paddingLeft: 40,
 });
 
 export const ProfilePic = styled.img({
@@ -122,11 +145,10 @@ export const ProfilePic = styled.img({
 export const WorkSpaces = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: '#FEF0E4',
-  borderRadius: 24,
+  padding: '40px',
+  backgroundColor: '#FCFCFC',
   width: 'fit',
   maxWidth: 'fit',
-
 });
 
 export const AddButton = styled.button({
@@ -178,15 +200,14 @@ export const TasksCards: FC<TasksCard> = ({
   return (
     <Box
       sx={{
-
         backgroundColor: colors,
         borderRadius: 4,
         display: 'flex',
         flexDirection: 'column',
-        height: { md: "35vh", lg: '35vh', xl: '30vh' },
-        width: { md: "17vw", lg: '17vw', xl: '16vw' },
+        height: { md: '35vh', lg: '35vh', xl: '30vh' },
+        width: { md: '17vw', lg: '17vw', xl: '16vw' },
         padding: '12px',
-        paddingRight: 0
+        paddingRight: 0,
       }}
     >
       <Box
@@ -208,24 +229,25 @@ export const TasksCards: FC<TasksCard> = ({
             cursor: 'pointer',
           }}
         >
-          <Icon src='AddIcon' size={24} />
+          <Icon src='AddIcon' size={32} />
           <Text size={14} color='#6F6F70' fontWeight={500}>
             {cardStatus}
           </Text>
         </Box>
       </Box>
-      <Box sx={{
-        paddingRight: '12px',
-        overflow: 'auto',
-      }}>
+      <Box
+        sx={{
+          paddingRight: '12px',
+          overflow: 'auto',
+        }}
+      >
         {tasks.map((task, index) => (
           <Box
             key={index}
             sx={{
-
               display: 'flex',
               flexDirection: 'row',
-              padding: { md: '6px', xl: "8px" },
+              padding: { md: '6px', xl: '8px' },
               borderRadius: 4,
               marginTop: 1,
               justifyContent: 'space-around',
@@ -246,7 +268,6 @@ export const TasksCards: FC<TasksCard> = ({
               size={14}
               fontWeight={500}
               color={task.status ? '#65954A' : '#0B161F'}
-
               sx={{
                 fontSize: { md: 12, xl: 18 },
                 textDecoration: task.status ? 'line-through' : 'none',
@@ -268,7 +289,6 @@ export const TasksCards: FC<TasksCard> = ({
           </Box>
         ))}
       </Box>
-
     </Box>
   );
 };
@@ -286,10 +306,11 @@ export const ProjectsCards: FC<ProjectsCard> = ({
         display: 'flex',
         flexDirection: 'column',
         borderRadius: 4,
-        height: { md: "28vh", lg: '28vh', xl: '25vh' },
-        width: { md: "17vw", lg: '17vw', xl: '15vw' },
+        height: { md: '28vh', lg: '28vh', xl: '25vh' },
+        width: { md: '17vw', lg: '17vw', xl: '15vw' },
         backgroundColor: '#FFFFFF',
         position: 'relative',
+        boxShadow: '0 4px 8px 7px #021C030E, 0 6px 20px 7px #021C0312',
       }}
     >
       <Box
@@ -303,7 +324,6 @@ export const ProjectsCards: FC<ProjectsCard> = ({
       >
         <Box
           sx={{
-
             borderRadius: 4,
             overflow: 'hidden',
             height: { md: 100, xl: 130 },
@@ -350,7 +370,6 @@ export const ProjectsCards: FC<ProjectsCard> = ({
         </Box>
       </Box>
 
-
       <Box
         sx={{
           display: 'flex',
@@ -384,15 +403,13 @@ export const ProjectsCards: FC<ProjectsCard> = ({
         <Image
           src={projectImg}
           alt='project Img'
-          style={{ position: 'absolute', top: "-30%", left: 15 }}
+          style={{ position: 'absolute', top: '-30%', left: 15 }}
         />
         <Text size={16}>{projectName}</Text>
         <Text size={12} color='#646464' fontWeight={400}>
           {projectDescription}
         </Text>
       </Box>
-
-
     </Box>
   );
 };
