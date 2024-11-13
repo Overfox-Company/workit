@@ -2,6 +2,7 @@
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import { Box, Typography } from '@mui/material'
+import { BGSCREEN, PRIMARYCOLOR, PRIMARYDARK } from '@/constants/Colors'
 export const AvatarCompany = styled(Image)({
 
     borderRadius: 8
@@ -74,10 +75,10 @@ export const BoxOpacity = styled(Box)({
     backgroundColor: 'rgb(11,22,31,0.6)'
 })
 export const BoxColor = styled(Box)({
-    height: 22,
-    width: 22,
+    height: 38,
+    width: 38,
     cursor: 'pointer',
-    borderRadius: 4
+    borderRadius: 122
 })
 export const LabelOption = styled(Typography)({
     color: 'white',
@@ -97,3 +98,36 @@ export const ContentAddImageIcon = styled(Box)({
     alignItems: 'center',
     justifyContent: 'center'
 })
+const Colors = ["rgb(85,85,85)", "rgb(96,38,154)", "rgb(238,175,96)", PRIMARYCOLOR, PRIMARYDARK, "rgb(76,86,206)", "rgb(228,69,110)", "rgb(91,183,97)", "rgb(84,177,250)"]
+
+export const SelectColors = ({ onChangeColor, value }: { value: string, onChangeColor: (color: string) => void }) => {
+    return (
+        <Box style={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
+            {Colors.map(color => (
+                <div key={color} style={{ padding: 2, border: `solid 2px ${value === color ? value : 'transparent'}`, borderRadius: 200 }}>
+                    <BoxColor key={color} style={{ backgroundColor: color }} onClick={() => { onChangeColor(color) }} />
+
+                </div>
+            )
+            )}
+        </Box>
+    )
+}
+export const SelectImages = () => {
+    return (
+        <div style={{
+            height: 46,
+            backgroundColor: BGSCREEN,
+            color: PRIMARYDARK,
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            gap: 8
+        }}>
+            Cargar imagen
+            <Image src={"/assets/upload.svg"} width={18} height={18} alt='' />
+        </div>
+    )
+}

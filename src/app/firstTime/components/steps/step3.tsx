@@ -12,6 +12,7 @@ import ApiController from '@/ApiController/ApiController'
 import { CompanyContext } from '@/context/CompanyContext'
 import { AppContext } from '@/context/AppContext'
 import Skip from './controllers/Skip'
+import InidicatorSteps from './components/InidicatorSteps'
 interface Props { setStep: Dispatch<SetStateAction<number>> }
 const validationSchema = Yup.object().shape({
     nameCompany: Yup.string()
@@ -70,6 +71,9 @@ const Step3: NextPage<Props> = ({ setStep }) => {
                                                 <ButtonBlue type="submit">
                                                     Continuar
                                                 </ButtonBlue>
+                                            </Item>
+                                            <Item xs={12}>
+                                                <InidicatorSteps steps={3} />
                                             </Item>
                                         </Container>
                                     </Form>

@@ -8,12 +8,13 @@ import { HandleSubmitForm } from '../handlers/SubmitForm'
 import { AppContext } from '@/context/AppContext'
 import { CardWhite, Container, Item, Wrapper } from '@/components/layout/Container'
 import { ButtonBlue, ButtonBlueOutlined } from '@/components/UI/Buttons'
-import { IconButton } from '@mui/material'
+import { IconButton, Typography } from '@mui/material'
 import Link from 'next/link'
 import Icon from '@/components/UI/Icon'
 import FadeIn from '@/components/animation/FadeIn'
 import { AuthContext } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
+import HeaderForms from '@/components/UI/HeaderForms'
 interface Props { setStep: Dispatch<SetStateAction<number>> }
 
 const LoginForm: NextPage<Props> = ({ setStep }) => {
@@ -31,11 +32,11 @@ const LoginForm: NextPage<Props> = ({ setStep }) => {
             <Item xs={10} md={8} lg={4}>
                 <FadeIn>
                     <CardWhite>
-                        <Container >
+                        <Container>
                             <Item xs={12}>
-                                <IconButton onClick={() => setStep(0)}>
-                                    <Icon src="arrowLeft" size={24} />
-                                </IconButton>
+                                <HeaderForms onClick={() => setStep(0)}>
+                                    Iniciar sesión
+                                </HeaderForms>
                             </Item>
                             <Item xs={12}>
                                 <Formik
@@ -63,7 +64,6 @@ const LoginForm: NextPage<Props> = ({ setStep }) => {
                                             label={"Correo"}
                                             placeholder='Tu correo'
                                         />
-
                                         <Input
                                             iconName='lock'
                                             iconSize={20}
@@ -82,7 +82,6 @@ const LoginForm: NextPage<Props> = ({ setStep }) => {
                                     Continuar
                                 </ButtonBlue>
                                 <br />
-
                                 <Link href={"/register"}>
                                     <ButtonBlueOutlined>
                                         Crear cuenta
@@ -92,11 +91,8 @@ const LoginForm: NextPage<Props> = ({ setStep }) => {
                         </Container>
                     </CardWhite>
                 </FadeIn>
-
             </Item>
         </Container>
-
-
     </Wrapper>
 
 

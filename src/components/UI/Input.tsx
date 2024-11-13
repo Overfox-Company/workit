@@ -18,7 +18,7 @@ const TextInput = styled(Field)({
     padding: "16px",
     width: '100%',
     height: 48,
-    backgroundColor: GRAYINPUT,
+    // backgroundColor: GRAYINPUT,
     paddingRight: 20,
     borderRadius: 6,
     border: 0,
@@ -99,17 +99,17 @@ const Input: React.FC<InputProps> = ({
             <Item xs={12}>
                 <ContainerInput style={{
                     paddingLeft: iconName ? '12px' : 1,
-                    backgroundColor: error && touched ? ERROROPACITY : PAPERGRAY,
+                    backgroundColor: error && touched ? ERROROPACITY : "white",
                     borderColor: error && touched ? ERROR : undefined,
                 }}>
                     {iconName ? <Icon src={iconName} size={iconSize} /> : null}
                     <TextInput
                         style={{
                             paddingLeft: iconName ? '8px' : "16px",
-                            backgroundColor: error && touched ? ERROROPACITY : PAPERGRAY,
+                            backgroundColor: error && touched ? ERROROPACITY : "white",
                             resize: 'none',
-                            WebkitBackgroundColor: error && touched ? ERROROPACITY : PAPERGRAY,
-                            WebkitBoxShadow: `0 0 0 30000px ${error && touched ? ERROROPACITY : PAPERGRAY} inset`, /* Cambiar el color de fondo al autocompletar */
+                            WebkitBackgroundColor: error && touched ? ERROROPACITY : "white",
+                            WebkitBoxShadow: `0 0 0 30000px ${error && touched ? ERROROPACITY : "white"} inset`, /* Cambiar el color de fondo al autocompletar */
                             WebkitTextFillColor: '#333' /* Cambiar el color del texto al autocompletar */
 
                         }}
@@ -125,8 +125,8 @@ const Input: React.FC<InputProps> = ({
                     </TextInput>
                     {type == 'password' ? <IconButton onClick={() => setIsPassword(!isPassword)}>
                         {isPassword ?
-                            <ViewPassword loading="eager" priority alt="icon" src={error && touched ? '/assets/eyeerror.svg' : '/assets/eye.svg'} width={20} height={20} /> :
-                            <OcultPassword loading="eager" priority alt="icon" src={error && touched ? '/assets/eye-offerror.svg' : '/assets/eye-off.svg'} width={20} height={20} />}
+                            <ViewPassword loading="eager" priority alt="icon" src={error && touched ? '/assets/erroreye.svg' : '/assets/eye.svg'} width={20} height={20} /> :
+                            <OcultPassword loading="eager" priority alt="icon" src={error && touched ? '/assets/errorhideeye.svg' : '/assets/hideeye.svg'} width={20} height={20} />}
                     </IconButton> : null}
                 </ContainerInput >
 
