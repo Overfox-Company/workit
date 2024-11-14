@@ -8,20 +8,32 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { Box, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Switch, { SwitchProps } from '@mui/material/Switch';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { FC } from 'react';
 
 // //make the sidebar receive a prop who will change the width of the sidebar
-export const SideBar = styled(Box)<{ variant: string }>((props) => ({
+export const SideBar = styled(motion.div)<{ variant: boolean }>((props) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: 25,
-  padding: 40,
-  width: props.variant === 'false' ? 387 : 80,
+  padding: "40px 20px",
+  width: props.variant ? "20vw" : "5vw",
   height: '100vh',
   backgroundColor: '#FAFAFC',
-  transition: 'all 0.1s ease-in-out',
+  transition: 'all 0.2s ease-in-out',
   overflow: 'hidden',
+}));
+export const Header = styled.div<{ variant: boolean }>((props) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  backgroundColor: '#FCFCFC',
+  height: 71,
+  width: props.variant ? "80vw" : "95vw",
+  paddingRight: 40,
+  paddingLeft: 40,
 }));
 
 // export const SideBar = styled(Box)({
@@ -124,17 +136,6 @@ export const TextBox = styled.div({
 });
 
 //should have the user name, search icon and notification icon
-export const Header = styled.div({
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  backgroundColor: '#FCFCFC',
-  height: 71,
-  width: '100%',
-  paddingRight: 40,
-  paddingLeft: 40,
-});
 
 export const ProfilePic = styled.img({
   width: 'auto',

@@ -18,7 +18,7 @@ import {
 import { IOSSwitch } from '../IOSSSwitch';
 
 interface Props {
-  variant: string;
+  variant: boolean;
 }
 const NavList = [
   'Dashboard',
@@ -36,7 +36,9 @@ const noSelectedColor = '#0B1839';
 const SideBarComponent: NextPage<Props> = ({ variant }) => {
   const [selectedOption, setSelectedOption] = useState(0);
   return (
-    <SideBar variant={variant}>
+    <SideBar variant={variant}
+      initial="initial"
+      animate="animate">
       <Container
         justifyContent='space-between'
         style={{
@@ -77,6 +79,7 @@ const SideBarComponent: NextPage<Props> = ({ variant }) => {
                     <ListItem
                       onClick={() => setSelectedOption(index)}
                       style={{
+                        padding: 0,
                         color: index === selectedOption ? '#5CCF6F' : '#0B1839',
                       }}
                     >
@@ -89,7 +92,7 @@ const SideBarComponent: NextPage<Props> = ({ variant }) => {
                         }
                         size={18}
                       /> */}
-                      {item}
+                      {variant ? item : null}
                     </ListItem>
                   </SecuenceFade>
                 ))}
@@ -106,10 +109,10 @@ const SideBarComponent: NextPage<Props> = ({ variant }) => {
           }}
           xs={12}
         >
-          <ListItem style={{ width: '100%', backgroundColor: 'white' }}>
+          <ListItem style={{ width: '100%', backgroundColor: 'white', padding: 0 }}>
             <FormControlLabel
               control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-              label='Dark Mode'
+              label={variant ? 'Dark Mode' : ""}
             />
           </ListItem>
         </Item>

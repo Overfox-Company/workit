@@ -16,75 +16,19 @@ import { Container, Item, Wrapper } from '@/components/layout/Container';
 import Icon from '@/components/UI/Icon';
 import { Box, Collapse, Switch } from '@mui/material';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import SideBarComponent from './components/SideBar/SideBar';
+import { AuthContext } from '@/context/AuthContext';
+import { InitialTemplateTask } from './data/data';
+import NavBar from './components/navBar/NavBar';
+import CentralPanel from './components/CentralPanel/CentralPanel';
 
 const Dashboard = () => {
-  const [Collapsed, setCollapsed] = useState('false');
-  const [TaskInfo, setTaskInfo] = useState([
-    {
-      date: 'June 15',
-      color: '#C7EBB3',
-      tasks: [
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: true,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: false,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: true,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: false,
-        },
-      ],
-    },
-    {
-      date: 'June 16',
-      color: '#FFDEC6',
-      tasks: [
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: false,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: true,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: true,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: false,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: false,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: true,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: true,
-        },
-        {
-          description: 'Lorem Ipsum Dolor',
-          status: false,
-        },
-      ],
-    },
-  ]);
+  const { user } = useContext(AuthContext)
+  const [collapsed, setCollapsed] = useState<boolean>(false);
 
-  const UserName = 'Joel Zambrado';
+
+  const UserName = user.name ? user.name.split(/\s+/)[0] : "";
 
   //handle if active or not for list items
   const handleActive = (
@@ -130,169 +74,12 @@ const Dashboard = () => {
         backgroundColor: '#FCFCFC',
       }}
     >
-      <SideBarComponent variant={Collapsed} />
-      <Box>
-        <Header>
-          <Box
-            display={'flex'}
-            flexDirection={'row'}
-            alignItems={'center'}
-            gap={4}
-          >
-            <button
-              onClick={() => {
-                setCollapsed(Collapsed === 'false' ? 'true' : 'false');
-              }}
-            >
-              <Icon src='sidebarIcon' size={24} />
-            </button>
-            <Image src={profileImg} alt='profile pic' width={56} height={56} />
-            <Title textAlign={'left'}>{UserName}</Title>
-          </Box>
-          <Box display={'flex'} flexDirection={'row'} gap={4}>
-            <Icon src='whiteboardIcon' size={24} />
-            <Icon src='calendarIcon' size={24} />
-            <Icon src='notificationIcon' size={24} />
-          </Box>
-        </Header>
+      <SideBarComponent variant={collapsed} />
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100vh', overflow: 'auto' }}>
+        <NavBar variant={collapsed} setVariant={setCollapsed} />
+        <CentralPanel />
+      </div>
 
-        <WorkSpaces
-          sx={{
-            padding: { md: 2, xl: 4 },
-          }}
-        >
-          <Container>
-            <Item xs={2}>
-              <Text
-                sx={{ fontSize: { md: 24, xl: 28 }, marginY: 2 }}
-                color='#0B1839'
-              >
-                Proyectos
-              </Text>
-            </Item>
-            <Item xs={10} sx={{ cursor: 'pointer', display: 'flex' }}>
-              <Icon src='AddIcon' size={32} />
-            </Item>
-
-            <Item sx={{ marginTop: 2 }}>
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                <ProjectsCards
-                  bannerImg={bannerImg}
-                  membersImg={[
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                  ]}
-                  projectName='OverFox'
-                  projectDescription='Breve descripción'
-                  projectImg={projectImg}
-                />{' '}
-                <ProjectsCards
-                  bannerImg={bannerImg}
-                  membersImg={[
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                    '/assets/profileImg.png',
-                  ]}
-                  projectName='OverFox'
-                  projectDescription='Breve descripción'
-                  projectImg={projectImg}
-                />
-              </Box>
-            </Item>
-          </Container>
-          <Container>
-            <Item xs={9}>
-              <Text
-                color='#0B1839'
-                sx={{ fontSize: { md: 24, xl: 28 }, marginY: 3 }}
-              >
-                Tareas
-              </Text>
-              <TaskFilter>
-                <Text
-                  color='#FFFFFF'
-                  size={14}
-                  sx={{
-                    backgroundColor: '#5CCF6F',
-                    padding: '8px 16px',
-                    borderRadius: '100px',
-                  }}
-                >
-                  Todas
-                  {/* TaskInfo total number */} ({TaskInfo.length})
-                </Text>
-                <Text
-                  color='#647184'
-                  size={14}
-                  sx={{
-                    backgroundColor: '#FFFFFF',
-                    padding: '8px 16px',
-                    borderRadius: '8px',
-                  }}
-                >
-                  Recientes
-                </Text>
-                <Text
-                  color='#647184'
-                  size={14}
-                  sx={{
-                    backgroundColor: '#FFFFFF',
-                    padding: '8px 16px',
-                    borderRadius: '8px',
-                  }}
-                >
-                  Por Vencer
-                </Text>
-                <Text
-                  color='#647184'
-                  size={14}
-                  sx={{
-                    backgroundColor: '#FFFFFF',
-                    padding: '8px 16px',
-                    borderRadius: '8px',
-                  }}
-                >
-                  Sin Iniciar
-                </Text>
-              </TaskFilter>
-            </Item>
-            <Item sx={{ marginTop: 1 }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: { md: 1, xl: 3 },
-                }}
-              >
-                {TaskInfo.length > 0
-                  ? TaskInfo.map((task, index) => (
-                      <TasksCards
-                        setTaskInfo={setTaskInfo}
-                        key={index}
-                        date={task.date}
-                        taskInfo={TaskInfo}
-                        tasks={task.tasks}
-                        cardStatus={
-                          task.tasks
-                            .filter((task) => task.status)
-                            .length.toString() +
-                          '/' +
-                          task.tasks.length.toString()
-                        }
-                        colors={task.color}
-                        projectImg={projectImg}
-                      />
-                    ))
-                  : null}
-              </Box>
-            </Item>
-          </Container>
-        </WorkSpaces>
-      </Box>
     </Box>
   );
 };
