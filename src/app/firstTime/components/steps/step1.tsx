@@ -13,6 +13,7 @@ import { americanCountries, europeanCountries } from '@/countries/data'
 import styled from '@emotion/styled';
 import { AddCountry } from '../../handlers/SendSurvey'
 import { AuthContext } from '@/context/AuthContext'
+import InidicatorSteps from './components/InidicatorSteps'
 
 interface Props { setStep: Dispatch<SetStateAction<number>> }
 
@@ -57,7 +58,7 @@ const Step1: NextPage<Props> = ({ setStep }) => {
             <Container justifyContent='center'>
                 <Item xs={5}>
                     <CardWhite>
-                        <StepIndicator step={1} limit={2} />
+
                         <Title>
                             ¿Desde que pais nos visitas?
                         </Title>
@@ -75,7 +76,6 @@ const Step1: NextPage<Props> = ({ setStep }) => {
                                         onChange={changeHandler}
                                         MenuProps={MenuProps}
                                     >
-
                                         {options.map(option => (
                                             <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
                                         ))}
@@ -87,6 +87,9 @@ const Step1: NextPage<Props> = ({ setStep }) => {
                                 <ButtonBlue disabled={value ? false : true} onClick={() => handleClick()}>
                                     Siguiente
                                 </ButtonBlue>
+                            </Item>
+                            <Item xs={12}>
+                                <InidicatorSteps steps={1} />
                             </Item>
                         </Container>
                     </CardWhite>

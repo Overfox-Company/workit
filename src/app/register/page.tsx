@@ -4,7 +4,7 @@ import { Container, Item, Wrapper } from '@/components/layout/Container'
 import { loginUser, registerUser } from '@/types/User'
 import { Form, Formik, FormikProps } from 'formik'
 import { NextPage } from 'next'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from 'react'
 import { Card, Divider, Subtitle, Title } from './components/Components'
 import { CardVariants, SubtitleVariants, TitleVariants } from './config/Parameters'
 import { InitialValues, loginSchema } from './config/Validations'
@@ -17,6 +17,7 @@ import { useSession } from 'next-auth/react'
 import { IconButton } from '@mui/material'
 import Icon from '@/components/UI/Icon'
 import { useRouter } from 'next/navigation'
+import HeaderForms from '@/components/UI/HeaderForms'
 interface Props { }
 
 const Page: NextPage<Props> = ({ }) => {
@@ -39,12 +40,12 @@ const Page: NextPage<Props> = ({ }) => {
                 <Item xs={12} sm={8} md={6} lg={4} xl={5}>
                     <Card sx={CardVariants}>
                         <Container justifyContent='center' rowSpacing={{ xs: 1, md: 0 }} alignItems='center' gap={{ xs: 0, md: 1 }}>
-                            <Item xs={12}>
+                            { /* <Item xs={12}>
                                 <IconButton onClick={() => router.push('/login')}>
                                     <Icon src="arrowLeft" size={24} />
                                 </IconButton>
                             </Item>
-                            <Item xs={12}>
+                           <Item xs={12}>
                                 <Title sx={{ fontSize: TitleVariants }}>
                                     Somos workit
                                 </Title>
@@ -53,7 +54,10 @@ const Page: NextPage<Props> = ({ }) => {
                                 <Subtitle sx={{ fontSize: SubtitleVariants }}>
                                     ¿Nuevo por aqui? ¡Crea una cuenta!
                                 </Subtitle>
-                            </Item>
+                            </Item>*/}
+                            <HeaderForms onClick={() => router.push("login")}>
+                                Crear cuenta
+                            </HeaderForms>
                             <Item xs={12}>
                                 <Formik
                                     innerRef={FormRef}
@@ -85,7 +89,7 @@ const Page: NextPage<Props> = ({ }) => {
                                 </ButtonBlue>
 
                             </Item>
-                            <Item xs={6} md={5}>
+                            { /*<Item xs={6} md={5}>
                                 <Subtitle sx={{ fontSize: SubtitleVariants }} style={{ fontWeight: 400 }}>
                                     ¿Ya tienes cuenta?
                                 </Subtitle>
@@ -97,7 +101,7 @@ const Page: NextPage<Props> = ({ }) => {
                                         ¡Accede aqui!
                                     </Link>
                                 </Subtitle>
-                            </Item>
+                            </Item>*/}
 
                         </Container>
                     </Card>

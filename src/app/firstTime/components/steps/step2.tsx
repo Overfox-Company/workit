@@ -12,6 +12,7 @@ import { Typography } from '@mui/material'
 import { PRIMARYCOLOR, PRIMARYDARK } from '@/constants/Colors'
 import { CheckIcon, NoCheckIcon } from '@/icons/CheckIcon'
 import ApiController from '@/ApiController/ApiController'
+import InidicatorSteps from './components/InidicatorSteps'
 const Card = styled.div({
     borderRadius: 8,
     backgroundColor: 'white',
@@ -103,6 +104,10 @@ const Step2: NextPage<Props> = ({ setStep }) => {
                                 <ButtonBlue disabled={!selected} onClick={() => handleClick()}>
                                     Siguiente
                                 </ButtonBlue>
+                                <br />
+                            </Item>
+                            <Item xs={12}>
+                                <InidicatorSteps steps={2} />
                             </Item>
                         </Container>
                     </CardWhite>
