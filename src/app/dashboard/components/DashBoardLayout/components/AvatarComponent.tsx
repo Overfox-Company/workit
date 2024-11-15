@@ -13,7 +13,15 @@ const AvatarComponent: NextPage<Props> = ({ }) => {
     return (
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
 
-            <div style={{ cursor: 'pointer', borderRadius: 200, backgroundColor: 'rgba(130,140,160,0.3)', padding: 4, display: 'flex', alignItems: 'center', }}>
+            <div style={{
+                cursor: 'pointer',
+                borderRadius: 200,
+                backgroundColor: 'rgba(130,140,160,0.3)',
+                padding: 4,
+                gap: 4,
+                display: 'flex',
+                alignItems: 'center',
+            }}>
                 <div style={{ position: 'relative' }}>
                     <Avatar
                         src={user.avatar ? user.avatar : undefined}
@@ -34,7 +42,7 @@ const AvatarComponent: NextPage<Props> = ({ }) => {
                     }} />
                 </div>
 
-                <Image src={'/assets/arrowfilters.svg'} width={18} height={18} alt="" />
+                <Image src={'/assets/arrowfilters.svg'} width={16} height={16} alt="" />
             </div>
 
         </div>

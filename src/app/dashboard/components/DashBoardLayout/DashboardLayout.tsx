@@ -107,7 +107,9 @@ const DashboardLayout: NextPage<Props> = (props: DemoProps) => {
                     toolbarActions: OptionsToNavBar,
                     toolbarAccount: AvatarComponent
                 }}>
-                <CentralPanel pathname={router.pathname} />
+                <CentralPanel //pathname={router.pathname}
+
+                />
             </DashboardLayoutMaterial>
         </AppProvider>
         // preview-end
