@@ -36,13 +36,13 @@ const NavBar: NextPage<Props> = ({ variant, setVariant }) => {
             gap={1}
 
         >
-            {!variant ? <button
+            <button
                 onClick={() => {
                     setVariant(!variant);
                 }}
             >
                 <Icon src='sidebarIcon' size={24} />
-            </button> : null}
+            </button>
             <Avatar
                 src={user.avatar ? user.avatar : undefined}
                 alt='profile pic'
@@ -51,11 +51,7 @@ const NavBar: NextPage<Props> = ({ variant, setVariant }) => {
                     user.avatar ? null : user.name?.split("")[0]}</Avatar>
             <Title textAlign={'left'}>{user.name ? user.name.split(/\s+/)[0] : ""}</Title>
         </Box>
-        <Box display={'flex'} flexDirection={'row'} gap={4}>
-            <Icon src='whiteboardIcon' size={22} />
-            <Icon src='calendarIcon' size={22} />
-            <Icon src='notificationIcon' size={22} />
-        </Box>
+
     </Header>
 
 

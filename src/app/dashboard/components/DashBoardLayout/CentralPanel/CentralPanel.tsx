@@ -17,19 +17,14 @@ import Icon from '@/components/UI/Icon';
 import { Box, Collapse, Switch } from '@mui/material';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useContext, useState } from 'react';
-import SideBarComponent from '../../components/SideBar/SideBar';
+import SideBarComponent from '../../SideBar/SideBar';
 import { AuthContext } from '@/context/AuthContext';
-import { InitialTemplateTask } from '../../data/data';
+import { InitialTemplateTask } from '../../../data/data';
 interface Props { }
 
 const CentralPanel: NextPage<Props> = ({ }) => {
     const [TaskInfo, setTaskInfo] = useState(InitialTemplateTask);
-    return <WorkSpaces
-        sx={{
-            marginTop: "64px",
-            padding: { md: 2, xl: 4 },
-        }}
-    >
+    return <WorkSpaces>
         <Container>
             <Item xs={2}>
                 <Text

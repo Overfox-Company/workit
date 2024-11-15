@@ -66,13 +66,7 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
                   layout="responsive"
                   width={20} height={20}
                 />
-                {variant ? <button
-                  onClick={() => {
-                    setVariant(!variant);
-                  }}
-                >
-                  <Icon src='sidebarIcon' size={24} />
-                </button> : null}
+
               </div>
 
             </Item>

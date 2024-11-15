@@ -21,7 +21,8 @@ import SideBarComponent from './components/SideBar/SideBar';
 import { AuthContext } from '@/context/AuthContext';
 import { InitialTemplateTask } from './data/data';
 import NavBar from './components/navBar/NavBar';
-import CentralPanel from './components/CentralPanel/CentralPanel';
+import CentralPanel from './components/DashBoardLayout/CentralPanel/CentralPanel';
+import DashboardLayout from './components/DashBoardLayout/DashboardLayout';
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext)
@@ -75,7 +76,7 @@ const Dashboard = () => {
         backgroundColor: '#FCFCFC',
       }}
     >
-      <SideBarComponent variant={collapsed} setVariant={setCollapsed} />
+      {/*<SideBarComponent variant={collapsed} setVariant={setCollapsed} />
       <div style={{
         display: 'flex',
         flexDirection: 'column',
@@ -87,7 +88,8 @@ const Dashboard = () => {
         <NavBar variant={collapsed} setVariant={setCollapsed} />
         <CentralPanel />
       </div>
-
+*/}
+      <DashboardLayout />
     </Box>
   );
 };

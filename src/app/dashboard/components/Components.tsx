@@ -19,12 +19,11 @@ export const SideBar = styled(motion.div)<{ variant: boolean }>((props) => ({
   gap: 25,
   padding: "40px 20px",
   paddingTop: 0,
-
   width: props.variant ? "20vw" : "5vw",
   height: '100vh',
   maxWidth: 240,
   backgroundColor: '#FAFAFC',
-  //transition: 'all 0.2s ease-in-out',
+  transition: 'all 0.2s ease-in-out',
   overflow: 'hidden',
 }));
 export const Header = styled.div<{ variant: boolean }>((props) => ({
@@ -33,7 +32,9 @@ export const Header = styled.div<{ variant: boolean }>((props) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   height: 64,
-  width: props.variant ? "calc(100% - 20vw)" : "calc(100% - 5vw)",
+  width: props.variant
+    ? `calc(100% - min(20vw, 240px))`
+    : `calc(100% - min(5vw, 240px))`,
   position: 'fixed',
   backgroundColor: '#FCFCFC',
   paddingRight: 40,
