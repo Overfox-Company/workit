@@ -26,6 +26,7 @@ const CentralPanel: NextPage<Props> = ({ }) => {
     const [TaskInfo, setTaskInfo] = useState(InitialTemplateTask);
     return <WorkSpaces
         sx={{
+            marginTop: "64px",
             padding: { md: 2, xl: 4 },
         }}
     >

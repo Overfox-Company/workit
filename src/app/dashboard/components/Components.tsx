@@ -18,10 +18,13 @@ export const SideBar = styled(motion.div)<{ variant: boolean }>((props) => ({
   flexDirection: 'column',
   gap: 25,
   padding: "40px 20px",
+  paddingTop: 0,
+
   width: props.variant ? "20vw" : "5vw",
   height: '100vh',
+  maxWidth: 240,
   backgroundColor: '#FAFAFC',
-  transition: 'all 0.2s ease-in-out',
+  //transition: 'all 0.2s ease-in-out',
   overflow: 'hidden',
 }));
 export const Header = styled.div<{ variant: boolean }>((props) => ({
@@ -29,9 +32,10 @@ export const Header = styled.div<{ variant: boolean }>((props) => ({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
+  height: 64,
+  width: props.variant ? "calc(100% - 20vw)" : "calc(100% - 5vw)",
+  position: 'fixed',
   backgroundColor: '#FCFCFC',
-  height: 71,
-  width: props.variant ? "80vw" : "95vw",
   paddingRight: 40,
   paddingLeft: 40,
 }));
@@ -62,7 +66,7 @@ export const Title = styled(Typography)({
   fontWeight: 700,
   color: PRIMARYDARK,
   fontFamily: 'Roboto',
-  fontSize: 24,
+  fontSize: 16,
 });
 
 export const Text: FC<TypographyProps> = ({

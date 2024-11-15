@@ -70,12 +70,20 @@ const Dashboard = () => {
       sx={{
         display: 'flex',
         flexDirection: 'row',
-
+        position: "relative",
+        width: '100vw',
         backgroundColor: '#FCFCFC',
       }}
     >
-      <SideBarComponent variant={collapsed} />
-      <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100vh', overflow: 'auto' }}>
+      <SideBarComponent variant={collapsed} setVariant={setCollapsed} />
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: "100%",
+        height: '100vh',
+        position: 'relative',
+        overflow: 'auto'
+      }}>
         <NavBar variant={collapsed} setVariant={setCollapsed} />
         <CentralPanel />
       </div>

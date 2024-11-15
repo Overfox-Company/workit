@@ -5,7 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Switch from '@mui/material/Switch';
 import { NextPage } from 'next';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import {
   List,
   ListItem,
@@ -16,9 +16,11 @@ import {
   Title,
 } from '../Components';
 import { IOSSwitch } from '../IOSSSwitch';
+import Image from 'next/image';
 
 interface Props {
   variant: boolean;
+  setVariant: Dispatch<SetStateAction<boolean>>
 }
 const NavList = [
   'Dashboard',
@@ -33,7 +35,7 @@ const selectedColor = '#5CCF6F';
 const noSelectedColor = '#0B1839';
 //make the component receive a boolean from page, and change the width of the sidebar
 // const SideBarComponent: NextPage<Props> = ({}) => {
-const SideBarComponent: NextPage<Props> = ({ variant }) => {
+const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
   const [selectedOption, setSelectedOption] = useState(0);
   return (
     <SideBar variant={variant}
@@ -47,10 +49,32 @@ const SideBarComponent: NextPage<Props> = ({ variant }) => {
       >
         <Item xs={12}>
           <Container gap={{ xs: 1, lg: 3, xl: 5 }}>
-            <Item xs={12}>
-              <Text sx={{ fontSize: { md: 40, xl: 44 }, paddingLeft: 0.2 }}>
-                Workit
-              </Text>
+            <Item xs={12} style={{
+              height: 64,
+              display: 'flex',
+              alignItems: 'center', justifyContent: 'center'
+            }}>
+              <div style={{
+                position: 'relative',
+                height: 30, display: 'flex', justifyContent: 'flex-start', width: "100%"
+              }}>
+                <Image alt=""
+                  src={variant ? "/assets/default/Workit-l.svg" : "/assets/default/Workit-s.svg"}
+                  style={{
+                    // backgroundColor: 'red',
+                  }}
+                  layout="responsive"
+                  width={20} height={20}
+                />
+                {variant ? <button
+                  onClick={() => {
+                    setVariant(!variant);
+                  }}
+                >
+                  <Icon src='sidebarIcon' size={24} />
+                </button> : null}
+              </div>
+
             </Item>
             <Item xs={12}>
               <Container>
@@ -79,12 +103,20 @@ const SideBarComponent: NextPage<Props> = ({ variant }) => {
                     <ListItem
                       onClick={() => setSelectedOption(index)}
                       style={{
+                        display: 'flex',
+                        justifyContent: 'center',
                         padding: 0,
-                        color: index === selectedOption ? '#5CCF6F' : '#0B1839',
+
                       }}
                     >
-                      <Icon src={item} size={24} />
-                      {/* <IconHome
+                      <div style={{
+                        display: 'flex',
+                        color: index === selectedOption ? '#5CCF6F' : '#0B1839',
+                        width: variant ? "15vw" : "4vw",
+                        gap: 8
+                      }}>
+                        <Icon src={item} size={24} />
+                        {/* <IconHome
                         color={
                           index === selectedOption
                             ? selectedColor
@@ -92,7 +124,9 @@ const SideBarComponent: NextPage<Props> = ({ variant }) => {
                         }
                         size={18}
                       /> */}
-                      {variant ? item : null}
+                        {variant ? item : null}
+                      </div>
+
                     </ListItem>
                   </SecuenceFade>
                 ))}

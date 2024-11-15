@@ -14,7 +14,7 @@ import {
 } from '@/app/dashboard/components/Components';
 import { Container, Item, Wrapper } from '@/components/layout/Container';
 import Icon from '@/components/UI/Icon';
-import { Box, Collapse, Switch } from '@mui/material';
+import { Avatar, Box, Collapse, Switch } from '@mui/material';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import SideBarComponent from '../../components/SideBar/SideBar';
@@ -25,27 +25,36 @@ interface Props { variant: boolean; setVariant: Dispatch<SetStateAction<boolean>
 const NavBar: NextPage<Props> = ({ variant, setVariant }) => {
     const { user } = useContext(AuthContext)
 
-    return <Header style={{ backgroundColor: 'red', width: '100%' }} variant={variant}>
+    return <Header style={{
+
+    }} variant={variant}>
         <Box
             display={'flex'}
             flexDirection={'row'}
             alignItems={'center'}
-            gap={4}
+            justifyContent={"flex-start"}
+            gap={1}
+
         >
-            <button
+            {!variant ? <button
                 onClick={() => {
                     setVariant(!variant);
                 }}
             >
-                <Icon src='sidebarIcon' size={124} />
-            </button>
-            <Image src={profileImg} alt='profile pic' width={56} height={56} />
+                <Icon src='sidebarIcon' size={24} />
+            </button> : null}
+            <Avatar
+                src={user.avatar ? user.avatar : undefined}
+                alt='profile pic'
+                sx={{ width: 32, height: 32 }}
+            >{
+                    user.avatar ? null : user.name?.split("")[0]}</Avatar>
             <Title textAlign={'left'}>{user.name ? user.name.split(/\s+/)[0] : ""}</Title>
         </Box>
         <Box display={'flex'} flexDirection={'row'} gap={4}>
-            <Icon src='whiteboardIcon' size={24} />
-            <Icon src='calendarIcon' size={84} />
-            <Icon src='notificationIcon' size={24} />
+            <Icon src='whiteboardIcon' size={22} />
+            <Icon src='calendarIcon' size={22} />
+            <Icon src='notificationIcon' size={22} />
         </Box>
     </Header>
 
