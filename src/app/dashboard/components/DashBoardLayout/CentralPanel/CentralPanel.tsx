@@ -17,7 +17,7 @@ import Icon from '@/components/UI/Icon';
 import { Box, Collapse, Switch } from '@mui/material';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useContext, useState } from 'react';
-import SideBarComponent from '../../SideBar/SideBar';
+import SideBarComponent from '../SideBar/SideBar';
 import { AuthContext } from '@/context/AuthContext';
 import { InitialTemplateTask } from '../../../data/data';
 interface Props { }

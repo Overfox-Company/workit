@@ -67,3 +67,11 @@
 }
 
 /*revisa para que siver el css de abajo*/
+.icons {
+  height: 24px !important;
+  width: 24px !important;
+}
+
+body {
+  background-color: white;
+}

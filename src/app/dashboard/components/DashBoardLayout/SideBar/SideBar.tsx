@@ -14,8 +14,8 @@ import {
   Text,
   TextBox,
   Title,
-} from '../Components';
-import { IOSSwitch } from '../IOSSSwitch';
+} from '../../Components';
+import { IOSSwitch } from '../../IOSSSwitch';
 import Image from 'next/image';
 
 interface Props {
@@ -37,6 +37,7 @@ const noSelectedColor = '#0B1839';
 // const SideBarComponent: NextPage<Props> = ({}) => {
 const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
   const [selectedOption, setSelectedOption] = useState(0);
+
   return (
     <SideBar variant={variant}
       initial="initial"
@@ -49,28 +50,8 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
       >
         <Item xs={12}>
           <Container gap={{ xs: 1, lg: 3, xl: 5 }}>
-            <Item xs={12} style={{
-              height: 64,
-              display: 'flex',
-              alignItems: 'center', justifyContent: 'center'
-            }}>
-              <div style={{
-                position: 'relative',
-                height: 30, display: 'flex', justifyContent: 'flex-start', width: "100%"
-              }}>
-                <Image alt=""
-                  src={variant ? "/assets/default/Workit-l.svg" : "/assets/default/Workit-s.svg"}
-                  style={{
-                    // backgroundColor: 'red',
-                  }}
-                  layout="responsive"
-                  width={20} height={20}
-                />
 
-              </div>
-
-            </Item>
-            <Item xs={12}>
+            {  /* <Item xs={12}>
               <Container>
                 <Select>
                   <option> Intelligent AI</option>
@@ -78,7 +59,7 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
                   <option>Proyectos completados</option>
                 </Select>
               </Container>
-            </Item>
+            </Item>*/}
 
             <Item
               xs={12}
@@ -106,7 +87,7 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
                       <div style={{
                         display: 'flex',
                         color: index === selectedOption ? '#5CCF6F' : '#0B1839',
-                        width: variant ? "15vw" : "4vw",
+                        width: "100%",
                         gap: 8
                       }}>
                         <Icon src={item} size={24} />
@@ -118,7 +99,12 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
                         }
                         size={18}
                       /> */}
-                        {variant ? item : null}
+                        <p style={{
+                          transition: "all 0.1s ease-in-out",
+                          opacity: variant ? 1 : 0
+                        }}>
+                          {item}
+                        </p>
                       </div>
 
                     </ListItem>

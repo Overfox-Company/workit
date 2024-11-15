@@ -14,12 +14,14 @@ import {
 } from '@/app/dashboard/components/Components';
 import { Container, Item, Wrapper } from '@/components/layout/Container';
 import Icon from '@/components/UI/Icon';
-import { Avatar, Box, Collapse, Switch } from '@mui/material';
+import { Avatar, Box, Collapse, IconButton, Switch } from '@mui/material';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useContext, useState } from 'react';
-import SideBarComponent from '../../components/SideBar/SideBar';
+import SideBarComponent from '../SideBar/SideBar';
 import { AuthContext } from '@/context/AuthContext';
-import { InitialTemplateTask } from '../../data/data';
+import { InitialTemplateTask } from '../../../data/data';
+import OptionsToNavBar from '../components/OptionsToNavBar';
+import AvatarComponent from '../components/AvatarComponent';
 interface Props { variant: boolean; setVariant: Dispatch<SetStateAction<boolean>> }
 
 const NavBar: NextPage<Props> = ({ variant, setVariant }) => {
@@ -36,22 +38,20 @@ const NavBar: NextPage<Props> = ({ variant, setVariant }) => {
             gap={1}
 
         >
-            <button
+            <IconButton
+
                 onClick={() => {
                     setVariant(!variant);
                 }}
             >
-                <Icon src='sidebarIcon' size={24} />
-            </button>
-            <Avatar
-                src={user.avatar ? user.avatar : undefined}
-                alt='profile pic'
-                sx={{ width: 32, height: 32 }}
-            >{
-                    user.avatar ? null : user.name?.split("")[0]}</Avatar>
-            <Title textAlign={'left'}>{user.name ? user.name.split(/\s+/)[0] : ""}</Title>
+                <Icon src='menu' size={24} />
+            </IconButton>
+            <img src="/assets/default/Workit-l.svg" alt="MUI logo" />
         </Box>
-
+        <Box display={'flex'} flexDirection={'row'} gap={1}>
+            <OptionsToNavBar />
+            <AvatarComponent />
+        </Box>
     </Header>
 
 

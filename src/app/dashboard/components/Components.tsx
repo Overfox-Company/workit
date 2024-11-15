@@ -19,8 +19,8 @@ export const SideBar = styled(motion.div)<{ variant: boolean }>((props) => ({
   gap: 25,
   padding: "40px 20px",
   paddingTop: 0,
-  width: props.variant ? "20vw" : "5vw",
-  height: '100vh',
+  width: props.variant ? 320 : 78,
+  height: 'calc(100vh - 64px)',
   maxWidth: 240,
   backgroundColor: '#FAFAFC',
   transition: 'all 0.2s ease-in-out',
@@ -32,13 +32,11 @@ export const Header = styled.div<{ variant: boolean }>((props) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   height: 64,
-  width: props.variant
-    ? `calc(100% - min(20vw, 240px))`
-    : `calc(100% - min(5vw, 240px))`,
+  width: "100%",
   position: 'fixed',
   backgroundColor: '#FCFCFC',
   paddingRight: 40,
-  paddingLeft: 40,
+  paddingLeft: 12
 }));
 
 // export const SideBar = styled(Box)({
@@ -152,9 +150,10 @@ export const WorkSpaces = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   padding: '40px',
-  backgroundColor: '#FCFCFC',
-  width: 'fit',
-  maxWidth: 'fit',
+  height: '100%',
+  width: '100%',
+  overflow: 'auto',
+
 });
 
 export const AddButton = styled.button({

@@ -16,55 +16,17 @@ import { Container, Item, Wrapper } from '@/components/layout/Container';
 import Icon from '@/components/UI/Icon';
 import { Box, Collapse, Switch } from '@mui/material';
 import Image from 'next/image';
-import { useContext, useState } from 'react';
-import SideBarComponent from './components/SideBar/SideBar';
+import { useContext, useEffect, useState } from 'react';
+import SideBarComponent from './components/DashBoardLayout/SideBar/SideBar';
 import { AuthContext } from '@/context/AuthContext';
 import { InitialTemplateTask } from './data/data';
-import NavBar from './components/navBar/NavBar';
+import NavBar from './components/DashBoardLayout/navBar/NavBar';
 import CentralPanel from './components/DashBoardLayout/CentralPanel/CentralPanel';
 import DashboardLayout from './components/DashBoardLayout/DashboardLayout';
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext)
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
-
-  const UserName = user.name ? user.name.split(/\s+/)[0] : "";
-
-  //handle if active or not for list items
-  const handleActive = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    // on click change the active class
-    const target = event.target as HTMLDivElement;
-    target.classList.toggle('active');
-
-    // remove the active class from the siblings
-    const siblings = target.parentElement?.children;
-    for (let i = 0; i < siblings!.length; i++) {
-      if (siblings![i] !== target) {
-        siblings![i].classList.remove('active');
-      }
-    }
-
-    //change the icon color if active
-    const icon = target.querySelector('img');
-    if (target.classList.contains('active')) {
-      icon!.style.filter = 'invert(100%)';
-    } else {
-      icon!.style.filter =
-        'invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)';
-    }
-
-    //remove the active class from the siblings icons
-    for (let i = 0; i < siblings!.length; i++) {
-      const siblingIcon = siblings![i].querySelector('img');
-      if (siblings![i] !== target) {
-        siblingIcon!.style.filter =
-          'invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)';
-      }
-    }
-  };
 
   return (
     <Box
@@ -76,20 +38,40 @@ const Dashboard = () => {
         backgroundColor: '#FCFCFC',
       }}
     >
-      {/*<SideBarComponent variant={collapsed} setVariant={setCollapsed} />
+      {/*
+        <SideBarComponent variant={collapsed} setVariant={setCollapsed} />
+        
+      <DashboardLayout />
+        */}
+      <NavBar variant={collapsed} setVariant={setCollapsed} />
       <div style={{
+
+        marginTop: "64px",
         display: 'flex',
         flexDirection: 'column',
         width: "100%",
-        height: '100vh',
+
         position: 'relative',
-        overflow: 'auto'
+
+
+
       }}>
-        <NavBar variant={collapsed} setVariant={setCollapsed} />
-        <CentralPanel />
+
+
+        <div style={{ display: 'flex', width: "100%", }}>
+          <SideBarComponent variant={collapsed} setVariant={setCollapsed} />
+          <div style={{
+            height: 'calc(100vh - 64px)',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}>
+            <CentralPanel />
+          </div>
+        </div>
+
       </div>
-*/}
-      <DashboardLayout />
+
     </Box>
   );
 };
