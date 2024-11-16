@@ -29,50 +29,7 @@ const Dashboard = () => {
 
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        position: "relative",
-        width: '100vw',
-        backgroundColor: '#FCFCFC',
-      }}
-    >
-      {/*
-        <SideBarComponent variant={collapsed} setVariant={setCollapsed} />
-        
-      <DashboardLayout />
-        */}
-      <NavBar variant={collapsed} setVariant={setCollapsed} />
-      <div style={{
-
-        marginTop: "64px",
-        display: 'flex',
-        flexDirection: 'column',
-        width: "100%",
-
-        position: 'relative',
-
-
-
-      }}>
-
-
-        <div style={{ display: 'flex', width: "100%", }}>
-          <SideBarComponent variant={collapsed} setVariant={setCollapsed} />
-          <div style={{
-            height: 'calc(100vh - 64px)',
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}>
-            <CentralPanel />
-          </div>
-        </div>
-
-      </div>
-
-    </Box>
+    <DashboardLayout variant={collapsed} setVariant={setCollapsed} />
   );
 };
 

@@ -149,7 +149,7 @@ export const ProfilePic = styled.img({
 export const WorkSpaces = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
-  padding: '40px',
+  padding: '10px',
   height: '100%',
   width: '100%',
   overflow: 'auto',

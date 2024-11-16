@@ -17,11 +17,13 @@ import {
 } from '../../Components';
 import { IOSSwitch } from '../../IOSSSwitch';
 import Image from 'next/image';
+import { PRIMARYCOLOR } from '@/constants/Colors';
 
 interface Props {
   variant: boolean;
   setVariant: Dispatch<SetStateAction<boolean>>
 }
+
 const NavList = [
   'Dashboard',
   'Proyectos',
@@ -80,17 +82,20 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
                       style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        padding: 0,
+                        padding: " 0",
+                        borderRadius: 0,
 
                       }}
                     >
                       <div style={{
                         display: 'flex',
+                        transition: 'all 0.1s ease-in-out',
+                        borderRight: `solid 2px ${index === selectedOption ? PRIMARYCOLOR : "transparent"}`,
                         color: index === selectedOption ? '#5CCF6F' : '#0B1839',
                         width: "100%",
                         gap: 8
                       }}>
-                        <Icon src={item} size={24} />
+                        <Icon src={item} selected={index === selectedOption} size={24} />
                         {/* <IconHome
                         color={
                           index === selectedOption

@@ -26,7 +26,7 @@ const MenuProps = {
         component: CustomPaper,
     },
 };
-
+const FlagsA: any = Flag
 const Step1: NextPage<Props> = ({ setStep }) => {
     const { user, setUser } = useContext(AuthContext)
     const [value, setValue] = useState<string | null>(null);
@@ -34,12 +34,14 @@ const Step1: NextPage<Props> = ({ setStep }) => {
     ).map(country => ({
         label: (
             <div key={country.value} style={{ display: 'flex', alignItems: 'center' }}>
-                <Flag code={country.value} style={{ width: 20, height: 15, marginRight: 10 }} />
-                {country.label}
+                <FlagsA code={country.value as string} style={{ width: 20, height: 15, marginRight: 10 }} />
+
+                <span style={{ marginRight: 10 }}>{country.label}</span>
             </div>
         ),
         value: country.value,
     })), [])
+
 
     const changeHandler = (event: SelectChangeEvent) => {
         setValue(event.target.value as string);

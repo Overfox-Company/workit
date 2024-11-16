@@ -26,17 +26,19 @@ const CentralPanel: NextPage<Props> = ({ }) => {
     const [TaskInfo, setTaskInfo] = useState(InitialTemplateTask);
     return <WorkSpaces>
         <Container>
-            <Item xs={2}>
-                <Text
-                    sx={{ fontSize: { md: 24, xl: 28 }, marginY: 2 }}
-                    color='#0B1839'
-                >
-                    Proyectos
-                </Text>
+            <Item xs={12}>
+                <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+                    <Text
+                        sx={{ fontSize: { md: 24, xl: 28 }, marginY: 2 }}
+                        color='#0B1839'
+                    >
+                        Proyectos
+                    </Text>
+                    <Icon src='AddIcon' size={32} />
+                </div>
+
             </Item>
-            <Item xs={10} sx={{ cursor: 'pointer', display: 'flex' }}>
-                <Icon src='AddIcon' size={32} />
-            </Item>
+
 
             <Item sx={{ marginTop: 2 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>

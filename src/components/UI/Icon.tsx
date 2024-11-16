@@ -4,11 +4,12 @@ import Image from 'next/image'
 
 interface Props {
     src: string,
-    size: number
+    size: number,
+    selected?: boolean
 }
 
-export const Icon: NextPage<Props> = ({ src, size }) => {
-    return <Image alt={src} src={icons[src]} width={size} height={size} className='icons'/>
+export const Icon: NextPage<Props> = ({ src, size, selected }) => {
+    return <Image alt={src} src={icons[src]} width={size} style={{ fill: "red" }} height={size} className='icons' />
 }
 export const IconHome: NextPage<{
     color: string,
