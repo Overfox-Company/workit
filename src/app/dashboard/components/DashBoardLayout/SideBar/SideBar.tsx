@@ -18,6 +18,7 @@ import {
 import { IOSSwitch } from '../../IOSSSwitch';
 import Image from 'next/image';
 import { PRIMARYCOLOR } from '@/constants/Colors';
+import { iconsSideBar } from '@/icons/SideMenuIcons';
 
 interface Props {
   variant: boolean;
@@ -70,33 +71,46 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
               }}
             >
               <List>
-                {NavList.map((item, index) => (
-                  <SecuenceFade
-                    key={index}
-                    index={index}
-                    fromY={-60}
-                    duration={0.2}
-                  >
-                    <ListItem
-                      onClick={() => setSelectedOption(index)}
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        padding: " 0",
-                        borderRadius: 0,
-
-                      }}
+                {NavList.map((item, index) => {
+                  const IconComponent = iconsSideBar[item];
+                  return (
+                    <SecuenceFade
+                      key={index}
+                      index={index}
+                      fromY={-60}
+                      duration={0.2}
                     >
-                      <div style={{
-                        display: 'flex',
-                        transition: 'all 0.1s ease-in-out',
-                        borderRight: `solid 2px ${index === selectedOption ? PRIMARYCOLOR : "transparent"}`,
-                        color: index === selectedOption ? '#5CCF6F' : '#0B1839',
-                        width: "100%",
-                        gap: 8
-                      }}>
-                        <Icon src={item} selected={index === selectedOption} size={24} />
-                        {/* <IconHome
+                      <ListItem
+                        onClick={() => setSelectedOption(index)}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          padding: " 0",
+                          borderRadius: 0,
+
+                        }}
+                      >
+                        <div style={{
+                          display: 'flex',
+                          transition: 'all 0.1s ease-in-out',
+                          borderRight: `solid 2px ${index === selectedOption ? PRIMARYCOLOR : "transparent"}`,
+                          color: index === selectedOption ? '#5CCF6F' : '#0B1839',
+                          width: "100%",
+                          gap: 8
+                        }}>
+                          {IconComponent ? (
+                            <div>
+                              <IconComponent
+
+                                size={24}
+                                selected={index === selectedOption}
+                              />
+                            </div>
+
+                          ) : (
+                            <span>Ícono no disponible</span>
+                          )}
+                          {/* <IconHome
                         color={
                           index === selectedOption
                             ? selectedColor
@@ -104,17 +118,18 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
                         }
                         size={18}
                       /> */}
-                        <p style={{
-                          transition: "all 0.1s ease-in-out",
-                          opacity: variant ? 1 : 0
-                        }}>
-                          {item}
-                        </p>
-                      </div>
+                          <p style={{
+                            transition: "all 0.1s ease-in-out",
+                            opacity: variant ? 1 : 0
+                          }}>
+                            {item}
+                          </p>
+                        </div>
 
-                    </ListItem>
-                  </SecuenceFade>
-                ))}
+                      </ListItem>
+                    </SecuenceFade>
+                  )
+                })}
               </List>
             </Item>
           </Container>
