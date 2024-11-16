@@ -37,14 +37,14 @@ const loginImage = {
 export const PrincipalContainer: FC<ContainerProps> = ({ children, ...props }) => {
     return (
         <StylePrincipalContainer  {...props}>
-            {children}
+            {children as any}
         </StylePrincipalContainer>
     )
 }
 export const ContentContainer: FC<ContainerProps> = ({ children, ...props }) => {
     return (
         <StyleContentContainer  {...props}>
-            {children}
+            {children as any}
         </StyleContentContainer>
     )
 }
