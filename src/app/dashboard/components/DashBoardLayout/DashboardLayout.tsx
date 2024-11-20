@@ -16,13 +16,13 @@ import { AuthContext } from '@/context/AuthContext';
 import AvatarComponent from './components/AvatarComponent';
 import SideBarComponent from './SideBar/SideBar';
 import NavBar from './navBar/NavBar';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 interface Props { variant: boolean; setVariant: Dispatch<SetStateAction<boolean>> }
 
 
 const DashboardLayout: NextPage<Props> = ({ variant, setVariant }) => {
 
-
+    const [selectedOption, setSelectedOption] = useState(0);
     return (<Box
         sx={{
             display: 'flex',
@@ -41,14 +41,23 @@ const DashboardLayout: NextPage<Props> = ({ variant, setVariant }) => {
             position: 'relative',
         }}>
             <div style={{ display: 'flex', width: "100%", }}>
-                <SideBarComponent variant={variant} setVariant={setVariant} />
+                <SideBarComponent
+                    variant={variant}
+                    setVariant={setVariant}
+                    selectedOption={selectedOption}
+                    setSelectedOption={setSelectedOption}
+                />
                 <div style={{
                     height: 'calc(100vh - 64px)',
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'space-between',
                 }}>
-                    <CentralPanel />
+                    <CentralPanel
+
+                        selectedOption={selectedOption}
+                        setSelectedOption={setSelectedOption}
+                    />
                 </div>
             </div>
 

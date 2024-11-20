@@ -146,7 +146,7 @@ export const ProfilePic = styled.img({
   borderRadius: '100%',
 });
 
-export const WorkSpaces = styled(Box)({
+export const WorkSpaces = styled(motion.div)({
   display: 'flex',
   flexDirection: 'column',
   padding: '10px',

@@ -8,7 +8,7 @@ import countryList from 'react-select-country-list';
 import Flag from 'react-world-flags';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { InputLabel, MenuItem } from '@mui/material'
+import { Box, InputLabel, MenuItem, Paper } from '@mui/material'
 import { americanCountries, europeanCountries } from '@/countries/data'
 import styled from '@emotion/styled';
 import { AddCountry } from '../../handlers/SendSurvey'
@@ -68,19 +68,23 @@ const Step1: NextPage<Props> = ({ setStep }) => {
 
                         <Container justifyContent='center' columnSpacing={2} rowSpacing={2}>
                             <Item xs={10}>
-                                <FormControl fullWidth>
+                                <FormControl fullWidth >
                                     <InputLabel id="demo-simple-select-label">Country</InputLabel>
                                     <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
+
                                         value={value as string}
                                         label="Country"
+
                                         onChange={changeHandler}
                                         MenuProps={MenuProps}
                                     >
+
+
                                         {options.map(option => (
                                             <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
                                         ))}
+
+
 
                                     </Select>
                                 </FormControl>

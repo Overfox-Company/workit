@@ -22,7 +22,9 @@ import { iconsSideBar } from '@/icons/SideMenuIcons';
 
 interface Props {
   variant: boolean;
-  setVariant: Dispatch<SetStateAction<boolean>>
+  setVariant: Dispatch<SetStateAction<boolean>>;
+  selectedOption: number;
+  setSelectedOption: Dispatch<SetStateAction<number>>;
 }
 
 const NavList = [
@@ -38,8 +40,8 @@ const selectedColor = '#5CCF6F';
 const noSelectedColor = '#0B1839';
 //make the component receive a boolean from page, and change the width of the sidebar
 // const SideBarComponent: NextPage<Props> = ({}) => {
-const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
-  const [selectedOption, setSelectedOption] = useState(0);
+const SideBarComponent: NextPage<Props> = ({ variant, setVariant, selectedOption, setSelectedOption }) => {
+
 
   return (
     <SideBar variant={variant}
@@ -101,12 +103,10 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
                           {IconComponent ? (
                             <div>
                               <IconComponent
-
                                 size={24}
                                 selected={index === selectedOption}
                               />
                             </div>
-
                           ) : (
                             <span>Ícono no disponible</span>
                           )}
@@ -125,7 +125,6 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
                             {item}
                           </p>
                         </div>
-
                       </ListItem>
                     </SecuenceFade>
                   )
@@ -134,7 +133,6 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
             </Item>
           </Container>
         </Item>
-
         <Item
           sx={{
             display: 'flex',
@@ -145,7 +143,10 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant }) => {
         >
           <ListItem style={{ width: '100%', backgroundColor: 'white', padding: 0 }}>
             <FormControlLabel
-              control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              control={
+                <IOSSwitch sx={{ m: 1 }}
+                  defaultChecked />
+              }
               label={variant ? 'Dark Mode' : ""}
             />
           </ListItem>

@@ -49,6 +49,7 @@
   min-height: 100vh;
 }
 
+
 .MuiTooltip-tooltip {
   display: flex !important;
   gap: 10px;
@@ -72,6 +73,6 @@
   width: 24px !important;
 }
 
-body {
-  background-color: white;
+.css-hl5znz-MuiPopover-paper-MuiMenu-paper {
+  background-color: rgb(255, 255, 255);
 }
