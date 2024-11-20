@@ -64,9 +64,11 @@ export interface TasksCard {
     projectImg: any;
 }
 export interface ProjectsCard {
+
     bannerImg: any;
     membersImg: Array<string>;
     projectName: string;
     projectDescription: string;
     projectImg: any;
+
 }

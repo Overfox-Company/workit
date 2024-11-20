@@ -11,7 +11,7 @@ import Switch, { SwitchProps } from '@mui/material/Switch';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { FC } from 'react';
-
+import Skeleton from '@mui/material/Skeleton';
 // //make the sidebar receive a prop who will change the width of the sidebar
 export const SideBar = styled(motion.div)<{ variant: boolean }>((props) => ({
   display: 'flex',
@@ -298,22 +298,27 @@ export const TasksCards: FC<TasksCard> = ({
     </Box>
   );
 };
+export interface ProjectsCardProps {
+  data: ProjectsCard;
+}
 
-export const ProjectsCards: FC<ProjectsCard> = ({
-  bannerImg,
-  membersImg,
-  projectName,
-  projectDescription,
-  projectImg,
-}) => {
+export const ProjectsCards: FC<ProjectsCardProps> = (
+  { data }
+) => {
+  const { bannerImg,
+    membersImg,
+    projectName,
+    projectDescription,
+    projectImg
+  } = data
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
         borderRadius: 4,
-        height: { md: '28vh', lg: '28vh', xl: '25vh' },
-        width: { md: '17vw', lg: '17vw', xl: '15vw' },
+        height: 200,
+        width: 250,
         backgroundColor: '#FFFFFF',
         position: 'relative',
         boxShadow: '0 4px 8px 7px #021C030E, 0 6px 20px 7px #021C0312',
@@ -417,6 +422,19 @@ export const ProjectsCards: FC<ProjectsCard> = ({
         </Text>
       </Box>
     </Box>
+  );
+};
+export const ProjectsCardsSkeleton = (
+
+) => {
+
+  return (
+    <Skeleton
+      sx={{ bgcolor: 'grey.700', borderRadius: 4 }}
+      variant="rectangular"
+      width={250}
+      height={200}
+    />
   );
 };
 

@@ -3,6 +3,7 @@ import {
     AddButton,
     Header,
     ProjectsCards,
+    ProjectsCardsSkeleton,
     TaskFilter,
     TasksCards,
     Text,
@@ -16,14 +17,80 @@ import { Container, Item, Wrapper } from '@/components/layout/Container';
 import Icon from '@/components/UI/Icon';
 import { Box, Collapse, Switch } from '@mui/material';
 import Image from 'next/image';
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import SideBarComponent from '../../../../SideBar/SideBar';
 import { AuthContext } from '@/context/AuthContext';
 import { InitialTemplateTask } from '../../../../../../data/data';
 import FadeIn from '@/components/animation/FadeIn';
+import { ProjectsCard } from '@/types/Layout';
+import SecuenceFade from '@/components/animation/SecuenceFade';
 interface Props { }
+const templateData = [
+    {
+        bannerImg: bannerImg,
+        membersImg:
+            [
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+            ],
+        projectName: 'OverFox',
 
+        projectDescription: 'Breve descripción',
+        projectImg: projectImg
+    },
+    {
+        bannerImg,
+        membersImg:
+            [
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+            ],
+        projectName: 'OverFox',
+
+        projectDescription: 'Breve descripción',
+        projectImg: projectImg
+    },
+    {
+        bannerImg,
+        membersImg:
+            [
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+            ],
+        projectName: 'OverFox',
+
+        projectDescription: 'Breve descripción',
+        projectImg: projectImg
+    },
+    {
+        bannerImg,
+        membersImg:
+            [
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+                '/assets/profileImg.png',
+            ],
+        projectName: 'OverFox',
+
+        projectDescription: 'Breve descripción',
+        projectImg: projectImg
+    },
+]
 const RecentProjects: NextPage<Props> = ({ }) => {
+    const [data, setData] = useState<ProjectsCard[]>([])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setData(templateData as ProjectsCard[])
+        }, 4000)
+    }, [])
     return <Container>
         <Item xs={12}>
             <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
@@ -35,37 +102,26 @@ const RecentProjects: NextPage<Props> = ({ }) => {
                 </Text>
                 <Icon src='AddIcon' size={32} />
             </div>
-
         </Item>
-
-
         <Item sx={{ marginTop: 2 }}>
             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                <ProjectsCards
-                    bannerImg={bannerImg}
-                    membersImg={[
-                        '/assets/profileImg.png',
-                        '/assets/profileImg.png',
-                        '/assets/profileImg.png',
-                        '/assets/profileImg.png',
-                    ]}
-                    projectName='OverFox'
-                    projectDescription='Breve descripción'
-                    projectImg={projectImg}
-                />{' '}
-                <ProjectsCards
-                    bannerImg={bannerImg}
-                    membersImg={[
-                        '/assets/profileImg.png',
-                        '/assets/profileImg.png',
-                        '/assets/profileImg.png',
-                        '/assets/profileImg.png',
-                        '/assets/profileImg.png',
-                    ]}
-                    projectName='OverFox'
-                    projectDescription='Breve descripción'
-                    projectImg={projectImg}
-                />
+                {data.length > 0 ? data.map((Item, index) => (
+                    <FadeIn key={index} >
+                        <ProjectsCards key={index}
+                            data={Item}
+                        />
+                    </FadeIn>
+
+                )) : null}
+                {data.length === 0 ? [0, 1, 2, 3].map((Item, index) => (
+
+                    <SecuenceFade index={Item} key={Item}>
+                        <ProjectsCardsSkeleton />
+                    </SecuenceFade>
+
+
+                )) : null}
+
             </Box>
         </Item>
     </Container>
