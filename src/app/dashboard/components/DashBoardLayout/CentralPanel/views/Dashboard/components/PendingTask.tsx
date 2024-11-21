@@ -44,6 +44,7 @@ const PendingTask: NextPage<Props> = ({ }) => {
             <TaskFilter>
                 {TopMenu.map((menu, index) => (
                     <Button
+                        key={menu.label}
                         onClick={() => setFilterSelected(index)}
                         variant='contained'
                         style={{
