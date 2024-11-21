@@ -22,6 +22,7 @@ import { AuthContext } from '@/context/AuthContext';
 import { InitialTemplateTask } from '../../../../../data/data';
 import FadeIn from '@/components/animation/FadeIn';
 import RecentProjects from './components/RecentProjects';
+import PendingTask from './components/PendingTask';
 interface Props { }
 
 const DashboardView: NextPage<Props> = ({ }) => {
@@ -29,93 +30,7 @@ const DashboardView: NextPage<Props> = ({ }) => {
     return <WorkSpaces>
         <FadeIn>
             <RecentProjects />
-            <Container>
-                <Item xs={9}>
-                    <Text
-                        color='#0B1839'
-                        sx={{ fontSize: { md: 24, xl: 28 }, marginY: 3 }}
-                    >
-                        Tareas
-                    </Text>
-                    <TaskFilter>
-                        <Text
-                            color='#FFFFFF'
-                            size={14}
-                            sx={{
-                                backgroundColor: '#5CCF6F',
-                                padding: '8px 16px',
-                                borderRadius: '100px',
-                            }}
-                        >
-                            Todas
-                            {/* TaskInfo total number */} ({TaskInfo.length})
-                        </Text>
-                        <Text
-                            color='#647184'
-                            size={14}
-                            sx={{
-                                backgroundColor: '#FFFFFF',
-                                padding: '8px 16px',
-                                borderRadius: '8px',
-                            }}
-                        >
-                            Recientes
-                        </Text>
-                        <Text
-                            color='#647184'
-                            size={14}
-                            sx={{
-                                backgroundColor: '#FFFFFF',
-                                padding: '8px 16px',
-                                borderRadius: '8px',
-                            }}
-                        >
-                            Por Vencer
-                        </Text>
-                        <Text
-                            color='#647184'
-                            size={14}
-                            sx={{
-                                backgroundColor: '#FFFFFF',
-                                padding: '8px 16px',
-                                borderRadius: '8px',
-                            }}
-                        >
-                            Sin Iniciar
-                        </Text>
-                    </TaskFilter>
-                </Item>
-                <Item sx={{ marginTop: 1 }}>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            gap: { md: 1, xl: 3 },
-                        }}
-                    >
-                        {TaskInfo.length > 0
-                            ? TaskInfo.map((task, index) => (
-                                <TasksCards
-                                    setTaskInfo={setTaskInfo}
-                                    key={index}
-                                    date={task.date}
-                                    taskInfo={TaskInfo}
-                                    tasks={task.tasks}
-                                    cardStatus={
-                                        task.tasks
-                                            .filter((task) => task.status)
-                                            .length.toString() +
-                                        '/' +
-                                        task.tasks.length.toString()
-                                    }
-                                    colors={task.color}
-                                    projectImg={projectImg}
-                                />
-                            ))
-                            : null}
-                    </Box>
-                </Item>
-            </Container>
+            <PendingTask />
         </FadeIn>
 
     </WorkSpaces>

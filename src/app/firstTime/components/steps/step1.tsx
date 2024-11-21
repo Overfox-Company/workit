@@ -60,32 +60,23 @@ const Step1: NextPage<Props> = ({ setStep }) => {
             <Container justifyContent='center'>
                 <Item xs={5}>
                     <CardWhite>
-
                         <Title>
                             ¿Desde que pais nos visitas?
                         </Title>
                         <br />
-
                         <Container justifyContent='center' columnSpacing={2} rowSpacing={2}>
                             <Item xs={10}>
                                 <FormControl fullWidth >
                                     <InputLabel id="demo-simple-select-label">Country</InputLabel>
                                     <Select
-
                                         value={value as string}
                                         label="Country"
-
                                         onChange={changeHandler}
                                         MenuProps={MenuProps}
                                     >
-
-
                                         {options.map(option => (
                                             <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
                                         ))}
-
-
-
                                     </Select>
                                 </FormControl>
                             </Item>
