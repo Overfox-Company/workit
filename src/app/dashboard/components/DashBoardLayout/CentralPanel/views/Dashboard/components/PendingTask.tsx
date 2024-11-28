@@ -22,24 +22,26 @@ import { AuthContext } from '@/context/AuthContext';
 import { InitialTemplateTask } from '../../../../../../data/data';
 import FadeIn from '@/components/animation/FadeIn';
 import RecentProjects from '../components/RecentProjects';
+import { TasksCard } from '@/types/Layout';
 interface Props { }
 const TopMenu = [
-    { label: "Todal", id: 0 },
+    { label: "Total", id: 0 },
     { label: "Recientes", id: 1 },
     { label: "Por vencer", id: 2 },
-    { label: "sin empezar", id: 3 }
+    { label: "Sin empezar", id: 3 }
 ]
 
 const PendingTask: NextPage<Props> = ({ }) => {
     const [TaskInfo, setTaskInfo] = useState(InitialTemplateTask);
-    const [filterSelected, setFilterSelected] = useState(0)
+    const [filterSelected, setFilterSelected] = useState<number>(0)
+
     return <Container>
         <Item xs={9}>
             <Text
                 color='#0B1839'
                 sx={{ fontSize: { md: 24, xl: 28 }, marginY: 3 }}
             >
-                Tareas
+                Tareas pendientes
             </Text>
             <TaskFilter>
                 {TopMenu.map((menu, index) => (
@@ -64,7 +66,7 @@ const PendingTask: NextPage<Props> = ({ }) => {
                 }
             </TaskFilter>
         </Item>
-        <Item sx={{ marginTop: 1 }}>
+        <Item xs={12} sx={{ marginTop: 1 }}>
             <Box
                 sx={{
                     display: 'flex',
@@ -74,23 +76,11 @@ const PendingTask: NextPage<Props> = ({ }) => {
             >
                 {TaskInfo.length > 0
                     ? TaskInfo.map((task, index) => (
-                        <TasksCards
-                            setTaskInfo={setTaskInfo}
-                            key={index}
-                            date={task.date}
-                            taskInfo={TaskInfo}
-                            tasks={task.tasks}
-                            cardStatus={
-                                task.tasks
-                                    .filter((task) => task.status)
-                                    .length.toString() +
-                                '/' +
-                                task.tasks.length.toString()
-                            }
-                            colors={task.color}
-                            projectImg={projectImg}
+                        task.id + 1 === filterSelected || filterSelected === 0 ? <TasksCards
+                            filter={filterSelected}
+                            data={task as any}
                         />
-                    ))
+                            : null))
                     : null}
             </Box>
         </Item>

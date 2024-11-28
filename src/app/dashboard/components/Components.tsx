@@ -1,6 +1,6 @@
 'use client';
 import Icon from '@/components/UI/Icon';
-import { PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from '@/constants/Colors';
+import { GRAYINPUT, PAPERGRAY, PRIMARYDARK, SECONDARYDARK, TEXTDARK } from '@/constants/Colors';
 import { ProjectsCard, TasksCard, TypographyProps } from '@/types/Layout';
 import styled from '@emotion/styled';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
@@ -12,6 +12,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { FC } from 'react';
 import Skeleton from '@mui/material/Skeleton';
+import ActivityIndicator from '@/components/UI/ActivityIndicator';
 // //make the sidebar receive a prop who will change the width of the sidebar
 export const SideBar = styled(motion.div)<{ variant: boolean }>((props) => ({
   display: 'flex',
@@ -172,16 +173,21 @@ export const AddButton = styled.button({
   fontFamily: 'Roboto',
 });
 
+export interface TasksCardProps {
+  data: TasksCard;
+  filter: number
+}
 
-export const TasksCards: FC<TasksCard> = ({
-  date,
-  cardStatus,
-  tasks,
-  colors,
-  setTaskInfo,
-  taskInfo,
-  projectImg,
+export const TasksCards: FC<TasksCardProps> = ({
+  data, filter
 }) => {
+  const { date,
+    cardStatus,
+    tasks,
+    colors,
+    setTaskInfo,
+    taskInfo,
+    projectImg, id } = data
   const HandleCheck = (index: number, checked: boolean) => {
     try {
       const newTasks = [
@@ -203,65 +209,83 @@ export const TasksCards: FC<TasksCard> = ({
       console.log('Error', error);
     }
   };
-  return (
+  return (<Box
+    sx={{
+
+      borderRadius: 4,
+      display: 'flex',
+      flexDirection: 'column',
+      height: { md: '35vh', lg: '35vh', xl: '30vh' },
+      width: { md: '17vw', lg: '17vw', xl: '16vw' },
+      //  padding: '12px',
+      boxShadow: '0 4px 24px 0 rgb(100,100,140,0.2)',
+      paddingRight: 0,
+    }}
+  >
     <Box
       sx={{
-        backgroundColor: colors,
-        borderRadius: 4,
+        borderRadius: "16px 16px 0px 0",
+        padding: 2,
+        backgroundColor: PRIMARYDARK,
+        paddingRight: '12px',
         display: 'flex',
-        flexDirection: 'column',
-        height: { md: '35vh', lg: '35vh', xl: '30vh' },
-        width: { md: '17vw', lg: '17vw', xl: '16vw' },
-        padding: '12px',
-        paddingRight: 0,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
       }}
     >
+      <Text sx={{ color: "white", fontSize: { md: 16, xl: 18 } }}>{id === 0 ? "Recientes" : id === 1 ? "Por vencer" : "Sin empezar"}</Text>
       <Box
         sx={{
-          paddingRight: '12px',
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          gap: 1,
+          cursor: 'pointer',
         }}
       >
-        <Text sx={{ fontSize: { md: 16, xl: 24 } }}>{date}</Text>
+        <Icon src='AddIcon' size={32} />
+        <Text size={14} color='white' fontWeight={500}>
+          {cardStatus}
+
+          {tasks.filter((task) => task.status).length.toString() +
+            '/' +
+            tasks.length.toString()}
+        </Text>
+      </Box>
+    </Box>
+    <Box
+      sx={{
+        overflow: 'auto',
+      }}
+    >
+      {tasks.map((task, index) => (
         <Box
+          key={index}
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            alignItems: 'center',
+            padding: { md: '6px', xl: '12px' },
+
             gap: 1,
-            cursor: 'pointer',
+            borderBottom: 'solid 1px rgb(220,220,220)',
+            alignItems: 'center',
+            bgcolor: 'white',
           }}
         >
-          <Icon src='AddIcon' size={32} />
-          <Text size={14} color='#6F6F70' fontWeight={500}>
-            {cardStatus}
-          </Text>
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          paddingRight: '12px',
-          overflow: 'auto',
-        }}
-      >
-        {tasks.map((task, index) => (
-          <Box
-            key={index}
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              padding: { md: '6px', xl: '8px' },
+
+
+          <Image
+            src={projectImg}
+            alt='project Img'
+            style={{
               borderRadius: 4,
-              marginTop: 1,
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              bgcolor: task.status ? null : '#FEF0E4',
+
+              width: 32,
+              height: 32,
             }}
-          >
-            <Checkbox
+          />
+          {/* <Checkbox
               style={{ padding: 0 }}
               icon={<RadioButtonUncheckedIcon />}
               checkedIcon={<TaskAltIcon style={{ fill: '#65954A' }} />}
@@ -269,33 +293,30 @@ export const TasksCards: FC<TasksCard> = ({
               defaultChecked={task.status}
               // when check change set the task status
               onChange={(e) => HandleCheck(index, e.target.checked)}
-            />
-            <Text
-              size={14}
-              fontWeight={500}
-              color={task.status ? '#65954A' : '#0B161F'}
-              sx={{
-                fontSize: { md: 12, xl: 18 },
-                textDecoration: task.status ? 'line-through' : 'none',
-                textDecorationThickness: '0.5px',
-              }}
-            >
-              {task.description}
-            </Text>
-            <Image
-              src={projectImg}
-              alt='project Img'
-              style={{
-                borderRadius: '100%',
+            />*/}
+          <Text
+            size={14}
+            fontWeight={500}
+            color={SECONDARYDARK}
+            sx={{
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              width: '150px',
+              fontSize: { md: 12, xl: 14 },
+              textDecoration: 'none',
+            }}
+          >
+            {task.description}
+          </Text>
+          {
+            task.type && task.label ? <ActivityIndicator text={task.label} type={task.type} /> : null
+          }
 
-                width: 24,
-                height: 24,
-              }}
-            />
-          </Box>
-        ))}
-      </Box>
+        </Box>
+      ))}
     </Box>
+  </Box>
   );
 };
 export interface ProjectsCardProps {

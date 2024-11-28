@@ -98,7 +98,7 @@ const RecentProjects: NextPage<Props> = ({ }) => {
                     sx={{ fontSize: { md: 24, xl: 28 }, marginY: 2 }}
                     color='#0B1839'
                 >
-                    Proyectos
+                    Proyectos recientes
                 </Text>
                 <Icon src='AddIcon' size={32} />
             </div>

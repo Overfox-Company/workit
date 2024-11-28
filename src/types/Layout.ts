@@ -54,14 +54,18 @@ export interface TypographyProps {
 export interface TasksCard {
     date: string;
     cardStatus: string;
-    colors: any;
-    taskInfo: Array<any>;
-    tasks: Array<{
+    colors: string;
+    taskInfo: any[]
+    tasks: {
+        type: "correct" | "warn" | "error";
+        label: string;
         description: string;
         status: boolean;
-    }>;
-    setTaskInfo: any;
-    projectImg: any;
+    }[];
+    setTaskInfo?: any;
+    id: number
+
+    projectImg: string;
 }
 export interface ProjectsCard {
 
