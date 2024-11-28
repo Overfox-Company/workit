@@ -77,7 +77,7 @@ const PendingTask: NextPage<Props> = ({ }) => {
                 {TaskInfo.length > 0
                     ? TaskInfo.map((task, index) => (
                         task.id + 1 === filterSelected || filterSelected === 0 ? <TasksCards
-                            filter={filterSelected}
+                            key={task.date}
                             data={task as any}
                         />
                             : null))

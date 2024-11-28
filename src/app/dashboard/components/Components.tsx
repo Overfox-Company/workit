@@ -175,11 +175,10 @@ export const AddButton = styled.button({
 
 export interface TasksCardProps {
   data: TasksCard;
-  filter: number
 }
 
 export const TasksCards: FC<TasksCardProps> = ({
-  data, filter
+  data
 }) => {
   const { date,
     cardStatus,
