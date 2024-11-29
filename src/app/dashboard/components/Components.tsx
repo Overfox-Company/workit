@@ -211,8 +211,9 @@ export const TasksCards: FC<TasksCardProps> = ({
   return (<Box
     sx={{
 
-      borderRadius: 4,
+      borderRadius: "16px",
       display: 'flex',
+      overflow: 'hidden',
       flexDirection: 'column',
       height: { md: '35vh', lg: '35vh', xl: '30vh' },
       width: { md: '17vw', lg: '17vw', xl: '16vw' },

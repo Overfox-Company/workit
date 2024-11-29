@@ -74,14 +74,15 @@ const PendingTask: NextPage<Props> = ({ }) => {
                     gap: { md: 1, xl: 3 },
                 }}
             >
-                {TaskInfo.length > 0
-                    ? TaskInfo.map((task, index) => (
-                        task.id + 1 === filterSelected || filterSelected === 0 ? <TasksCards
-                            key={task.date}
-                            data={task as any}
-                        />
-                            : null))
-                    : null}
+                {TaskInfo.filter(
+                    (task) => filterSelected === 0 || task.id === filterSelected - 1
+                ).map((task) => (
+                    <TasksCards
+                        key={task.id}
+                        data={task as any}
+                    />
+                ))}
+
             </Box>
         </Item>
     </Container>

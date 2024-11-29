@@ -15,7 +15,7 @@ import profileImg from '@/../public/assets/profileImg.png';
 import projectImg from '@/../public/assets/projectImg.png';
 import { Container, Item, Wrapper } from '@/components/layout/Container';
 import Icon from '@/components/UI/Icon';
-import { Box, Collapse, Switch } from '@mui/material';
+import { Box, Collapse, IconButton, Switch } from '@mui/material';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import SideBarComponent from '../../../../SideBar/SideBar';
@@ -24,6 +24,8 @@ import { InitialTemplateTask } from '../../../../../../data/data';
 import FadeIn from '@/components/animation/FadeIn';
 import { ProjectsCard } from '@/types/Layout';
 import SecuenceFade from '@/components/animation/SecuenceFade';
+import { AddIcon } from '@/icons/AddIcon';
+import { PRIMARYDARK } from '@/constants/Colors';
 interface Props { }
 const templateData = [
     {
@@ -100,7 +102,10 @@ const RecentProjects: NextPage<Props> = ({ }) => {
                 >
                     Proyectos recientes
                 </Text>
-                <Icon src='AddIcon' size={32} />
+                <IconButton>
+                    <AddIcon size={24} color={PRIMARYDARK} />
+                </IconButton>
+
             </div>
         </Item>
         <Item sx={{ marginTop: 2 }}>
