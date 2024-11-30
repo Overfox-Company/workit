@@ -75,8 +75,8 @@ export const BoxOpacity = styled(Box)({
     backgroundColor: 'rgb(11,22,31,0.6)'
 })
 export const BoxColor = styled(Box)({
-    height: 38,
-    width: 38,
+    height: 28,
+    width: 28,
     cursor: 'pointer',
     borderRadius: 122
 })

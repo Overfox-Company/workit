@@ -76,3 +76,21 @@
 .css-hl5znz-MuiPopover-paper-MuiMenu-paper {
   background-color: rgb(255, 255, 255);
 }
+
+.css-1jgjjzm {
+
+  padding: 4px 24px !important
+}
+
+.css-16htz67-MuiPaper-root-MuiDialog-paper {
+  border-radius: 22px !important;
+  max-width: 500px !important;
+}
+
+.css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  /* background-color: aqua !important;*/
+  display: flex !important;
+  gap: 4;
+  height: 22px !important;
+  padding: 0 !important
+}

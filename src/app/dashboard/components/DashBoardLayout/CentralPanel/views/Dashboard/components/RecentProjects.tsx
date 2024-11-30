@@ -26,6 +26,7 @@ import { ProjectsCard } from '@/types/Layout';
 import SecuenceFade from '@/components/animation/SecuenceFade';
 import { AddIcon } from '@/icons/AddIcon';
 import { PRIMARYDARK } from '@/constants/Colors';
+import AddNewProject from './AddNewProject/AddNewProject';
 interface Props { }
 const templateData = [
     {
@@ -87,49 +88,54 @@ const templateData = [
 ]
 const RecentProjects: NextPage<Props> = ({ }) => {
     const [data, setData] = useState<ProjectsCard[]>([])
-
+    const [openNewProjects, setOpenNewProjects] = useState<boolean>(false)
     useEffect(() => {
         setTimeout(() => {
             setData(templateData as ProjectsCard[])
         }, 4000)
     }, [])
-    return <Container>
-        <Item xs={12}>
-            <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-                <Text
-                    sx={{ fontSize: { md: 24, xl: 28 }, marginY: 2 }}
-                    color='#0B1839'
-                >
-                    Proyectos recientes
-                </Text>
-                <IconButton>
-                    <AddIcon size={24} color={PRIMARYDARK} />
-                </IconButton>
+    return <div>
+        <AddNewProject open={openNewProjects} setOpen={setOpenNewProjects} />
+        <Container>
 
-            </div>
-        </Item>
-        <Item sx={{ marginTop: 2 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                {data.length > 0 ? data.map((Item, index) => (
-                    <FadeIn key={index} >
-                        <ProjectsCards key={index}
-                            data={Item}
-                        />
-                    </FadeIn>
+            <Item xs={12}>
+                <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+                    <Text
+                        sx={{ fontSize: { md: 24, xl: 28 }, marginY: 2 }}
+                        color='#0B1839'
+                    >
+                        Proyectos recientes
+                    </Text>
+                    <IconButton onClick={() => setOpenNewProjects(true)}>
+                        <AddIcon size={24} color={PRIMARYDARK} />
+                    </IconButton>
 
-                )) : null}
-                {data.length === 0 ? [0, 1, 2, 3].map((Item, index) => (
+                </div>
+            </Item>
+            <Item sx={{ marginTop: 2 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+                    {data.length > 0 ? data.map((Item, index) => (
+                        <FadeIn key={index} >
+                            <ProjectsCards key={index}
+                                data={Item}
+                            />
+                        </FadeIn>
 
-                    <SecuenceFade index={Item} key={Item}>
-                        <ProjectsCardsSkeleton />
-                    </SecuenceFade>
+                    )) : null}
+                    {data.length === 0 ? [0, 1, 2, 3].map((Item, index) => (
+
+                        <SecuenceFade index={Item} key={Item}>
+                            <ProjectsCardsSkeleton />
+                        </SecuenceFade>
 
 
-                )) : null}
+                    )) : null}
 
-            </Box>
-        </Item>
-    </Container>
+                </Box>
+            </Item>
+        </Container>
+    </div>
+
 }
 
 export default RecentProjects

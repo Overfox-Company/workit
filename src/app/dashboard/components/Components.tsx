@@ -19,6 +19,8 @@ export const SideBar = styled(motion.div)<{ variant: boolean }>((props) => ({
   flexDirection: 'column',
   gap: 25,
   padding: "40px 20px",
+  paddingRight: 0,
+  paddingLeft: 10,
   paddingTop: 0,
   width: props.variant ? 320 : 78,
   height: 'calc(100vh - 64px)',

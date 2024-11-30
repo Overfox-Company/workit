@@ -21,8 +21,9 @@ export default function RootLayout({
   return (
     <NextAuthProvider>
       <AppContextProvider>
-        <CompanyContextProvider>
-          <AuthContextProvider>
+
+        <AuthContextProvider>
+          <CompanyContextProvider>
 
             <html lang="en">
               <body>
@@ -32,8 +33,9 @@ export default function RootLayout({
               </body>
             </html>
 
-          </AuthContextProvider>
-        </CompanyContextProvider>
+
+          </CompanyContextProvider>
+        </AuthContextProvider>
       </AppContextProvider>
     </NextAuthProvider>
   );

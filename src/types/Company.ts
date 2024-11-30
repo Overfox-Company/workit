@@ -38,4 +38,9 @@ export interface EditCompany {
     name?: string,
     email?: string,
     workers?: string[],
-} 
+}
+export interface AddFile {
+    id_company: string,
+    id_user: string,
+    file: File,
+}

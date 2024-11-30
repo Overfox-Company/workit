@@ -5,7 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Switch from '@mui/material/Switch';
 import { NextPage } from 'next';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import {
   List,
   ListItem,
@@ -19,6 +19,8 @@ import { IOSSwitch } from '../../IOSSSwitch';
 import Image from 'next/image';
 import { PRIMARYCOLOR } from '@/constants/Colors';
 import { iconsSideBar } from '@/icons/SideMenuIcons';
+import { CompanyContext } from '@/context/CompanyContext';
+import SelectorCompany from '../components/SelectorCompany';
 
 interface Props {
   variant: boolean;
@@ -41,7 +43,7 @@ const noSelectedColor = '#0B1839';
 //make the component receive a boolean from page, and change the width of the sidebar
 // const SideBarComponent: NextPage<Props> = ({}) => {
 const SideBarComponent: NextPage<Props> = ({ variant, setVariant, selectedOption, setSelectedOption }) => {
-
+  const { companyList } = useContext(CompanyContext)
 
   return (
     <SideBar variant={variant}
@@ -50,21 +52,17 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant, selectedOption
       <Container
         justifyContent='space-between'
         style={{
+
           height: '100%',
         }}
       >
         <Item xs={12}>
           <Container gap={{ xs: 1, lg: 3, xl: 5 }}>
 
-            {  /* <Item xs={12}>
-              <Container>
-                <Select>
-                  <option> Intelligent AI</option>
-                  <option>Proyectos activos</option>
-                  <option>Proyectos completados</option>
-                </Select>
-              </Container>
-            </Item>*/}
+            <Item xs={12}>
+              <SelectorCompany openSideBar={variant} />
+
+            </Item>
 
             <Item
               xs={12}
@@ -87,7 +85,7 @@ const SideBarComponent: NextPage<Props> = ({ variant, setVariant, selectedOption
                         style={{
                           display: 'flex',
                           justifyContent: 'center',
-                          padding: " 0",
+                          padding: "0",
                           borderRadius: 0,
 
                         }}
