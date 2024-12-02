@@ -1,6 +1,6 @@
 // Eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 'use client'
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import { Field } from "formik";
 import styled from "@emotion/styled";
 import { InputProps } from "@/types/App";
@@ -12,6 +12,7 @@ import { ERROR, ERROROPACITY, GRAYINPUT, PAPERGRAY, PRIMARYDARK, SECONDARYDARK }
 import Image from "next/image";
 import Icon from "./Icon";
 import { PRINCIPALFONT } from "@/constants/Fonts";
+import SearchIcon from "@/icons/SearchIcon";
 
 //Deezert es una aplicacion para la gestion empresarial, tanto del lado de recursos humanos como la gestion administrativa y la gestion de proyectos
 const TextInput = styled(Field)({
@@ -59,7 +60,7 @@ const OcultPassword = styled(Image)({
     height: "auto"
 })
 
-const Input: React.FC<InputProps> = ({
+const Input: FC<InputProps> = ({
     iconName,
     iconSize,
     name,
@@ -150,3 +151,22 @@ export const InputSimple = styled.input({
     fontFamily: PRINCIPALFONT,
     width: 120
 })
+export const InputSearch: FC<any> = (props) => {
+    return (
+        <div style={{
+            display: "flex",
+            alignItems: 'center',
+            padding: 4,
+            border: "solid 1px #647184",
+            borderRadius: 12,
+        }}>
+            <SearchIcon size={20} />
+            <InputSimple {...props} style={{
+
+                width: '100%',
+                fontSize: 14
+            }} />
+        </div>
+
+    )
+} 

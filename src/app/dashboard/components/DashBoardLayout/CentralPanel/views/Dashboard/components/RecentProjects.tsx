@@ -27,6 +27,7 @@ import SecuenceFade from '@/components/animation/SecuenceFade';
 import { AddIcon } from '@/icons/AddIcon';
 import { PRIMARYDARK } from '@/constants/Colors';
 import AddNewProject from './AddNewProject/AddNewProject';
+import { CompanyContext } from '@/context/CompanyContext';
 interface Props { }
 const templateData = [
     {
@@ -89,6 +90,7 @@ const templateData = [
 const RecentProjects: NextPage<Props> = ({ }) => {
     const [data, setData] = useState<ProjectsCard[]>([])
     const [openNewProjects, setOpenNewProjects] = useState<boolean>(false)
+    const { projects } = useContext(CompanyContext)
     useEffect(() => {
         setTimeout(() => {
             setData(templateData as ProjectsCard[])
@@ -114,7 +116,7 @@ const RecentProjects: NextPage<Props> = ({ }) => {
             </Item>
             <Item sx={{ marginTop: 2 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                    {data.length > 0 ? data.map((Item, index) => (
+                    {projects.length > 0 ? projects.map((Item, index) => (
                         <FadeIn key={index} >
                             <ProjectsCards key={index}
                                 data={Item}
@@ -122,7 +124,7 @@ const RecentProjects: NextPage<Props> = ({ }) => {
                         </FadeIn>
 
                     )) : null}
-                    {data.length === 0 ? [0, 1, 2, 3].map((Item, index) => (
+                    {projects.length === 0 ? [0, 1, 2, 3].map((Item, index) => (
 
                         <SecuenceFade index={Item} key={Item}>
                             <ProjectsCardsSkeleton />

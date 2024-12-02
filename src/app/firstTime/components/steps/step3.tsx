@@ -13,14 +13,14 @@ import { CompanyContext } from '@/context/CompanyContext'
 import { AppContext } from '@/context/AppContext'
 import Skip from './controllers/Skip'
 import InidicatorSteps from './components/InidicatorSteps'
-interface Props { setStep: Dispatch<SetStateAction<number>> }
+interface Props { setStep?: Dispatch<SetStateAction<number>>; ds?: boolean; setOpen?: Dispatch<SetStateAction<boolean>> }
 const validationSchema = Yup.object().shape({
     nameCompany: Yup.string()
 });
-const Step3: NextPage<Props> = ({ setStep }) => {
+const Step3: NextPage<Props> = ({ setStep, ds, setOpen }) => {
     const { user } = useContext(AuthContext)
     const { setSnackbarOpen } = useContext(AppContext)
-    const { setCompanyList } = useContext(CompanyContext)
+    const { setCompanyList, getCompanies } = useContext(CompanyContext)
     const handleSend = async (nameCompany: string) => {
         const dataAddCompany = {
             id: user._id,
@@ -30,8 +30,16 @@ const Step3: NextPage<Props> = ({ setStep }) => {
         const { status, company, message } = result.data
 
         if (status === 200) {
-            setCompanyList([company])
-            setStep(1)
+
+            if (setStep) {
+                setCompanyList([company])
+                setStep(1)
+            }
+            if (setOpen) {
+                setOpen(false)
+                getCompanies()
+            }
+
         }
         setSnackbarOpen({ message, type: status === 200 ? 'success' : 'error' })
     }
@@ -39,11 +47,11 @@ const Step3: NextPage<Props> = ({ setStep }) => {
     return skip ? <Skip /> : <FadeIn>
         <div>
             <Container justifyContent='center'>
-                <Item xs={5}>
+                <Item xs={ds ? 12 : 5}>
                     <CardWhite>
 
                         <Title>
-                            ¿Cual es el nombre de tu empresa?
+                            {ds ? "Nombre de la organizacion" : "¿Cual es el nombre de tu empresa?"}
                         </Title>
                         <br />
                         <Container justifyContent='center' columnSpacing={2} rowSpacing={2}>
@@ -61,20 +69,20 @@ const Step3: NextPage<Props> = ({ setStep }) => {
                                         <Input error={errors.nameCompany} touched={touched.nameCompany} name={"nameCompany"} placeholder="Nombre tu empresa u organizacion" />
                                         <br />
                                         <Container columnSpacing={2} rowSpacing={2}>
-                                            <Item xs={6}>
+                                            {ds ? null : <Item xs={6}>
                                                 <ButtonBlueOutlined onClick={() => setSkip(true)}>
                                                     Omitir
                                                 </ButtonBlueOutlined>
-                                            </Item>
-                                            <Item xs={6}>
+                                            </Item>}
+                                            <Item xs={ds ? 12 : 6}>
 
                                                 <ButtonBlue type="submit">
                                                     Continuar
                                                 </ButtonBlue>
                                             </Item>
-                                            <Item xs={12}>
+                                            {!ds ? <Item xs={12}>
                                                 <InidicatorSteps steps={3} />
-                                            </Item>
+                                            </Item> : null}
                                         </Container>
                                     </Form>
                                 )}

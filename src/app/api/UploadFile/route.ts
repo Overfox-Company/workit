@@ -15,6 +15,7 @@ export async function POST(req: Request) {
         const formDataObject: any = Object.fromEntries(formData.entries());
         const json: AddFile = formDataObject;
         const { id_company, file, id_user } = json
+        console.log(json)
         if (!id_company || !id_user || !file) {
             return new Response(JSON.stringify({ message: "You need all camps", status: 400 }))
         }
@@ -24,6 +25,7 @@ export async function POST(req: Request) {
             return new Response(JSON.stringify({ message: "ids not valid", status: 400 }))
         }
         const fileResult: any = await uploadFileToCloudinary(file, id_company)
+        console.log(fileResult)
         const newFile = new File({
             id_company: verifyCompany._id,
             id_user: verifyUser._id,
@@ -37,6 +39,7 @@ export async function POST(req: Request) {
         return new Response(JSON.stringify({ message: "File uploaded", file: newFile, status: 200 }))
 
     } catch (error) {
+        console.log(error)
         return new Response(JSON.stringify({ message: 'error in signup route', error: error }))
     }
 }

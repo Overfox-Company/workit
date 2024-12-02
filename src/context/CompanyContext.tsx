@@ -12,7 +12,10 @@ import { AuthContext } from "./AuthContext";
 type ContextData = {
     companyList: CompanyType[] | [],
     setCompanyList: Dispatch<SetStateAction<CompanyType[] | []>>;
-    companySelected: CompanyType | {}
+    companySelected: CompanyType | null
+    setCompanySelected: Dispatch<SetStateAction<CompanyType | null>>;
+    getCompanies: () => void,
+    projects: any[]
 };
 type ProviderProps = {
     children?: React.ReactNode;
@@ -22,35 +25,71 @@ type ProviderProps = {
 export const CompanyContext = createContext<ContextData>({
     companyList: [],
     setCompanyList: () => { },
-    companySelected: {}
+    companySelected: null,
+    setCompanySelected: () => { },
+    getCompanies: () => { },
+    projects: []
 });
 
 export const CompanyContextProvider: React.FC<ProviderProps> = ({ children }) => {
     const [companyList, setCompanyList] = useState<CompanyType[]>([])
-    const [companySelected, setCompanySelected] = useState<CompanyType | {}>({})
+    const [companySelected, setCompanySelected] = useState<CompanyType | null>(null)
     const { user } = useContext(AuthContext)
-    const getComanys = async () => {
-        const resultCompanys = await ApiController.getCompanys({ id_user: user._id })
+    const [projects, setProjects] = useState<any[]>([])
+    const getCompanies = async () => {
+        try {
+            // Solicitar datos de las empresas
+            const { data: { companys } } = await ApiController.getCompanys({ id_user: user._id });
 
-        const { companys } = resultCompanys.data
-        if (companys) {
-            console.log(companys)
-            setCompanyList(companys)
-            setCompanySelected(companys[0])
+            if (companys?.length > 0) {
+                setCompanyList(companys);
+
+                // Obtener el ID almacenado en localStorage
+                const idStorage = localStorage.getItem("idCompanySelected");
+
+                // Encontrar la empresa seleccionada o usar la primera como predeterminada
+                const selectedCompany = companys.find((comp: CompanyType) => comp._id === idStorage) || companys[0];
+
+                // Si el ID almacenado no es válido, eliminarlo del localStorage
+                if (idStorage && selectedCompany._id !== idStorage) {
+                    localStorage.removeItem("idCompanySelected");
+                }
+
+                setCompanySelected(selectedCompany);
+            }
+        } catch (error) {
+            console.error("Error fetching companies:", error);
+        }
+    };
+    const getProjects = async () => {
+        if (companySelected?._id) {
+            const resultProjects = await ApiController.getProjects(companySelected._id)
+            console.log(resultProjects)
+            const { projects } = resultProjects.data
+            setProjects(projects)
         }
     }
     useEffect(() => {
+        if (companySelected?._id) {
+
+            getProjects()
+        }
+    }, [companySelected])
+    useEffect(() => {
         if (user._id) {
-            getComanys()
+            getCompanies()
         }
 
     }, [user])
     return (
         <CompanyContext.Provider
             value={{
+                getCompanies,
                 companyList,
                 setCompanyList,
-                companySelected
+                companySelected,
+                setCompanySelected,
+                projects
             }}
         >
             {children}

@@ -28,7 +28,7 @@ import { onChangeColor, onDropImageAvatar, onDropImageBg, onSendEmail } from '..
 interface Props { }
 
 const validationSchema = Yup.object({
-    email: Yup.string().email('Debe ser un correo electrónico válido').required('El correo es obligatorio')
+    email: Yup.string().required('Debes especificar el nombre del proyecto')
 });
 const ButtonToSelect = styled(Button)({
     fontWeitgh: 700,
@@ -43,25 +43,14 @@ const ButtonToSelect = styled(Button)({
 const Colors = ["rgb(85,85,85)", "rgb(96,38,154)", "rgb(238,175,96)", PRIMARYCOLOR, PRIMARYDARK, "rgb(76,86,206)", "rgb(228,69,110)", "rgb(91,183,97)", "rgb(84,177,250)"]
 const FormAddProjects: NextPage<Props> = ({ }) => {
     const route = useRouter()
-    const { companyList } = useContext(CompanyContext)
+    const { companyList, companySelected } = useContext(CompanyContext)
     const { user } = useContext(AuthContext)
     const { loadingScreen, setSnackbarOpen, setLoadingScreen } = useContext(AppContext)
     const [show, setShow] = useState(false)
     const [color, setColor] = useState(Colors[Math.floor(Math.random() * Colors.length)])
-    const [newCompany, setNewCompany] = useState<CompanyType>(InitialCompany)
+    const [newProject, setNewProject] = useState<CompanyType>(InitialCompany)
 
-    useEffect(() => {
-        const filter = companyList.filter(company => company.idOwner === user._id)[0]
 
-        if (filter?._id && !newCompany._id) {
-
-            console.log(filter)
-            setNewCompany(filter)
-            if (filter.bgColor) {
-                setColor(filter.bgColor)
-            }
-        }
-    }, [user, companyList, newCompany])
 
     useEffect(() => {
         if (!loadingScreen) {
@@ -73,13 +62,6 @@ const FormAddProjects: NextPage<Props> = ({ }) => {
 
     const [open, setOpen] = useState(false);
 
-    const handleTooltipClose = () => {
-        setOpen(false);
-    };
-    const handleTooltipOpen = (event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation();
-        setOpen(true);
-    };
 
 
     const [loadBg, setLoadBg] = useState(false)
@@ -88,15 +70,40 @@ const FormAddProjects: NextPage<Props> = ({ }) => {
     const [loadAvatar, setLoadAvatar] = useState(false)
     const [opacityAvatar, setOpacityAvatar] = useState(0)
     const onDrop = useCallback((acceptedFiles: File[]) => {
-        onDropImageBg(acceptedFiles[0], setLoadBg, setOpacityBg, newCompany, setNewCompany)
-    }, [newCompany])
+        onDropImageBg(
+            acceptedFiles[0],
+            setLoadBg,
+            setOpacityBg,
+            companySelected as CompanyType,
+            setNewProject,
+            user
+        )
+    }, [newProject])
     //falta acomodar esto
     const onDropAvatar = useCallback((acceptedFiles: File[]) => {
-        onDropImageAvatar(acceptedFiles[0])
-    }, [newCompany])
+        onDropImageAvatar(
+            acceptedFiles[0],
+            setLoadAvatar,
+            setOpacityAvatar,
+            companySelected as CompanyType,
+            setNewProject,
+            user
+        )
+    }, [newProject])
     const { getRootProps, getInputProps, } = useDropzone({ onDrop, maxFiles: 1 })
     const { getRootProps: getRootPropsAvatar, getInputProps: getInputPropsAvatar, } = useDropzone({ onDrop: onDropAvatar, maxFiles: 1 })
     const [optionToChangeBackground, setOptionToChangeBackground] = useState(0)
+    useEffect(() => {
+        console.log(newProject)
+    }, [newProject])
+    const onCreateProject = async (value: string) => {
+        const data: any = newProject
+        data.bg = newProject.bg || newProject.bgColor,
+            data.name = value,
+            data.id_company = companySelected?._id || ""
+        const resultAddProject = await ApiController.addNewProjects(data)
+        console.log(resultAddProject)
+    }
     return <div style={{ width: "100%" }}>
 
         <Container justifyContent='center' >
@@ -113,8 +120,8 @@ const FormAddProjects: NextPage<Props> = ({ }) => {
                             <AddPhotoAlternateIcon style={{ color: 'rgb(240,240,240)', fontSize: 24 }} />
                         </ContentAddImageIcon>
                         <input {...getInputProps()} />
-                        {newCompany.bg ?
-                            <CoverCompany src={newCompany.bg} fill objectFit='cover' alt="cover company" /> :
+                        {newProject.bg ?
+                            <CoverCompany src={newProject.bg} fill objectFit='cover' alt="cover company" /> :
                             <BgColor style={{ backgroundColor: color }} />
                         }
                         <ContainerOptions style={{ opacity: open ? 1 : undefined }}>
@@ -140,19 +147,16 @@ const FormAddProjects: NextPage<Props> = ({ }) => {
                                 <AddPhotoAlternateIcon style={{ color: 'rgb(240,240,240)', fontSize: 24 }} />
                             </ContentAddImageIcon>
 
-                            {newCompany.avatar ? <AvatarCompany src={newCompany.avatar} fill objectFit='cover' alt='Company image' />
+                            {newProject.avatar ? <AvatarCompany src={newProject.avatar} fill objectFit='cover' alt='Company image' />
                                 : <Avatar style={{ borderRadius: 8 }} sx={{ width: 61, height: 61 }}>
-                                    {newCompany.name?.slice(0)[0]}
+                                    {newProject.name?.slice(0)[0]}
                                 </Avatar>
                             }  </AvatarContent>
                         <br />
-                        <NameCompany>
-                            {newCompany.name}
-                        </NameCompany>
-                        <br />
+
                         <Formik
 
-                            onSubmit={(values) => onSendEmail(values.email)}
+                            onSubmit={(values) => onCreateProject(values.email)}
                             validateOnChange={false} // No validar al cambiar
                             validateOnBlur={false}
                             initialValues={{ email: '' }}
@@ -160,7 +164,7 @@ const FormAddProjects: NextPage<Props> = ({ }) => {
                         >{({ errors, touched }) => (
                             <Form style={{ display: "flex", flexDirection: "column", gap: 4, }}>
 
-                                <Input error={errors.email} touched={touched.email} name={"email"} label={`Email asociado a ${newCompany.name}`} placeholder="example@gmail.com" />
+                                <Input error={errors.email} touched={touched.email} name={"email"} label={`¿Como se va a llamar el proyecto?`} placeholder="Nombre del proyecto" />
 
                                 <div style={{ display: 'flex', gap: 4, width: '100%' }}>
                                     {["Color de fondo", "Imagen de fondo"].map((text, index) => (

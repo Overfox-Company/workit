@@ -322,17 +322,17 @@ export const TasksCards: FC<TasksCardProps> = ({
   );
 };
 export interface ProjectsCardProps {
-  data: ProjectsCard;
+  data: ProjectsCard | any;
 }
 
 export const ProjectsCards: FC<ProjectsCardProps> = (
   { data }
 ) => {
-  const { bannerImg,
-    membersImg,
-    projectName,
-    projectDescription,
-    projectImg
+  const { bg: bannerImg,
+    //  membersImg,
+    name: projectName,
+    //  projectDescription,
+    avatar: projectImg
   } = data
   return (
     <Box
@@ -386,7 +386,7 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
             padding: 0.5,
           }}
         >
-          {membersImg.slice(0, 3).map((member, index) => (
+          {/*membersImg.slice(0, 3).map((member, index) => (
             <Image
               key={index}
               src={member}
@@ -400,7 +400,7 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
                 left: index * -8,
               }}
             />
-          ))}
+          ))*/}
         </Box>
       </Box>
 
@@ -419,7 +419,7 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
           top: 16,
         }}
       >
-        <Text
+        {/*<Text
           size={8}
           color='#FFFFFF'
           fontWeight={500}
@@ -430,19 +430,19 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
             zIndex: 0,
           }}
         >
-          {membersImg.length > 3 ? `+${membersImg.length - 3}` : ''}
-        </Text>
+          {/*membersImg.length > 3 ? `+${membersImg.length - 3}` : ''}
+        </Text>*/}
       </Box>
       <Box sx={{ paddingLeft: 2, paddingTop: 3, position: 'relative' }}>
         <Image
+          width={40}
+          height={40}
           src={projectImg}
           alt='project Img'
-          style={{ position: 'absolute', top: '-30%', left: 15 }}
+          style={{ position: 'absolute', top: '-50%', left: 15 }}
         />
         <Text size={16}>{projectName}</Text>
-        <Text size={12} color='#646464' fontWeight={400}>
-          {projectDescription}
-        </Text>
+
       </Box>
     </Box>
   );

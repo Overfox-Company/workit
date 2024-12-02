@@ -48,7 +48,10 @@ const ApiController = {
         headers: {
             'Content-Type': 'multipart/form-data',
         }
-    })
+    }),
+    //Projects
+    addNewProjects: (data: any) => api.post("/addProject", data),
+    getProjects: (id: string) => api.post("/getProjects", { id })
 };
 
 
