@@ -106,7 +106,7 @@ const SelectorCompany: NextPage<Props> = ({ openSideBar }) => {
                 <InputSearch placeholder="Busca una organizacion" />
                 <ScrollContainer>
                     {companyList.length > 0 ? companyList.map((company, index) => (
-                        <ContainerCompany onClick={() => onSelectCompany(company._id || "")}
+                        <ContainerCompany key={company._id} onClick={() => onSelectCompany(company._id || "")}
                             style={{
                                 backgroundColor: company._id === (companySelected?._id ?? "") ? PRIMARYCOLOR : "transparent"
                             }}>
