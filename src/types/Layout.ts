@@ -72,3 +72,12 @@ export interface ProjectsCard {
     projectImg: any;
 
 }
+
+export interface TeamFilterTypes {
+    topMenu: Array<{
+        label: string;
+        id: number;
+    }>;
+    filterSelected: any;
+    setFilterSelected: any; 
+}
