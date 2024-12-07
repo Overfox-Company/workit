@@ -15,7 +15,7 @@ type ContextData = {
     companySelected: CompanyType | null
     setCompanySelected: Dispatch<SetStateAction<CompanyType | null>>;
     getCompanies: () => void,
-    projects: any[]
+    projects: any[] | string
 };
 type ProviderProps = {
     children?: React.ReactNode;
@@ -35,7 +35,7 @@ export const CompanyContextProvider: React.FC<ProviderProps> = ({ children }) =>
     const [companyList, setCompanyList] = useState<CompanyType[]>([])
     const [companySelected, setCompanySelected] = useState<CompanyType | null>(null)
     const { user } = useContext(AuthContext)
-    const [projects, setProjects] = useState<any[]>([])
+    const [projects, setProjects] = useState<any[] | string>([])
     const getCompanies = async () => {
         try {
             // Solicitar datos de las empresas
@@ -66,7 +66,7 @@ export const CompanyContextProvider: React.FC<ProviderProps> = ({ children }) =>
             const resultProjects = await ApiController.getProjects(companySelected._id)
             console.log(resultProjects)
             const { projects } = resultProjects.data
-            setProjects(projects)
+            setProjects(projects.length > 0 ? projects : "No tienes ningun proyecto aun")
         }
     }
     useEffect(() => {

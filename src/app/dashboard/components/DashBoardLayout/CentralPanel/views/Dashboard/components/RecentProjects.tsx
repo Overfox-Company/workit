@@ -28,6 +28,7 @@ import { AddIcon } from '@/icons/AddIcon';
 import { PRIMARYDARK } from '@/constants/Colors';
 import AddNewProject from './AddNewProject/AddNewProject';
 import { CompanyContext } from '@/context/CompanyContext';
+import NoProjectCreated from './AddNewProject/components/NoProjectCreated';
 interface Props { }
 const templateData = [
     {
@@ -116,25 +117,41 @@ const RecentProjects: NextPage<Props> = ({ }) => {
             </Item>
             <Item sx={{ marginTop: 2 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                    {projects.length > 0 ? projects.map((Item, index) => (
-                        <FadeIn key={index} >
-                            <ProjectsCards key={index}
-                                data={Item}
-                            />
-                        </FadeIn>
+                    {(() => {
+                        const isArray = Array.isArray(projects);
+                        const isString = typeof projects === "string";
 
-                    )) : null}
-                    {projects.length === 0 ? [0, 1, 2, 3].map((Item, index) => (
+                        // Caso 1: Si `projects` es un array y tiene elementos
+                        if (isArray && projects.length > 0) {
+                            return projects.map((project, index) => (
+                                <FadeIn key={index}>
+                                    <ProjectsCards data={project} />
+                                </FadeIn>
+                            ));
+                        }
+                        // Caso 2: Si `projects` es un array vacío
+                        if (isArray && projects.length === 0) {
+                            return [0, 1, 2, 3].map((item) => (
+                                <SecuenceFade index={item} key={item}>
+                                    <ProjectsCardsSkeleton />
+                                </SecuenceFade>
+                            ));
+                        }
+                        // Caso 3: Si `projects` es una cadena
+                        if (isString) {
+                            return <NoProjectCreated>
+                                {projects}
+                            </NoProjectCreated>
+                        }
 
-                        <SecuenceFade index={Item} key={Item}>
-                            <ProjectsCardsSkeleton />
-                        </SecuenceFade>
 
 
-                    )) : null}
-
+                        // Caso por defecto (si se llega aquí)
+                        return null;
+                    })()}
                 </Box>
             </Item>
+
         </Container>
     </div>
 
