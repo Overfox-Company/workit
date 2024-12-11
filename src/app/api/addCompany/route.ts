@@ -21,6 +21,15 @@ export async function POST(req: Request) {
         if (!nameCompany) {
             return new Response(JSON.stringify({ message: 'Not name', status: 400, }))
         }
+        let background = bg
+        let avatarCompany = avatar
+        if (typeof avatar !== "string") {
+
+        }
+        if (typeof bg !== "string") {
+
+        }
+
         const newCompany = new Company({
             email,
             avatar,

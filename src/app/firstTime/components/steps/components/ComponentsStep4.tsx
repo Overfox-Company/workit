@@ -36,7 +36,7 @@ export const ContainerImages = styled(Box)({
     width: '100%',
     cursor: 'pointer',
     height: 200,
-    borderRadius: "24px 24px 0 0",
+    borderRadius: "24px 24px 0px 0px",
     "&:hover #containerOPtions": {
         opacity: 1
     }
