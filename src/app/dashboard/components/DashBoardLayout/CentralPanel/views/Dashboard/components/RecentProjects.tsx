@@ -123,11 +123,14 @@ const RecentProjects: NextPage<Props> = ({ }) => {
 
                         // Caso 1: Si `projects` es un array y tiene elementos
                         if (isArray && projects.length > 0) {
-                            return projects.map((project, index) => (
-                                <FadeIn key={index}>
-                                    <ProjectsCards data={project} />
-                                </FadeIn>
-                            ));
+                            return projects.map((project, index) => {
+
+                                return index < 4 ? (
+                                    <FadeIn key={index}>
+                                        <ProjectsCards data={project} />
+                                    </FadeIn>
+                                ) : null
+                            });
                         }
                         // Caso 2: Si `projects` es un array vacío
                         if (isArray && projects.length === 0) {

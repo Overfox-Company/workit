@@ -29,7 +29,7 @@ const AddNewProject: NextPage<Props> = ({ open, setOpen }) => {
                 <HeaderForms onClick={handleClose}>
                     Crear nuevo proyecto
                 </HeaderForms>
-                <FormAddProjects />
+                <FormAddProjects setOpen={setOpen} />
             </CardWhite>
         </DialogContent>
 

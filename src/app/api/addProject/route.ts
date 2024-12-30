@@ -23,7 +23,7 @@ export async function POST(req: Request) {
             id_company
         })
         await newProject.save()
-        const allProjects = await Projects.find({ id_company })
+        const allProjects = await Projects.find({ id_company }).sort({ createdAt: -1 });
         return new Response(JSON.stringify({ message: 'Company created successfully', status: 200, projects: allProjects }))
 
     } catch (error) {

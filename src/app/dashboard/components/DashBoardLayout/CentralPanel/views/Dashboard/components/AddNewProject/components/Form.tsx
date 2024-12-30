@@ -25,7 +25,10 @@ import * as Yup from 'yup'
 import styled from '@emotion/styled'
 import { SelectColors, AvatarCompany, AvatarContent, BgColor, BoxColor, BoxOpacity, CompanyCard, ContainerImages, ContainerOptions, ContentAddImageIcon, CoverCompany, InfoContainer, LabelOption, NameCompany, SelectImages } from '@/app/firstTime/components/steps/components/ComponentsStep4'
 import { onChangeColor, onDropImageAvatar, onDropImageBg, onSendEmail } from '../controllers/FormAddProyect'
-interface Props { }
+import { set } from 'mongoose'
+interface Props {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const validationSchema = Yup.object({
     email: Yup.string().required('Debes especificar el nombre del proyecto')
@@ -41,9 +44,9 @@ const ButtonToSelect = styled(Button)({
 
 })
 const Colors = ["rgb(85,85,85)", "rgb(96,38,154)", "rgb(238,175,96)", PRIMARYCOLOR, PRIMARYDARK, "rgb(76,86,206)", "rgb(228,69,110)", "rgb(91,183,97)", "rgb(84,177,250)"]
-const FormAddProjects: NextPage<Props> = ({ }) => {
+const FormAddProjects: NextPage<Props> = ({ setOpen }) => {
     const route = useRouter()
-    const { companyList, companySelected } = useContext(CompanyContext)
+    const { companyList, companySelected, projects, setProjects } = useContext(CompanyContext)
     const { user } = useContext(AuthContext)
     const { loadingScreen, setSnackbarOpen, setLoadingScreen } = useContext(AppContext)
     const [show, setShow] = useState(false)
@@ -60,7 +63,7 @@ const FormAddProjects: NextPage<Props> = ({ }) => {
         }
     }, [loadingScreen])
 
-    const [open, setOpen] = useState(false);
+
 
 
 
@@ -103,6 +106,14 @@ const FormAddProjects: NextPage<Props> = ({ }) => {
             data.id_company = companySelected?._id || ""
         const resultAddProject = await ApiController.addNewProjects(data)
         console.log(resultAddProject)
+        const { message, projects } = resultAddProject.data
+        if (projects.length > 0) {
+            //tener en cuenta si se necesita acceder de una vez al proyecto creado
+            //route.push(`/dashboard/projects/${projects[0]._id}`)
+            setProjects(projects)
+            setOpen(false)
+        }
+        setSnackbarOpen({ message, type: projects && projects.length > 0 ? "success" : "error" })
     }
     return <div style={{ width: "100%" }}>
 
@@ -124,7 +135,7 @@ const FormAddProjects: NextPage<Props> = ({ }) => {
                             <CoverCompany src={newProject.bg} fill objectFit='cover' alt="cover company" /> :
                             <BgColor style={{ backgroundColor: color }} />
                         }
-                        <ContainerOptions style={{ opacity: open ? 1 : undefined }}>
+                        <ContainerOptions style={{ opacity: 1 }}>
                             <BoxOpacity>
                                 <LabelOption>
                                     Image

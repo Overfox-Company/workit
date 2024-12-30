@@ -9,7 +9,7 @@ export async function POST(req: Request) {
         await connectDB()
         const { id } = await req.json();
         console.log(id)
-        const allProjects = await Projects.find({ id_company: id })
+        const allProjects = await Projects.find({ id_company: id }).sort({ createdAt: -1 });
         return new Response(JSON.stringify({ message: 'Get projects', projects: allProjects, status: 200 }))
 
     } catch (error) {

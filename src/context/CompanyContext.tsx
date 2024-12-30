@@ -15,6 +15,7 @@ type ContextData = {
     companySelected: CompanyType | null
     setCompanySelected: Dispatch<SetStateAction<CompanyType | null>>;
     getCompanies: () => void,
+    setProjects: (projects: any[] | string) => void
     projects: any[] | string
 };
 type ProviderProps = {
@@ -28,6 +29,7 @@ export const CompanyContext = createContext<ContextData>({
     companySelected: null,
     setCompanySelected: () => { },
     getCompanies: () => { },
+    setProjects: () => { },
     projects: []
 });
 
@@ -89,7 +91,8 @@ export const CompanyContextProvider: React.FC<ProviderProps> = ({ children }) =>
                 setCompanyList,
                 companySelected,
                 setCompanySelected,
-                projects
+                projects,
+                setProjects
             }}
         >
             {children}
