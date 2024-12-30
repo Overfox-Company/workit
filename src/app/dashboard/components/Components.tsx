@@ -442,7 +442,7 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
           height={40}
           src={projectImg}
           alt='project Img'
-          style={{ position: 'absolute', top: '-50%', left: 15 }}
+          style={{ position: 'absolute', top: '-50%', left: 15, borderRadius: 4 }}
         />
         <Text size={16}>{projectName}</Text>
 
