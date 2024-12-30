@@ -438,11 +438,11 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
       </Box>*/}
       <Box sx={{ paddingLeft: 2, paddingTop: 3, position: 'relative' }}>
         <Image
-          width={40}
-          height={40}
+          width={50}
+          height={50}
           src={projectImg}
           alt='project Img'
-          style={{ position: 'absolute', top: '-50%', left: 15, borderRadius: 4 }}
+          style={{ position: 'absolute', top: '-50%', left: 15, borderRadius: 4, maxHeight: 50, maxWidth: 50 }}
         />
         <Text size={16}>{projectName}</Text>
 
