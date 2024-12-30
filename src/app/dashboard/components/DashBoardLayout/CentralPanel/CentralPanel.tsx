@@ -21,6 +21,7 @@ import SideBarComponent from '../SideBar/SideBar';
 import { AuthContext } from '@/context/AuthContext';
 import { InitialTemplateTask } from '../../../data/data';
 import DashboardView from './views/Dashboard/DashboardView';
+import TeamsView from './views/Teams/TeamsView';
 interface Props {
     selectedOption: number;
     setSelectedOption: Dispatch<SetStateAction<number>>;
@@ -30,7 +31,10 @@ const CentralPanel: NextPage<Props> = ({
     selectedOption,
     setSelectedOption }) => {
     return (
-        selectedOption === 0 ? <DashboardView /> : null
+        <>
+        {selectedOption === 0 ? <DashboardView /> : null}
+        {selectedOption === 2 ? <TeamsView /> : null}
+        </>
     )
 }
 
