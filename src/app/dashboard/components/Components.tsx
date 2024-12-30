@@ -358,19 +358,22 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
       >
         <Box
           sx={{
+            backgroundColor: bannerImg ? "transparent" : '#0B161F',
             borderRadius: 4,
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0,
             overflow: 'hidden',
             height: { md: 100, xl: 130 },
-            width: 241,
+            width: "100%",
           }}
         >
-          <Image
+          {bannerImg ? <Image
             src={bannerImg}
             alt='project banner'
             fill
             objectFit='cover'
             style={{ borderTopRightRadius: 16, borderTopLeftRadius: 16 }}
-          />
+          /> : null}
         </Box>
         <Box
           sx={{

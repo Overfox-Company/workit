@@ -178,22 +178,23 @@ const FormAddProjects: NextPage<Props> = ({ setOpen }) => {
                                 <Input error={errors.email} touched={touched.email} name={"email"} label={`¿Como se va a llamar el proyecto?`} placeholder="Nombre del proyecto" />
 
                                 <div style={{ display: 'flex', gap: 4, width: '100%' }}>
-                                    {["Color de fondo", "Imagen de fondo"].map((text, index) => (
-                                        < ButtonToSelect key={text} onClick={() => setOptionToChangeBackground(index)} variant='contained'
+                                    {[//"Color de fondo",
+                                        "Imagen de fondo"].map((text, index) => (
+                                            < ButtonToSelect key={text} onClick={() => setOptionToChangeBackground(index)} variant='contained'
 
-                                            style={{
-                                                color: optionToChangeBackground !== index ? TEXTDARK : "white",
-                                                backgroundColor: optionToChangeBackground !== index ? BGSCREEN : PRIMARYDARK
-                                            }}>
-                                            {text}
-                                        </ButtonToSelect>
-                                    ))}
+                                                style={{
+                                                    color: optionToChangeBackground !== index ? TEXTDARK : "white",
+                                                    backgroundColor: optionToChangeBackground !== index ? BGSCREEN : PRIMARYDARK
+                                                }}>
+                                                {text}
+                                            </ButtonToSelect>
+                                        ))}
                                 </div>
 
 
                                 <Container columnSpacing={1} rowSpacing={1}>
                                     <Item xs={12}>
-                                        {optionToChangeBackground ?
+                                        {optionToChangeBackground === 0 ?
                                             <div {...getRootProps()} style={{ width: "100%", backgroundColor: "blue" }}>
                                                 <input {...getInputProps()} />
                                                 <SelectImages />
