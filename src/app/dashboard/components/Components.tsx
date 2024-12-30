@@ -375,7 +375,7 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
             style={{ borderTopRightRadius: 16, borderTopLeftRadius: 16 }}
           /> : null}
         </Box>
-        <Box
+        {/* <Box
           sx={{
             display: 'flex',
             flexDirection: 'row',
@@ -389,7 +389,7 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
             padding: 0.5,
           }}
         >
-          {/*membersImg.slice(0, 3).map((member, index) => (
+         membersImg.slice(0, 3).map((member, index) => (
             <Image
               key={index}
               src={member}
@@ -403,11 +403,11 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
                 left: index * -8,
               }}
             />
-          ))*/}
-        </Box>
+          ))
+        </Box>*/}
       </Box>
 
-      <Box
+      {/* <Box
         sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -422,7 +422,7 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
           top: 16,
         }}
       >
-        {/*<Text
+        <Text
           size={8}
           color='#FFFFFF'
           fontWeight={500}
@@ -434,8 +434,8 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
           }}
         >
           {/*membersImg.length > 3 ? `+${membersImg.length - 3}` : ''}
-        </Text>*/}
-      </Box>
+        </Text>
+      </Box>*/}
       <Box sx={{ paddingLeft: 2, paddingTop: 3, position: 'relative' }}>
         <Image
           width={40}
