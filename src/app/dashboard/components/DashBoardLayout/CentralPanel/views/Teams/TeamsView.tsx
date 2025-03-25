@@ -8,6 +8,7 @@ import { Box, Button, Collapse, Switch } from '@mui/material';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import { InputsLine } from './components/InputsLine';
+import { MembersInfo } from './components/MembersInfo';
 interface Props {}
 const TopMenu = [
   { label: 'Miembros', id: 0 },
@@ -53,6 +54,7 @@ const TeamsView: NextPage<Props> = ({}) => {
           {/* si miembros esta seleccionado que cambie el texto, y si equipos lo esta que cambie */}
           {filterSelected === 0 ? 'Lista de Miembros' : 'Lista de Equipos'}
         </Text>
+        <MembersInfo />
       </FadeIn>
     </WorkSpaces>
   );

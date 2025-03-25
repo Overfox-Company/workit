@@ -1,26 +1,29 @@
 'use client';
+import ActivityIndicator from '@/components/UI/ActivityIndicator';
 import Icon from '@/components/UI/Icon';
-import { GRAYINPUT, PAPERGRAY, PRIMARYDARK, SECONDARYDARK, TEXTDARK } from '@/constants/Colors';
-import { ProjectsCard, TasksCard, TypographyProps } from '@/types/Layout';
+import { PAPERGRAY, PRIMARYDARK, SECONDARYDARK } from '@/constants/Colors';
+import {
+  MemberStatusProps,
+  ProjectsCard,
+  TasksCard,
+  TypographyProps,
+} from '@/types/Layout';
 import styled from '@emotion/styled';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { Box, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
+import Skeleton from '@mui/material/Skeleton';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { FC } from 'react';
-import Skeleton from '@mui/material/Skeleton';
-import ActivityIndicator from '@/components/UI/ActivityIndicator';
 // //make the sidebar receive a prop who will change the width of the sidebar
 export const SideBar = styled(motion.div)<{ variant: boolean }>((props) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: 25,
-  padding: "40px 20px",
-  paddingRight: 0,
-  paddingLeft: 10,
+  padding: '40px 20px',
   paddingTop: 0,
   width: props.variant ? 320 : 78,
   height: 'calc(100vh - 64px)',
@@ -35,11 +38,11 @@ export const Header = styled.div<{ variant: boolean }>((props) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   height: 64,
-  width: "100%",
+  width: '100%',
   position: 'fixed',
   backgroundColor: '#FCFCFC',
   paddingRight: 40,
-  paddingLeft: 12
+  paddingLeft: 12,
 }));
 
 // export const SideBar = styled(Box)({
@@ -156,7 +159,6 @@ export const WorkSpaces = styled(motion.div)({
   height: '100%',
   width: '100%',
   overflow: 'auto',
-
 });
 
 export const AddButton = styled.button({
@@ -175,13 +177,10 @@ export const AddButton = styled.button({
   fontFamily: 'Roboto',
 });
 
-export interface TasksCardProps {
-  data: TasksCard;
-}
-
-export const TasksCards: FC<TasksCardProps> = ({
+export const TasksCards: FC<TasksCard> = (
   data
-}) => {
+
+) => {
   const { date,
     cardStatus,
     tasks,
@@ -314,7 +313,6 @@ export const TasksCards: FC<TasksCardProps> = ({
           {
             task.type && task.label ? <ActivityIndicator text={task.label} type={task.type} /> : null
           }
-
         </Box>
       ))}
     </Box>
@@ -325,15 +323,9 @@ export interface ProjectsCardProps {
   data: ProjectsCard | any;
 }
 
-export const ProjectsCards: FC<ProjectsCardProps> = (
-  { data }
-) => {
-  const { bg: bannerImg,
-    //  membersImg,
-    name: projectName,
-    //  projectDescription,
-    avatar: projectImg
-  } = data
+export const ProjectsCards: FC<ProjectsCardProps> = ({ data }) => {
+  const { bannerImg, membersImg, projectName, projectDescription, projectImg } =
+    data;
   return (
     <Box
       sx={{
@@ -450,14 +442,11 @@ export const ProjectsCards: FC<ProjectsCardProps> = (
     </Box>
   );
 };
-export const ProjectsCardsSkeleton = (
-
-) => {
-
+export const ProjectsCardsSkeleton = () => {
   return (
     <Skeleton
       sx={{ bgcolor: 'grey.700', borderRadius: 4 }}
-      variant="rectangular"
+      variant='rectangular'
       width={250}
       height={200}
     />
@@ -476,3 +465,44 @@ export const TaskFilter = styled.div({
   fontSize: 16,
   fontWeight: 600,
 });
+
+//need a component where i give a number and show the status of the member, if is pending, acepted, or rejected
+export const MemberStatus: FC<MemberStatusProps> = ({ status }) => {
+  const getStatusColor = () => {
+    switch (status) {
+      case 'Aceptada':
+        return '#097A41'; // green
+      case 'Rechazada':
+        return '#C21823'; // red
+      case 'Pendiente':
+        return '#945C2E'; // yellow
+      default:
+        return '#6F6F70'; // default gray
+    }
+  };
+
+  return (
+    <Box
+      sx={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '80px',
+        height: '22px',
+        gap: '10px',
+        padding: '4px 8px',
+        borderRadius: '100px',
+        backgroundColor: `${getStatusColor()}20`, // 20 is for opacity
+      }}
+    >
+      <Text
+        size={12}
+        color={getStatusColor()}
+        fontWeight={700}
+        sx={{ textTransform: 'capitalize' }}
+      >
+        {status}
+      </Text>
+    </Box>
+  );
+};

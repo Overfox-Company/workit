@@ -85,3 +85,9 @@ export interface TeamFilterTypes {
     filterSelected: any;
     setFilterSelected: any; 
 }
+
+type StatusType = 'Aceptada' | 'Rechazada' | 'Pendiente' | 'Propietario';
+
+export interface MemberStatusProps {
+    status: StatusType;
+}
